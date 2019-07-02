@@ -6,6 +6,28 @@
         <script crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js?features=Array.prototype.forEach%2CString.prototype.includes"></script>
 
         <script>
+// This is where we initialise any global variables, namespaced in "opensdg".
+var opensdg = {
+
+  // A base URL for asynchronous calls to SDG data.
+  remoteDataBaseUrl: 'https://sustainabledevelopment-germany.github.io/sdg-data-pub/',
+
+  // A hook which can be replaced to modify the configuration for Chart.js.
+  // To see where this is used, see indicatorView.js createPlot() and updatePlot().
+  // To see an example of replacing it, see binary.html.
+  chartConfigAlter: function(config) {
+    // Alterations go here.
+    return config;
+  },
+};
+
+// For backwards compatibility, some of these might need to be global.
+// @TODO: Remove these eventually.
+var remoteDataBaseUrl = opensdg.remoteDataBaseUrl;
+
+</script>
+
+        <script>
 // JavaScript container for translation data.
 var translations = {
   //Javascript version of the "t" filter from jekyll-open-sdg-plugins.
@@ -83,10 +105,10 @@ var translations = {
         
 
         
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/3.2.3/css/fixedColumns.dataTables.min.css">
-        <link rel="stylesheet" href="/assets/css/default.css?v=20190426074530">
+        <link rel="stylesheet" href="/assets/css/default.css?v=20190702072734">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet">
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
           integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
@@ -94,7 +116,7 @@ var translations = {
         <link rel="stylesheet" href="https://cdn.rawgit.com/socib/Leaflet.TimeDimension/master/dist/leaflet.timedimension.control.min.css" />
         <link rel="stylesheet" href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' />
         <link rel="stylesheet" href="https://bowercdn.net/c/leaflet.zoomhome-latest/dist/leaflet.zoomhome.css" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-search@2.9.7/dist/leaflet-search.min.css"><link rel="stylesheet" href="/assets/css/custom.css?v=20190426074530"></head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-search@2.9.7/dist/leaflet-search.min.css"><link rel="stylesheet" href="/assets/css/custom.css?v=20190702072734"></head>
 <body class="language-de">
 <!-- <div class="container"> -->
 
@@ -173,21 +195,21 @@ var translations = {
   <h1>Berichtsstatus</h1><div class="goal goal-overall">
       <div class="details">
         <h2 class="status-goal">
-            Übersicht zum Berichtsstatus <span class="total"><span>244</span> indicators</span>
+            Übersicht zum Berichtsstatus <span class="total"><span>244</span> indikatoren</span>
         </h2>
         <div class="summary">
           <div class="statuses"><div>
-              <span class="status complete">138</span><strong>Daten verfügbar</strong><span class="value">56.6%</span>
+              <span class="status complete">154</span><strong>Daten verfügbar</strong><span class="value">63%</span>
             </div><div>
-              <span class="status inprogress">2</span><strong>in Bearbeitung</strong><span class="value">0.8%</span>
+              <span class="status inprogress">2</span><strong>in Bearbeitung</strong><span class="value">1%</span>
             </div><div>
-              <span class="status notstarted">103</span><strong>Datenquellenanalyse</strong><span class="value">42.2%</span>
+              <span class="status notstarted">78</span><strong>Datenquellenanalyse</strong><span class="value">32%</span>
             </div><div>
-              <span class="status notapplicable">1</span><strong>Nicht zutreffend</strong><span class="value">0.4%</span>
+              <span class="status notapplicable">10</span><strong>Nicht zutreffend</strong><span class="value">4%</span>
             </div><br style="clear:both;">
           </div>
         </div>
-        <div class="goal-stats"><span class="complete" style="width:56.6%" title="Daten verfügbar: 56.6%"></span><span class="inprogress" style="width:0.8%" title="in Bearbeitung: 0.8%"></span><span class="notstarted" style="width:42.2%" title="Datenquellenanalyse: 42.2%"></span><span class="notapplicable" style="width:0.4%" title="Nicht zutreffend: 0.4%"></span></div>
+        <div class="goal-stats"><span class="complete" style="width:63.1%" title="Daten verfügbar: 63%"></span><span class="inprogress" style="width:0.8%" title="in Bearbeitung: 1%"></span><span class="notstarted" style="width:32.0%" title="Datenquellenanalyse: 32%"></span><span class="notapplicable" style="width:4.1%" title="Nicht zutreffend: 4%"></span></div>
 
       </div>
     <!--</li>-->
@@ -207,17 +229,17 @@ var translations = {
           </h3>
           <div class="summary">
             <div class="statuses"><div>
-                <span class="status complete">6</span><strong>Daten verfügbar</strong><span class="value">42.9%</span>
+                <span class="status complete">6</span><strong>Daten verfügbar</strong><span class="value">43%</span>
               </div><div>
-                <span class="status inprogress">0</span><strong>in Bearbeitung</strong><span class="value">0.0%</span>
+                <span class="status inprogress">0</span><strong>in Bearbeitung</strong><span class="value">0%</span>
               </div><div>
-                <span class="status notstarted">8</span><strong>Datenquellenanalyse</strong><span class="value">57.1%</span>
+                <span class="status notstarted">7</span><strong>Datenquellenanalyse</strong><span class="value">50%</span>
               </div><div>
-                <span class="status notapplicable">0</span><strong>Nicht zutreffend</strong><span class="value">0.0%</span>
+                <span class="status notapplicable">1</span><strong>Nicht zutreffend</strong><span class="value">7%</span>
               </div><br style="clear:both;">
             </div>
           </div>
-          <div class="goal-stats"><span class="complete" style="width:42.9%" title="Daten verfügbar: 42.9%"></span><span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0.0%"></span><span class="notstarted" style="width:57.1%" title="Datenquellenanalyse: 57.1%"></span><span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0.0%"></span></div>
+          <div class="goal-stats"><span class="complete" style="width:42.9%" title="Daten verfügbar: 43%"></span><span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0%"></span><span class="notstarted" style="width:50.0%" title="Datenquellenanalyse: 50%"></span><span class="notapplicable" style="width:7.1%" title="Nicht zutreffend: 7%"></span></div>
           <div class="divider">
           </div>
         </div>
@@ -236,17 +258,17 @@ var translations = {
           </h3>
           <div class="summary">
             <div class="statuses"><div>
-                <span class="status complete">9</span><strong>Daten verfügbar</strong><span class="value">69.2%</span>
+                <span class="status complete">9</span><strong>Daten verfügbar</strong><span class="value">69%</span>
               </div><div>
-                <span class="status inprogress">1</span><strong>in Bearbeitung</strong><span class="value">7.7%</span>
+                <span class="status inprogress">1</span><strong>in Bearbeitung</strong><span class="value">8%</span>
               </div><div>
-                <span class="status notstarted">3</span><strong>Datenquellenanalyse</strong><span class="value">23.1%</span>
+                <span class="status notstarted">3</span><strong>Datenquellenanalyse</strong><span class="value">23%</span>
               </div><div>
-                <span class="status notapplicable">0</span><strong>Nicht zutreffend</strong><span class="value">0.0%</span>
+                <span class="status notapplicable">0</span><strong>Nicht zutreffend</strong><span class="value">0%</span>
               </div><br style="clear:both;">
             </div>
           </div>
-          <div class="goal-stats"><span class="complete" style="width:69.2%" title="Daten verfügbar: 69.2%"></span><span class="inprogress" style="width:7.7%" title="in Bearbeitung: 7.7%"></span><span class="notstarted" style="width:23.1%" title="Datenquellenanalyse: 23.1%"></span><span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0.0%"></span></div>
+          <div class="goal-stats"><span class="complete" style="width:69.2%" title="Daten verfügbar: 69%"></span><span class="inprogress" style="width:7.7%" title="in Bearbeitung: 8%"></span><span class="notstarted" style="width:23.1%" title="Datenquellenanalyse: 23%"></span><span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0%"></span></div>
           <div class="divider">
           </div>
         </div>
@@ -265,17 +287,17 @@ var translations = {
           </h3>
           <div class="summary">
             <div class="statuses"><div>
-                <span class="status complete">21</span><strong>Daten verfügbar</strong><span class="value">77.8%</span>
+                <span class="status complete">21</span><strong>Daten verfügbar</strong><span class="value">78%</span>
               </div><div>
-                <span class="status inprogress">0</span><strong>in Bearbeitung</strong><span class="value">0.0%</span>
+                <span class="status inprogress">0</span><strong>in Bearbeitung</strong><span class="value">0%</span>
               </div><div>
-                <span class="status notstarted">6</span><strong>Datenquellenanalyse</strong><span class="value">22.2%</span>
+                <span class="status notstarted">6</span><strong>Datenquellenanalyse</strong><span class="value">22%</span>
               </div><div>
-                <span class="status notapplicable">0</span><strong>Nicht zutreffend</strong><span class="value">0.0%</span>
+                <span class="status notapplicable">0</span><strong>Nicht zutreffend</strong><span class="value">0%</span>
               </div><br style="clear:both;">
             </div>
           </div>
-          <div class="goal-stats"><span class="complete" style="width:77.8%" title="Daten verfügbar: 77.8%"></span><span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0.0%"></span><span class="notstarted" style="width:22.2%" title="Datenquellenanalyse: 22.2%"></span><span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0.0%"></span></div>
+          <div class="goal-stats"><span class="complete" style="width:77.8%" title="Daten verfügbar: 78%"></span><span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0%"></span><span class="notstarted" style="width:22.2%" title="Datenquellenanalyse: 22%"></span><span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0%"></span></div>
           <div class="divider">
           </div>
         </div>
@@ -294,17 +316,17 @@ var translations = {
           </h3>
           <div class="summary">
             <div class="statuses"><div>
-                <span class="status complete">7</span><strong>Daten verfügbar</strong><span class="value">63.6%</span>
+                <span class="status complete">8</span><strong>Daten verfügbar</strong><span class="value">73%</span>
               </div><div>
-                <span class="status inprogress">0</span><strong>in Bearbeitung</strong><span class="value">0.0%</span>
+                <span class="status inprogress">0</span><strong>in Bearbeitung</strong><span class="value">0%</span>
               </div><div>
-                <span class="status notstarted">4</span><strong>Datenquellenanalyse</strong><span class="value">36.4%</span>
+                <span class="status notstarted">3</span><strong>Datenquellenanalyse</strong><span class="value">27%</span>
               </div><div>
-                <span class="status notapplicable">0</span><strong>Nicht zutreffend</strong><span class="value">0.0%</span>
+                <span class="status notapplicable">0</span><strong>Nicht zutreffend</strong><span class="value">0%</span>
               </div><br style="clear:both;">
             </div>
           </div>
-          <div class="goal-stats"><span class="complete" style="width:63.6%" title="Daten verfügbar: 63.6%"></span><span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0.0%"></span><span class="notstarted" style="width:36.4%" title="Datenquellenanalyse: 36.4%"></span><span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0.0%"></span></div>
+          <div class="goal-stats"><span class="complete" style="width:72.7%" title="Daten verfügbar: 73%"></span><span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0%"></span><span class="notstarted" style="width:27.3%" title="Datenquellenanalyse: 27%"></span><span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0%"></span></div>
           <div class="divider">
           </div>
         </div>
@@ -323,17 +345,17 @@ var translations = {
           </h3>
           <div class="summary">
             <div class="statuses"><div>
-                <span class="status complete">8</span><strong>Daten verfügbar</strong><span class="value">57.1%</span>
+                <span class="status complete">8</span><strong>Daten verfügbar</strong><span class="value">57%</span>
               </div><div>
-                <span class="status inprogress">0</span><strong>in Bearbeitung</strong><span class="value">0.0%</span>
+                <span class="status inprogress">0</span><strong>in Bearbeitung</strong><span class="value">0%</span>
               </div><div>
-                <span class="status notstarted">6</span><strong>Datenquellenanalyse</strong><span class="value">42.9%</span>
+                <span class="status notstarted">6</span><strong>Datenquellenanalyse</strong><span class="value">43%</span>
               </div><div>
-                <span class="status notapplicable">0</span><strong>Nicht zutreffend</strong><span class="value">0.0%</span>
+                <span class="status notapplicable">0</span><strong>Nicht zutreffend</strong><span class="value">0%</span>
               </div><br style="clear:both;">
             </div>
           </div>
-          <div class="goal-stats"><span class="complete" style="width:57.1%" title="Daten verfügbar: 57.1%"></span><span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0.0%"></span><span class="notstarted" style="width:42.9%" title="Datenquellenanalyse: 42.9%"></span><span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0.0%"></span></div>
+          <div class="goal-stats"><span class="complete" style="width:57.1%" title="Daten verfügbar: 57%"></span><span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0%"></span><span class="notstarted" style="width:42.9%" title="Datenquellenanalyse: 43%"></span><span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0%"></span></div>
           <div class="divider">
           </div>
         </div>
@@ -352,17 +374,17 @@ var translations = {
           </h3>
           <div class="summary">
             <div class="statuses"><div>
-                <span class="status complete">9</span><strong>Daten verfügbar</strong><span class="value">81.8%</span>
+                <span class="status complete">10</span><strong>Daten verfügbar</strong><span class="value">91%</span>
               </div><div>
-                <span class="status inprogress">0</span><strong>in Bearbeitung</strong><span class="value">0.0%</span>
+                <span class="status inprogress">0</span><strong>in Bearbeitung</strong><span class="value">0%</span>
               </div><div>
-                <span class="status notstarted">2</span><strong>Datenquellenanalyse</strong><span class="value">18.2%</span>
+                <span class="status notstarted">1</span><strong>Datenquellenanalyse</strong><span class="value">9%</span>
               </div><div>
-                <span class="status notapplicable">0</span><strong>Nicht zutreffend</strong><span class="value">0.0%</span>
+                <span class="status notapplicable">0</span><strong>Nicht zutreffend</strong><span class="value">0%</span>
               </div><br style="clear:both;">
             </div>
           </div>
-          <div class="goal-stats"><span class="complete" style="width:81.8%" title="Daten verfügbar: 81.8%"></span><span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0.0%"></span><span class="notstarted" style="width:18.2%" title="Datenquellenanalyse: 18.2%"></span><span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0.0%"></span></div>
+          <div class="goal-stats"><span class="complete" style="width:90.9%" title="Daten verfügbar: 91%"></span><span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0%"></span><span class="notstarted" style="width:9.1%" title="Datenquellenanalyse: 9%"></span><span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0%"></span></div>
           <div class="divider">
           </div>
         </div>
@@ -381,17 +403,17 @@ var translations = {
           </h3>
           <div class="summary">
             <div class="statuses"><div>
-                <span class="status complete">3</span><strong>Daten verfügbar</strong><span class="value">50.0%</span>
+                <span class="status complete">3</span><strong>Daten verfügbar</strong><span class="value">50%</span>
               </div><div>
-                <span class="status inprogress">0</span><strong>in Bearbeitung</strong><span class="value">0.0%</span>
+                <span class="status inprogress">1</span><strong>in Bearbeitung</strong><span class="value">17%</span>
               </div><div>
-                <span class="status notstarted">3</span><strong>Datenquellenanalyse</strong><span class="value">50.0%</span>
+                <span class="status notstarted">2</span><strong>Datenquellenanalyse</strong><span class="value">33%</span>
               </div><div>
-                <span class="status notapplicable">0</span><strong>Nicht zutreffend</strong><span class="value">0.0%</span>
+                <span class="status notapplicable">0</span><strong>Nicht zutreffend</strong><span class="value">0%</span>
               </div><br style="clear:both;">
             </div>
           </div>
-          <div class="goal-stats"><span class="complete" style="width:50.0%" title="Daten verfügbar: 50.0%"></span><span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0.0%"></span><span class="notstarted" style="width:50.0%" title="Datenquellenanalyse: 50.0%"></span><span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0.0%"></span></div>
+          <div class="goal-stats"><span class="complete" style="width:50.0%" title="Daten verfügbar: 50%"></span><span class="inprogress" style="width:16.7%" title="in Bearbeitung: 17%"></span><span class="notstarted" style="width:33.3%" title="Datenquellenanalyse: 33%"></span><span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0%"></span></div>
           <div class="divider">
           </div>
         </div>
@@ -410,17 +432,17 @@ var translations = {
           </h3>
           <div class="summary">
             <div class="statuses"><div>
-                <span class="status complete">14</span><strong>Daten verfügbar</strong><span class="value">82.4%</span>
+                <span class="status complete">14</span><strong>Daten verfügbar</strong><span class="value">82%</span>
               </div><div>
-                <span class="status inprogress">0</span><strong>in Bearbeitung</strong><span class="value">0.0%</span>
+                <span class="status inprogress">0</span><strong>in Bearbeitung</strong><span class="value">0%</span>
               </div><div>
-                <span class="status notstarted">3</span><strong>Datenquellenanalyse</strong><span class="value">17.6%</span>
+                <span class="status notstarted">3</span><strong>Datenquellenanalyse</strong><span class="value">18%</span>
               </div><div>
-                <span class="status notapplicable">0</span><strong>Nicht zutreffend</strong><span class="value">0.0%</span>
+                <span class="status notapplicable">0</span><strong>Nicht zutreffend</strong><span class="value">0%</span>
               </div><br style="clear:both;">
             </div>
           </div>
-          <div class="goal-stats"><span class="complete" style="width:82.4%" title="Daten verfügbar: 82.4%"></span><span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0.0%"></span><span class="notstarted" style="width:17.6%" title="Datenquellenanalyse: 17.6%"></span><span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0.0%"></span></div>
+          <div class="goal-stats"><span class="complete" style="width:82.4%" title="Daten verfügbar: 82%"></span><span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0%"></span><span class="notstarted" style="width:17.6%" title="Datenquellenanalyse: 18%"></span><span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0%"></span></div>
           <div class="divider">
           </div>
         </div>
@@ -439,17 +461,17 @@ var translations = {
           </h3>
           <div class="summary">
             <div class="statuses"><div>
-                <span class="status complete">10</span><strong>Daten verfügbar</strong><span class="value">83.3%</span>
+                <span class="status complete">10</span><strong>Daten verfügbar</strong><span class="value">83%</span>
               </div><div>
-                <span class="status inprogress">0</span><strong>in Bearbeitung</strong><span class="value">0.0%</span>
+                <span class="status inprogress">0</span><strong>in Bearbeitung</strong><span class="value">0%</span>
               </div><div>
-                <span class="status notstarted">2</span><strong>Datenquellenanalyse</strong><span class="value">16.7%</span>
+                <span class="status notstarted">2</span><strong>Datenquellenanalyse</strong><span class="value">17%</span>
               </div><div>
-                <span class="status notapplicable">0</span><strong>Nicht zutreffend</strong><span class="value">0.0%</span>
+                <span class="status notapplicable">0</span><strong>Nicht zutreffend</strong><span class="value">0%</span>
               </div><br style="clear:both;">
             </div>
           </div>
-          <div class="goal-stats"><span class="complete" style="width:83.3%" title="Daten verfügbar: 83.3%"></span><span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0.0%"></span><span class="notstarted" style="width:16.7%" title="Datenquellenanalyse: 16.7%"></span><span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0.0%"></span></div>
+          <div class="goal-stats"><span class="complete" style="width:83.3%" title="Daten verfügbar: 83%"></span><span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0%"></span><span class="notstarted" style="width:16.7%" title="Datenquellenanalyse: 17%"></span><span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0%"></span></div>
           <div class="divider">
           </div>
         </div>
@@ -468,17 +490,17 @@ var translations = {
           </h3>
           <div class="summary">
             <div class="statuses"><div>
-                <span class="status complete">4</span><strong>Daten verfügbar</strong><span class="value">36.4%</span>
+                <span class="status complete">5</span><strong>Daten verfügbar</strong><span class="value">46%</span>
               </div><div>
-                <span class="status inprogress">0</span><strong>in Bearbeitung</strong><span class="value">0.0%</span>
+                <span class="status inprogress">0</span><strong>in Bearbeitung</strong><span class="value">0%</span>
               </div><div>
-                <span class="status notstarted">7</span><strong>Datenquellenanalyse</strong><span class="value">63.6%</span>
+                <span class="status notstarted">5</span><strong>Datenquellenanalyse</strong><span class="value">46%</span>
               </div><div>
-                <span class="status notapplicable">0</span><strong>Nicht zutreffend</strong><span class="value">0.0%</span>
+                <span class="status notapplicable">1</span><strong>Nicht zutreffend</strong><span class="value">9%</span>
               </div><br style="clear:both;">
             </div>
           </div>
-          <div class="goal-stats"><span class="complete" style="width:36.4%" title="Daten verfügbar: 36.4%"></span><span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0.0%"></span><span class="notstarted" style="width:63.6%" title="Datenquellenanalyse: 63.6%"></span><span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0.0%"></span></div>
+          <div class="goal-stats"><span class="complete" style="width:45.5%" title="Daten verfügbar: 46%"></span><span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0%"></span><span class="notstarted" style="width:45.5%" title="Datenquellenanalyse: 46%"></span><span class="notapplicable" style="width:9.1%" title="Nicht zutreffend: 9%"></span></div>
           <div class="divider">
           </div>
         </div>
@@ -497,17 +519,17 @@ var translations = {
           </h3>
           <div class="summary">
             <div class="statuses"><div>
-                <span class="status complete">7</span><strong>Daten verfügbar</strong><span class="value">46.7%</span>
+                <span class="status complete">9</span><strong>Daten verfügbar</strong><span class="value">60%</span>
               </div><div>
-                <span class="status inprogress">0</span><strong>in Bearbeitung</strong><span class="value">0.0%</span>
+                <span class="status inprogress">0</span><strong>in Bearbeitung</strong><span class="value">0%</span>
               </div><div>
-                <span class="status notstarted">8</span><strong>Datenquellenanalyse</strong><span class="value">53.3%</span>
+                <span class="status notstarted">6</span><strong>Datenquellenanalyse</strong><span class="value">40%</span>
               </div><div>
-                <span class="status notapplicable">0</span><strong>Nicht zutreffend</strong><span class="value">0.0%</span>
+                <span class="status notapplicable">0</span><strong>Nicht zutreffend</strong><span class="value">0%</span>
               </div><br style="clear:both;">
             </div>
           </div>
-          <div class="goal-stats"><span class="complete" style="width:46.7%" title="Daten verfügbar: 46.7%"></span><span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0.0%"></span><span class="notstarted" style="width:53.3%" title="Datenquellenanalyse: 53.3%"></span><span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0.0%"></span></div>
+          <div class="goal-stats"><span class="complete" style="width:60.0%" title="Daten verfügbar: 60%"></span><span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0%"></span><span class="notstarted" style="width:40.0%" title="Datenquellenanalyse: 40%"></span><span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0%"></span></div>
           <div class="divider">
           </div>
         </div>
@@ -526,17 +548,17 @@ var translations = {
           </h3>
           <div class="summary">
             <div class="statuses"><div>
-                <span class="status complete">6</span><strong>Daten verfügbar</strong><span class="value">46.2%</span>
+                <span class="status complete">7</span><strong>Daten verfügbar</strong><span class="value">54%</span>
               </div><div>
-                <span class="status inprogress">0</span><strong>in Bearbeitung</strong><span class="value">0.0%</span>
+                <span class="status inprogress">0</span><strong>in Bearbeitung</strong><span class="value">0%</span>
               </div><div>
-                <span class="status notstarted">7</span><strong>Datenquellenanalyse</strong><span class="value">53.8%</span>
+                <span class="status notstarted">6</span><strong>Datenquellenanalyse</strong><span class="value">46%</span>
               </div><div>
-                <span class="status notapplicable">0</span><strong>Nicht zutreffend</strong><span class="value">0.0%</span>
+                <span class="status notapplicable">0</span><strong>Nicht zutreffend</strong><span class="value">0%</span>
               </div><br style="clear:both;">
             </div>
           </div>
-          <div class="goal-stats"><span class="complete" style="width:46.2%" title="Daten verfügbar: 46.2%"></span><span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0.0%"></span><span class="notstarted" style="width:53.8%" title="Datenquellenanalyse: 53.8%"></span><span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0.0%"></span></div>
+          <div class="goal-stats"><span class="complete" style="width:53.8%" title="Daten verfügbar: 54%"></span><span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0%"></span><span class="notstarted" style="width:46.2%" title="Datenquellenanalyse: 46%"></span><span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0%"></span></div>
           <div class="divider">
           </div>
         </div>
@@ -555,17 +577,17 @@ var translations = {
           </h3>
           <div class="summary">
             <div class="statuses"><div>
-                <span class="status complete">1</span><strong>Daten verfügbar</strong><span class="value">12.5%</span>
+                <span class="status complete">2</span><strong>Daten verfügbar</strong><span class="value">25%</span>
               </div><div>
-                <span class="status inprogress">0</span><strong>in Bearbeitung</strong><span class="value">0.0%</span>
+                <span class="status inprogress">0</span><strong>in Bearbeitung</strong><span class="value">0%</span>
               </div><div>
-                <span class="status notstarted">7</span><strong>Datenquellenanalyse</strong><span class="value">87.5%</span>
+                <span class="status notstarted">5</span><strong>Datenquellenanalyse</strong><span class="value">63%</span>
               </div><div>
-                <span class="status notapplicable">0</span><strong>Nicht zutreffend</strong><span class="value">0.0%</span>
+                <span class="status notapplicable">1</span><strong>Nicht zutreffend</strong><span class="value">13%</span>
               </div><br style="clear:both;">
             </div>
           </div>
-          <div class="goal-stats"><span class="complete" style="width:12.5%" title="Daten verfügbar: 12.5%"></span><span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0.0%"></span><span class="notstarted" style="width:87.5%" title="Datenquellenanalyse: 87.5%"></span><span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0.0%"></span></div>
+          <div class="goal-stats"><span class="complete" style="width:25.0%" title="Daten verfügbar: 25%"></span><span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0%"></span><span class="notstarted" style="width:62.5%" title="Datenquellenanalyse: 63%"></span><span class="notapplicable" style="width:12.5%" title="Nicht zutreffend: 13%"></span></div>
           <div class="divider">
           </div>
         </div>
@@ -584,17 +606,17 @@ var translations = {
           </h3>
           <div class="summary">
             <div class="statuses"><div>
-                <span class="status complete">2</span><strong>Daten verfügbar</strong><span class="value">20.0%</span>
+                <span class="status complete">5</span><strong>Daten verfügbar</strong><span class="value">50%</span>
               </div><div>
-                <span class="status inprogress">0</span><strong>in Bearbeitung</strong><span class="value">0.0%</span>
+                <span class="status inprogress">0</span><strong>in Bearbeitung</strong><span class="value">0%</span>
               </div><div>
-                <span class="status notstarted">8</span><strong>Datenquellenanalyse</strong><span class="value">80.0%</span>
+                <span class="status notstarted">4</span><strong>Datenquellenanalyse</strong><span class="value">40%</span>
               </div><div>
-                <span class="status notapplicable">0</span><strong>Nicht zutreffend</strong><span class="value">0.0%</span>
+                <span class="status notapplicable">1</span><strong>Nicht zutreffend</strong><span class="value">10%</span>
               </div><br style="clear:both;">
             </div>
           </div>
-          <div class="goal-stats"><span class="complete" style="width:20.0%" title="Daten verfügbar: 20.0%"></span><span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0.0%"></span><span class="notstarted" style="width:80.0%" title="Datenquellenanalyse: 80.0%"></span><span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0.0%"></span></div>
+          <div class="goal-stats"><span class="complete" style="width:50.0%" title="Daten verfügbar: 50%"></span><span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0%"></span><span class="notstarted" style="width:40.0%" title="Datenquellenanalyse: 40%"></span><span class="notapplicable" style="width:10.0%" title="Nicht zutreffend: 10%"></span></div>
           <div class="divider">
           </div>
         </div>
@@ -613,17 +635,17 @@ var translations = {
           </h3>
           <div class="summary">
             <div class="statuses"><div>
-                <span class="status complete">8</span><strong>Daten verfügbar</strong><span class="value">57.1%</span>
+                <span class="status complete">9</span><strong>Daten verfügbar</strong><span class="value">64%</span>
               </div><div>
-                <span class="status inprogress">0</span><strong>in Bearbeitung</strong><span class="value">0.0%</span>
+                <span class="status inprogress">0</span><strong>in Bearbeitung</strong><span class="value">0%</span>
               </div><div>
-                <span class="status notstarted">6</span><strong>Datenquellenanalyse</strong><span class="value">42.9%</span>
+                <span class="status notstarted">5</span><strong>Datenquellenanalyse</strong><span class="value">36%</span>
               </div><div>
-                <span class="status notapplicable">0</span><strong>Nicht zutreffend</strong><span class="value">0.0%</span>
+                <span class="status notapplicable">0</span><strong>Nicht zutreffend</strong><span class="value">0%</span>
               </div><br style="clear:both;">
             </div>
           </div>
-          <div class="goal-stats"><span class="complete" style="width:57.1%" title="Daten verfügbar: 57.1%"></span><span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0.0%"></span><span class="notstarted" style="width:42.9%" title="Datenquellenanalyse: 42.9%"></span><span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0.0%"></span></div>
+          <div class="goal-stats"><span class="complete" style="width:64.3%" title="Daten verfügbar: 64%"></span><span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0%"></span><span class="notstarted" style="width:35.7%" title="Datenquellenanalyse: 36%"></span><span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0%"></span></div>
           <div class="divider">
           </div>
         </div>
@@ -642,17 +664,17 @@ var translations = {
           </h3>
           <div class="summary">
             <div class="statuses"><div>
-                <span class="status complete">14</span><strong>Daten verfügbar</strong><span class="value">60.9%</span>
+                <span class="status complete">16</span><strong>Daten verfügbar</strong><span class="value">70%</span>
               </div><div>
-                <span class="status inprogress">1</span><strong>in Bearbeitung</strong><span class="value">4.3%</span>
+                <span class="status inprogress">0</span><strong>in Bearbeitung</strong><span class="value">0%</span>
               </div><div>
-                <span class="status notstarted">8</span><strong>Datenquellenanalyse</strong><span class="value">34.8%</span>
+                <span class="status notstarted">5</span><strong>Datenquellenanalyse</strong><span class="value">22%</span>
               </div><div>
-                <span class="status notapplicable">0</span><strong>Nicht zutreffend</strong><span class="value">0.0%</span>
+                <span class="status notapplicable">2</span><strong>Nicht zutreffend</strong><span class="value">9%</span>
               </div><br style="clear:both;">
             </div>
           </div>
-          <div class="goal-stats"><span class="complete" style="width:60.9%" title="Daten verfügbar: 60.9%"></span><span class="inprogress" style="width:4.3%" title="in Bearbeitung: 4.3%"></span><span class="notstarted" style="width:34.8%" title="Datenquellenanalyse: 34.8%"></span><span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0.0%"></span></div>
+          <div class="goal-stats"><span class="complete" style="width:69.6%" title="Daten verfügbar: 70%"></span><span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0%"></span><span class="notstarted" style="width:21.7%" title="Datenquellenanalyse: 22%"></span><span class="notapplicable" style="width:8.7%" title="Nicht zutreffend: 9%"></span></div>
           <div class="divider">
           </div>
         </div>
@@ -671,17 +693,17 @@ var translations = {
           </h3>
           <div class="summary">
             <div class="statuses"><div>
-                <span class="status complete">9</span><strong>Daten verfügbar</strong><span class="value">36.0%</span>
+                <span class="status complete">12</span><strong>Daten verfügbar</strong><span class="value">48%</span>
               </div><div>
-                <span class="status inprogress">0</span><strong>in Bearbeitung</strong><span class="value">0.0%</span>
+                <span class="status inprogress">0</span><strong>in Bearbeitung</strong><span class="value">0%</span>
               </div><div>
-                <span class="status notstarted">15</span><strong>Datenquellenanalyse</strong><span class="value">60.0%</span>
+                <span class="status notstarted">9</span><strong>Datenquellenanalyse</strong><span class="value">36%</span>
               </div><div>
-                <span class="status notapplicable">1</span><strong>Nicht zutreffend</strong><span class="value">4.0%</span>
+                <span class="status notapplicable">4</span><strong>Nicht zutreffend</strong><span class="value">16%</span>
               </div><br style="clear:both;">
             </div>
           </div>
-          <div class="goal-stats"><span class="complete" style="width:36.0%" title="Daten verfügbar: 36.0%"></span><span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0.0%"></span><span class="notstarted" style="width:60.0%" title="Datenquellenanalyse: 60.0%"></span><span class="notapplicable" style="width:4.0%" title="Nicht zutreffend: 4.0%"></span></div>
+          <div class="goal-stats"><span class="complete" style="width:48.0%" title="Daten verfügbar: 48%"></span><span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0%"></span><span class="notstarted" style="width:36.0%" title="Datenquellenanalyse: 36%"></span><span class="notapplicable" style="width:16.0%" title="Nicht zutreffend: 16%"></span></div>
           <div class="divider">
           </div>
         </div>
@@ -695,7 +717,7 @@ var translations = {
   <div class="container">
     <div class="row">
       <div class="col-xs-9">
-        <a href="https://www.destatis.de/DE/Service/Kontakt/Kontakt.html">Kontakt</a> | <a class="twitter-follow-button" href="https://twitter.com/destatis?lang=de" data-show-count="false">@destatis</a>
+        <a href="https://www.destatis.de/DE/Service/Kontakt/Kontakt.html" target="_blank">Kontakt</a> | <a class="twitter-follow-button" href="https://twitter.com/destatis?lang=de" data-show-count="false">@destatis</a>
       </div>
       <div class="col-xs-3 text-right">
         <a href="/faq/">FAQ</a> | <a href="/imprint/">Im­pres­s­um</a>
@@ -726,7 +748,7 @@ ga('send', 'pageview');
 <!-- /.container </div> -->
 <script src="//code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script src="//cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
 <script src="//cdn.datatables.net/fixedcolumns/3.2.3/js/dataTables.fixedColumns.min.js"></script>
@@ -741,10 +763,8 @@ ga('send', 'pageview');
 <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
 <script src="https://bowercdn.net/c/leaflet.zoomhome-latest/dist/leaflet.zoomhome.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/leaflet-search@2.9.7/dist/leaflet-search.min.js"></script>
-<script>
-  var remoteDataBaseUrl = 'https://sustainabledevelopment-germany.github.io/sdg-data-pub/';
-</script>
-<script src='/assets/js/sdg.js?v=20190426074530'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/autotrack/2.4.1/autotrack.js"></script>
+<script src='/assets/js/sdg.js?v=20190702072734'></script>
 <script>
 $(function() {
     if($('#indicatorData').length) {
@@ -755,7 +775,7 @@ $(function() {
       });
 
       $.ajax({
-        url: 'https://sustainabledevelopment-germany.github.io/sdg-data-pub//comb/' + domData.id + '.json',
+        url: opensdg.remoteDataBaseUrl + '/comb/' + domData.id + '.json',
         success: function(res) {
 
           $('.async-loading').remove();
@@ -775,7 +795,8 @@ $(function() {
             geographicalArea: domData.geographicalarea,
             showData: domData.showdata,
             footnote: domData.footnote,
-            graphType: domData.graphtype
+            graphType: domData.graphtype,
+            startValues: domData.startvalues
           }),
           view  = new indicatorView(model, {
             rootElement: '#indicatorData',

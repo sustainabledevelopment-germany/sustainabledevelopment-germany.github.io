@@ -5,6 +5,28 @@
         <script crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js?features=Array.prototype.forEach%2CString.prototype.includes"></script>
 
         <script>
+// This is where we initialise any global variables, namespaced in "opensdg".
+var opensdg = {
+
+  // A base URL for asynchronous calls to SDG data.
+  remoteDataBaseUrl: 'https://sustainabledevelopment-germany.github.io/sdg-data-pub/',
+
+  // A hook which can be replaced to modify the configuration for Chart.js.
+  // To see where this is used, see indicatorView.js createPlot() and updatePlot().
+  // To see an example of replacing it, see binary.html.
+  chartConfigAlter: function(config) {
+    // Alterations go here.
+    return config;
+  },
+};
+
+// For backwards compatibility, some of these might need to be global.
+// @TODO: Remove these eventually.
+var remoteDataBaseUrl = opensdg.remoteDataBaseUrl;
+
+</script>
+
+        <script>
 // JavaScript container for translation data.
 var translations = {
   //Javascript version of the "t" filter from jekyll-open-sdg-plugins.
@@ -82,10 +104,10 @@ var translations = {
         
 
         
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/3.2.3/css/fixedColumns.dataTables.min.css">
-        <link rel="stylesheet" href="/assets/css/default.css?v=20190426074530">
+        <link rel="stylesheet" href="/assets/css/default.css?v=20190702072734">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet">
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
           integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
@@ -93,7 +115,7 @@ var translations = {
         <link rel="stylesheet" href="https://cdn.rawgit.com/socib/Leaflet.TimeDimension/master/dist/leaflet.timedimension.control.min.css" />
         <link rel="stylesheet" href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' />
         <link rel="stylesheet" href="https://bowercdn.net/c/leaflet.zoomhome-latest/dist/leaflet.zoomhome.css" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-search@2.9.7/dist/leaflet-search.min.css"><link rel="stylesheet" href="/assets/css/custom.css?v=20190426074530"></head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-search@2.9.7/dist/leaflet-search.min.css"><link rel="stylesheet" href="/assets/css/custom.css?v=20190702072734"></head>
 <body class="language-en">
 <!-- <div class="container"> -->
 
@@ -170,32 +192,31 @@ var translations = {
     <div>
         <h1>Frequently Asked Questions (FAQ)</h1>
         <h2 id="how-do-i-suggest-new-or-different-data-sources">How do I suggest new or different data sources?</h2>
-<p>If you have feedback on the data sources we have used or have suggestions for new data sources then please email us at <a href="mailto:sdg-indicators@destatis.de">sdg-indicators@destatis.de</a>.</p>
+<p>If you have feedback on the data sources we have used or have suggestions for new data sources then please contact us here <a href="mailto:sdg-indicators@destatis.de">sdg-indicators@destatis.de</a>.</p>
 
 <h2 id="what-does-the-reporting-status-mean">What does the reporting status mean?</h2>
 <p>We have used three different types of reporting status for an indicator, which are also colour coded:</p>
 
 <ul>
-  <li>Reported online (green) – as a minimum the headline national data for this indicator is available on this website but the data might not be fully disaggregated yet. We are continuing to source additional disaggregations.</li>
-  <li>Statistics in progress (amber) – we have found a suitable source of data for this indicator or relevant proxy at national level. We are currently quality assuring the data and preparing it for publication.</li>
-  <li>Exploring data sources (red) – we are still looking for a suitable data source for this indicator.</li>
+  <li>Green: Reported online – as a minimum the headline national data for this indicator is available on this website but the data might not be fully disaggregated yet. We are continuing to source additional disaggregations.</li>
+  <li>Amber: Statistics in progress – we have found a suitable source of data for this indicator or relevant proxy at national level. We are currently quality assuring the data and preparing it for publication.</li>
+  <li>Red: Exploring data sources – we are still looking for a suitable data source for this indicator.</li>
 </ul>
 
 <p>Where there is additional information about the status of indicator data collection and reporting, this will be displayed at the top of the indicator page.</p>
 
-<h2 id="how-often-will-new-data-be-added-to-this-site">How often will new data be added to this site?</h2>
-<p>We will add data as soon as it has been sourced and checked. This includes new data as well as updates to data we have already published. We will continue to collect data from existing sources where possible, in cooperation with topic experts.</p>
+<h2 id="how-are-data-gaps-filled">How are data gaps filled?</h2>
+<p>In case there are no data available for an indicator, possible data sources are sought and assessed according to our quality standards. If they pass, the indicator is published in the reporting platform.</p>
 
-<h2 id="what-are-we-doing-to-fill-data-gaps">What are we doing to fill data gaps?</h2>
-<p>For some indicators, although we may have data at the national level, our existing data sources don’t always allow us to disaggregate by all main groups.</p>
+<p>For some indicators, although there may be data available at the national level, the existing data sources don’t always allow us to disaggregate by all required categories.</p>
 
-<p>This means we need to look for new data sources, link existing ones, or model data. We are working with colleagues across the Federal Statical Office to do this.</p>
+<p>Thus, either  new data sources need to be found, or existing ones to be linked, or data to be model. This is constantly supported by the respective thematic department in the Federal Statistical Office.</p>
 
-<h2 id="how-accessible-is-this-website">How accessible is this website?</h2>
-<p>Our aim is to make this website as accessible and usable as possible for every user.</p>
+<h2 id="what-does-disaggregation-mean">What does disaggregation mean?</h2>
+<p>Disaggregation is used to assess an indicator in more detail by dividing it into subcategories. The most common ones are age or gender. Every indicator has its own specific set of disaggregation categories which are provided either in the indicator’s name or by the international organization responsible for the indicator.</p>
 
 <h2 id="can-other-countries-copy-this-website">Can other countries copy this website?</h2>
-<p>Yes. For more information go to <a href="https://g205sdgs.github.io/sdg-indicators/en/guidance/">guidance</a>.</p>
+<p>The website may be used by other countries to build their own national reporting platform. Conditions for using Github apply. For more information please visit <a href="https://g205sdgs.github.io/sdg-indicators/en/guidance/">guidance</a>.</p>
 
 <!-- DO NOT REMOVE ANYTHING BELOW THIS LINE -->
 <script type="text/javascript">
@@ -224,10 +245,10 @@ document.addEventListener("DOMContentLoaded", function () {
   <div class="container">
     <div class="row">
       <div class="col-xs-9">
-        <a href="https://www.destatis.de/DE/Service/Kontakt/Kontakt.html">Contact us</a> | <a class="twitter-follow-button" href="https://twitter.com/destatis?lang=de" data-show-count="false">@destatis</a>
+        <a href="https://www.destatis.de/DE/Service/Kontakt/Kontakt.html" target="_blank">Contact us</a> | <a class="twitter-follow-button" href="https://twitter.com/destatis?lang=de" data-show-count="false">@destatis</a>
       </div>
       <div class="col-xs-3 text-right">
-        <a href="/en/faq/">FAQ</a> | <a href="/en/imprint/">Imprint</a>
+        <a href="/en/faq/">FAQ</a> | <a href="/en/imprint/">Legal Notice</a>
       </div>
     </div>
   </div>
@@ -255,7 +276,7 @@ ga('send', 'pageview');
 <!-- /.container </div> -->
 <script src="//code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script src="//cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
 <script src="//cdn.datatables.net/fixedcolumns/3.2.3/js/dataTables.fixedColumns.min.js"></script>
@@ -270,10 +291,8 @@ ga('send', 'pageview');
 <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
 <script src="https://bowercdn.net/c/leaflet.zoomhome-latest/dist/leaflet.zoomhome.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/leaflet-search@2.9.7/dist/leaflet-search.min.js"></script>
-<script>
-  var remoteDataBaseUrl = 'https://sustainabledevelopment-germany.github.io/sdg-data-pub/';
-</script>
-<script src='/assets/js/sdg.js?v=20190426074530'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/autotrack/2.4.1/autotrack.js"></script>
+<script src='/assets/js/sdg.js?v=20190702072734'></script>
 <script>
 $(function() {
     if($('#indicatorData').length) {
@@ -284,7 +303,7 @@ $(function() {
       });
 
       $.ajax({
-        url: 'https://sustainabledevelopment-germany.github.io/sdg-data-pub//comb/' + domData.id + '.json',
+        url: opensdg.remoteDataBaseUrl + '/comb/' + domData.id + '.json',
         success: function(res) {
 
           $('.async-loading').remove();
@@ -304,7 +323,8 @@ $(function() {
             geographicalArea: domData.geographicalarea,
             showData: domData.showdata,
             footnote: domData.footnote,
-            graphType: domData.graphtype
+            graphType: domData.graphtype,
+            startValues: domData.startvalues
           }),
           view  = new indicatorView(model, {
             rootElement: '#indicatorData',

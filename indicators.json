@@ -15,7 +15,7 @@
           "description": "",
           "keywords": "",
           "href": "/1-1-1",
-          "status": "notstarted"
+          "status": "notapplicable"
         },{
           "id": "1-2-2",
           "title": "Anteil der Männer, Frauen und Kinder jeden Alters, die in Armut in all ihren Dimensionen gemäß nationaler Definitionen leben",
@@ -192,7 +192,7 @@
           "status": "complete"
         },{
           "id": "2-a-1",
-          "title": "Der Agriculture Orientation Index für staatliche Ausgaben",
+          "title": "Der 'Agriculture Orientation Index' für staatliche Ausgaben",
           "description": "",
           "keywords": "",
           "href": "/2-a-1",
@@ -300,7 +300,7 @@
           "description": "",
           "keywords": "",
           "href": "/3-8-2",
-          "status": "complete"
+          "status": "notstarted"
         },{
           "id": "3-a-1",
           "title": "Altersstandardisierte Prävalenz des aktuellen Tabakkonsums bei Personen im Alter von 15 Jahren und älter",
@@ -345,7 +345,7 @@
           "status": "complete"
         },{
           "id": "3-9-3",
-          "title": "Sterblichkeitsrate infolge von unbeabsichtigtem Vergiften",
+          "title": "Sterblichkeit infolge unbeabsichtigter Vergiftung",
           "description": "",
           "keywords": "",
           "href": "/3-9-3",
@@ -377,7 +377,7 @@
           "description": "",
           "keywords": "",
           "href": "/3-5-1",
-          "status": "notstarted"
+          "status": "complete"
         },{
           "id": "3-5-2",
           "title": "Schädlicher Alkoholgebrauch, definiert gemäß den nationalen Gegebenheiten als Alkoholkonsum pro Kopf (15 Jahre und älter) innerhalb eines Kalenderjahres in Litern reinem Alkohol",
@@ -418,7 +418,7 @@
           "description": "",
           "keywords": "",
           "href": "/4-a-1",
-          "status": "notstarted"
+          "status": "complete"
         },{
           "id": "4-2-1",
           "title": "Anteil der Kinder unter 5 Jahren mit einer altersgemäßen  Entwicklung hinsichtlich Gesundheit, Lernen und psycho-sozialem Wohlbefinden, nach Geschlecht",
@@ -598,7 +598,7 @@
           "description": "",
           "keywords": "",
           "href": "/6-6-1",
-          "status": "notstarted"
+          "status": "complete"
         },{
           "id": "6-4-1",
           "title": "Veränderung der Wassernutzungseffizienz im Zeitablauf",
@@ -674,7 +674,7 @@
           "description": "",
           "keywords": "",
           "href": "/7-1-2",
-          "status": "notstarted"
+          "status": "inprogress"
         },{
           "id": "7-a-1",
           "title": "Internationale Finanzströme an Entwicklungsländer zur Förderung von Forschung und Entwicklung im Bereich sauberer Energien sowie erneuerbarer Energieproduktion, einschließlich Hybridsystemen",
@@ -913,7 +913,7 @@
           "status": "complete"
         },{
           "id": "9-4-1",
-          "title": "CO2-Emissionen pro Wertschöpfungseinheit",
+          "title": "CO<sub>2</sub>-Emissionen pro Wertschöpfungseinheit",
           "description": "",
           "keywords": "",
           "href": "/9-4-1",
@@ -972,7 +972,7 @@
           "description": "",
           "keywords": "",
           "href": "/10-1-1",
-          "status": "notstarted"
+          "status": "complete"
         },{
           "id": "10-5-1",
           "title": "Financial Soundness Indicators",
@@ -1000,7 +1000,7 @@
           "description": "",
           "keywords": "",
           "href": "/10-6-1",
-          "status": "notstarted"
+          "status": "notapplicable"
         },{
           "id": "10-4-1",
           "title": "Anteil des Arbeitsnehmerentgelts am BIP, bestehend aus Löhnen, Gehältern und Sozialversicherungsbeiträgen",
@@ -1055,7 +1055,7 @@
           "description": "",
           "keywords": "",
           "href": "/11-b-1",
-          "status": "notstarted"
+          "status": "complete"
         },{
           "id": "11-c-1",
           "title": "Anteil der finanziellen Unterstützung, die den am wenigsten entwickelten Ländern für den Umbau zu und Neubau von nachhaltigen, widerstandsfähigen und ressourceneffizienten Gebäuden unter Verwendung lokaler Materialien bereitgestellt wird",
@@ -1118,7 +1118,7 @@
           "description": "",
           "keywords": "",
           "href": "/11-4-1",
-          "status": "notstarted"
+          "status": "complete"
         }]
     }
   },{
@@ -1159,7 +1159,7 @@
           "description": "",
           "keywords": "",
           "href": "/12-7-1",
-          "status": "notstarted"
+          "status": "complete"
         },{
           "id": "12-2-2",
           "title": "Inländischer Materialverbrauch, inländischer Materialverbrauch pro Kopf und inländischer Materialverbrauch pro BIP",
@@ -1249,7 +1249,7 @@
           "description": "",
           "keywords": "",
           "href": "/13-b-1",
-          "status": "notstarted"
+          "status": "notapplicable"
         },{
           "id": "13-a-1",
           "title": "Mobilisierter Betrag an US-Dollar pro Jahr zwischen 2020 und 2025, anrechenbar auf die Zusage von 100 Milliarden US-Dollar",
@@ -1277,7 +1277,7 @@
           "description": "",
           "keywords": "",
           "href": "/13-2-1",
-          "status": "notstarted"
+          "status": "complete"
         }]
     }
   },{
@@ -1307,11 +1307,11 @@
           "status": "notstarted"
         },{
           "id": "14-6-1",
-          "title": "Grade der Umsetzung internationaler Instrumente mit dem Ziel zur Bekämpfung illegaler, nicht gemeldeter und unregulierter Fischerei",
+          "title": "Grad der Umsetzung internationaler Instrumente mit dem Ziel zur Bekämpfung illegaler, nicht gemeldeter und unregulierter Fischerei",
           "description": "",
           "keywords": "",
           "href": "/14-6-1",
-          "status": "notstarted"
+          "status": "complete"
         },{
           "id": "14-c-1",
           "title": "Anzahl der Staaten, die durch rechtliche, politische und institutionelle Rahmenbedingungen bei der Ratifizierung, Verabschiedung und Umsetzung meeresbezogener Instrumentarien, die internationales Recht zum Schutz und zur nachhaltigen Nutzung der Ozeane und ihrer Ressourcen (wie es dem Seerechtsübereinkommen der Vereinten Nationen entspricht) umsetzen, Fortschritte machen",
@@ -1325,7 +1325,7 @@
           "description": "",
           "keywords": "",
           "href": "/14-b-1",
-          "status": "notstarted"
+          "status": "notapplicable"
         },{
           "id": "14-5-1",
           "title": "Abdeckung von Meeresgebieten durch Schutzgebiete",
@@ -1346,20 +1346,20 @@
           "description": "",
           "keywords": "",
           "href": "/14-a-1",
-          "status": "notstarted"
+          "status": "complete"
         },{
           "id": "14-3-1",
           "title": "Durchschnittliche Versauerung der Meere (pH) gemessen an einer vereinbarten Reihe von repräsentativen Probeentnahmestationen",
           "description": "",
           "keywords": "",
           "href": "/14-3-1",
-          "status": "notstarted"
+          "status": "complete"
         }]
     }
   },{
     "goal": {
       "id": "15",
-      "title": "Landökosysteme schützen, wiederherstellen und ihre nachhaltige Nutzung fördern, Wälder nachhaltig bewirtschaften, Wüstenbildung bekämpfen, Bodendegradation beenden und umkehren und",
+      "title": "Landökosysteme schützen, wiederherstellen und ihre nachhaltige Nutzung fördern, Wälder nachhaltig bewirtschaften, Wüstenbildung bekämpfen, Bodendegradation beenden und umkehren und dem Verlust der biologischen Vielfalt ein Ende setzen",
       "indicators": [{
           "id": "15-3-1",
           "title": "Anteil der Fläche, die von Bodendegradation betroffenen ist, an der gesamten Landfläche",
@@ -1394,7 +1394,7 @@
           "description": "",
           "keywords": "",
           "href": "/15-4-2",
-          "status": "notstarted"
+          "status": "complete"
         },{
           "id": "15-2-1",
           "title": "Fortschritt bei der nachhaltigen Waldbewirtschaftung",
@@ -1477,7 +1477,7 @@
           "description": "",
           "keywords": "",
           "href": "/16-8-1",
-          "status": "inprogress"
+          "status": "notapplicable"
         },{
           "id": "16-4-1",
           "title": "Gesamtwert der ein- und ausgehenden illegalen Finanzströme (in aktuellen US-Dollar)",
@@ -1491,7 +1491,7 @@
           "description": "",
           "keywords": "",
           "href": "/16-2-1",
-          "status": "notstarted"
+          "status": "complete"
         },{
           "id": "16-10-1",
           "title": "Anzahl der bestätigten Fälle von Tötung, Entführung, erzwungenem Verschwinden, willkürlicher Inhaftierung und Folter von Journalisten, zugehörigem Medienpersonal, Gewerkschaftern und Menschenrechtsanwälten in den vergangenen 12 Monaten",
@@ -1522,11 +1522,11 @@
           "status": "complete"
         },{
           "id": "16-1-2",
-          "title": "Konfliktbedingte  Todesfälle je 100.000 Einwohner, nach Geschlecht, Alter und Ursache",
+          "title": "Konfliktbedingte Todesfälle je 100.000 Einwohner, nach Geschlecht, Alter und Ursache",
           "description": "",
           "keywords": "",
           "href": "/16-1-2",
-          "status": "notstarted"
+          "status": "notapplicable"
         },{
           "id": "16-b-1",
           "title": "Anteil der Bevölkerung, die angibt sich in den vergangenen 12 Monaten persönlich auf Basis einer Diskriminierung, die nach internationalem Menschenrecht verboten ist, diskriminiert oder belästigt gefühlt zu haben",
@@ -1557,7 +1557,7 @@
           "status": "notstarted"
         },{
           "id": "16-a-1",
-          "title": "Existenz von unabhängigen nationalen Menschenrechtsinstitutionen in Übereinstimmung mit den 'Pariser Grundsätzen",
+          "title": "Existenz von unabhängigen nationalen Menschenrechtsinstitutionen in Übereinstimmung mit den 'Pariser Grundsätzen'",
           "description": "",
           "keywords": "",
           "href": "/16-a-1",
@@ -1578,7 +1578,7 @@
           "status": "complete"
         },{
           "id": "16-1-1",
-          "title": "Anzahl der Opfern vorsätzlicher Tötung je 100.000 Einwohner, nach Geschlecht und Alter",
+          "title": "Anzahl der Opfer vorsätzlicher Tötung je 100.000 Einwohner, nach Geschlecht und Alter",
           "description": "",
           "keywords": "",
           "href": "/16-1-1",
@@ -1617,10 +1617,10 @@
           "description": "",
           "keywords": "",
           "href": "/16-3-1",
-          "status": "notstarted"
+          "status": "complete"
         },{
           "id": "16-2-2",
-          "title": "Anzahl von Opfer von Menschenhandel je 100.000 Einwohner, nach Geschlecht, Alter und Art der Ausbeutung",
+          "title": "Anzahl der Opfer von Menschenhandel je 100.000 Einwohner, nach Geschlecht, Alter und Art der Ausbeutung",
           "description": "",
           "keywords": "",
           "href": "/16-2-2",
@@ -1651,7 +1651,7 @@
           "description": "",
           "keywords": "",
           "href": "/17-14-1",
-          "status": "notstarted"
+          "status": "complete"
         },{
           "id": "17-2-1",
           "title": "Öffentliche Nettoentwicklungsausgaben, insgesamt und an am wenigsten entwickelte Länder, als Anteil am Bruttonationaleinkommen (BNE) der Geberländer des Ausschusses für Entwicklungshilfe der Organisation für wirtschaftliche Zusammenarbeit und Entwicklung (OECD)",
@@ -1714,14 +1714,14 @@
           "description": "",
           "keywords": "",
           "href": "/17-11-1",
-          "status": "notstarted"
+          "status": "notapplicable"
         },{
           "id": "17-4-1",
           "title": "Schuldendienst als Anteil an Güter- und Dienstleistungsexporten",
           "description": "",
           "keywords": "",
           "href": "/17-4-1",
-          "status": "notstarted"
+          "status": "notapplicable"
         },{
           "id": "17-17-1",
           "title": "Betrag an US-Dollar, der für (a) öffentlich-private Partnerschaften und (b) zivilgesellschaftliche Partnerschaften zugesagt wurde",
@@ -1749,14 +1749,14 @@
           "description": "",
           "keywords": "",
           "href": "/17-15-1",
-          "status": "notstarted"
+          "status": "complete"
         },{
           "id": "17-18-2",
           "title": "Anzahl der Staaten mit einer nationalen statistischen Gesetzgebung im Einklang mit den Grundprinzipien der amtlichen Statistik",
           "description": "",
           "keywords": "",
           "href": "/17-18-2",
-          "status": "notstarted"
+          "status": "complete"
         },{
           "id": "17-3-2",
           "title": "Volumen der (Rück-)Überweisungen (in US-Dollar) als Anteil am gesamten BIP",
@@ -1777,7 +1777,7 @@
           "description": "",
           "keywords": "",
           "href": "/17-10-1",
-          "status": "notstarted"
+          "status": "notapplicable"
         },{
           "id": "17-18-1",
           "title": "Anteil der Nachhaltigkeitsindikatoren, die auf nationaler Ebene vollständig - sofern gemäß dem Unterziel relevant - disaggregiert sind, in Übereinstimmung mit den Grundprinzipien der amtlichen Statistik",

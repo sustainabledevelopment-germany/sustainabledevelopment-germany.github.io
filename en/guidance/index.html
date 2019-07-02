@@ -5,6 +5,28 @@
         <script crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js?features=Array.prototype.forEach%2CString.prototype.includes"></script>
 
         <script>
+// This is where we initialise any global variables, namespaced in "opensdg".
+var opensdg = {
+
+  // A base URL for asynchronous calls to SDG data.
+  remoteDataBaseUrl: 'https://sustainabledevelopment-germany.github.io/sdg-data-pub/',
+
+  // A hook which can be replaced to modify the configuration for Chart.js.
+  // To see where this is used, see indicatorView.js createPlot() and updatePlot().
+  // To see an example of replacing it, see binary.html.
+  chartConfigAlter: function(config) {
+    // Alterations go here.
+    return config;
+  },
+};
+
+// For backwards compatibility, some of these might need to be global.
+// @TODO: Remove these eventually.
+var remoteDataBaseUrl = opensdg.remoteDataBaseUrl;
+
+</script>
+
+        <script>
 // JavaScript container for translation data.
 var translations = {
   //Javascript version of the "t" filter from jekyll-open-sdg-plugins.
@@ -82,10 +104,10 @@ var translations = {
         
 
         
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/3.2.3/css/fixedColumns.dataTables.min.css">
-        <link rel="stylesheet" href="/assets/css/default.css?v=20190426074530">
+        <link rel="stylesheet" href="/assets/css/default.css?v=20190702072734">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet">
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
           integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
@@ -93,7 +115,7 @@ var translations = {
         <link rel="stylesheet" href="https://cdn.rawgit.com/socib/Leaflet.TimeDimension/master/dist/leaflet.timedimension.control.min.css" />
         <link rel="stylesheet" href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' />
         <link rel="stylesheet" href="https://bowercdn.net/c/leaflet.zoomhome-latest/dist/leaflet.zoomhome.css" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-search@2.9.7/dist/leaflet-search.min.css"><link rel="stylesheet" href="/assets/css/custom.css?v=20190426074530"></head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-search@2.9.7/dist/leaflet-search.min.css"><link rel="stylesheet" href="/assets/css/custom.css?v=20190702072734"></head>
 <body class="language-en">
 <!-- <div class="container"> -->
 
@@ -171,28 +193,26 @@ var translations = {
         <h1>Guide NRP</h1>
         <h2 id="national-reporting-platform---sdg">National reporting platform - SDG</h2>
 
-<p>National reporting platform - SDG is a publicly available tool serving dissemination and presentation of indicators monitoring Sustainable Development Goals (SDGs) of the 2030 Agenda (with data for Germany) and a set of indicators for monitoring sustainable development on the level of the country.</p>
+<p>The national reporting platform - SDG (SDG - NRP) is a publicly available tool serving the dissemination and presentation of data for Germany on  the Sustainable Development Goals (SDGs) of the 2030 Agenda by the United Nations (UN).</p>
+
 <h3 id="our-aproach-to-nrp">Our aproach to NRP</h3>
 
-<p>In order to conform with the UN’s Fundamental Principles of Official Statistics, the minimum characteristics an SDG NRP should have are that it should:</p>
+<p>In order to conform with the UN’s Fundamental Principles of Official Statistics, the minimum characteristics an SDG NRP should have are that it should: <br /></p>
 <ul>
-  <li>is managed by national statistical offices;</li>
+  <li>be managed by national statistical offices;</li>
   <li>features official statistics and metadata according to established standard methodology;</li>
-  <li>is publicly accessible;</li>
+  <li>be publicly accessible;</li>
   <li>allows for feedback from data users;</li>
   <li>features open source (free) technology.</li>
 </ul>
 
-<p>In addition, the German NRP reporting platform has been developed in accordance with accepted ones international guidelines, in particular for open data and software produced in the open source model.</p>
+<p>In addition, the German SDG-NRP has been developed in accordance with recognized international guidelines, especially with regard to open data and software.</p>
 
 <h2 id="nrp---sources">NRP - sources</h2>
 
-<p>German statistics actively supports the development of national reporting platforms, in particular produced in the open-source model for the purpose of monitoring SDGs indicators. Precursors in this field are USA and UK.
-The current version of the German reporting platform has been developed based on earlier version of the UK NRP, and adapted to the needs of German statistics.
-The project code is publicly available in a <a href="https://github.com/G205SDGs/sdg-indicators">Github repository</a></p>
+<p>The Federal Statistical Office (Destatis) actively supports the development of national reporting platforms, in particular as an open source solution for the presentation of SDG indicators. Precursors in this field are the USA and Great Britain. The current version of the German reporting platform has been developed based on an earlier version of the UK NRP, and adapted to the needs of German statistics. The project code is publicly available in a <a href="https://github.com/G205SDGs/sdg-indicators">Github repository</a>.</p>
 
-<p>The new universal version of the open-sdg platform developed by the US, UK and Center for Open Data Enterprise is available.
-We encourage you to familiarize yourself with the national US, UK platforms for SDG and the project documentation.</p>
+<p>The Federal Statistical Office (Destatis) actively supports the development of national reporting platforms, in particular as an open source solution for the presentation of SDG indicators. Precursors in this field are the USA and Great Britain. The current version of the German reporting platform has been developed based on an earlier version of the UK NRP, and adapted to the needs of German statistics. The project code is publicly available in a .</p>
 
 <ul>
   <li>
@@ -218,6 +238,17 @@ We encourage you to familiarize yourself with the national US, UK platforms for 
   <li>Bootstrap: framework CSS</li>
 </ul>
 
+<h2 id="current-display">Current display</h2>
+
+<p>DDue to technical difficulties, the current version of the German NRP contains some faulty illustrations, which are referred to here:<br /></p>
+<ul>
+  <li>The units of the displayed time series are only displayed in English in the legends of the graphics.</li>
+  <li>Four- (or more) digit values are rounded.</li>
+  <li>Integers are displayed without decimal places (even in time series in which other numerical values with decimal places exist).</li>
+  <li>Very long names of time series are not broken up into several lines in the axis labels of the graphics and hence are partly cut off.</li>
+  <li>Zero values in time series are interpreted and displayed as missing values.</li>
+</ul>
+
     </div>
 </div>
 
@@ -225,10 +256,10 @@ We encourage you to familiarize yourself with the national US, UK platforms for 
   <div class="container">
     <div class="row">
       <div class="col-xs-9">
-        <a href="https://www.destatis.de/DE/Service/Kontakt/Kontakt.html">Contact us</a> | <a class="twitter-follow-button" href="https://twitter.com/destatis?lang=de" data-show-count="false">@destatis</a>
+        <a href="https://www.destatis.de/DE/Service/Kontakt/Kontakt.html" target="_blank">Contact us</a> | <a class="twitter-follow-button" href="https://twitter.com/destatis?lang=de" data-show-count="false">@destatis</a>
       </div>
       <div class="col-xs-3 text-right">
-        <a href="/en/faq/">FAQ</a> | <a href="/en/imprint/">Imprint</a>
+        <a href="/en/faq/">FAQ</a> | <a href="/en/imprint/">Legal Notice</a>
       </div>
     </div>
   </div>
@@ -256,7 +287,7 @@ ga('send', 'pageview');
 <!-- /.container </div> -->
 <script src="//code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script src="//cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
 <script src="//cdn.datatables.net/fixedcolumns/3.2.3/js/dataTables.fixedColumns.min.js"></script>
@@ -271,10 +302,8 @@ ga('send', 'pageview');
 <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
 <script src="https://bowercdn.net/c/leaflet.zoomhome-latest/dist/leaflet.zoomhome.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/leaflet-search@2.9.7/dist/leaflet-search.min.js"></script>
-<script>
-  var remoteDataBaseUrl = 'https://sustainabledevelopment-germany.github.io/sdg-data-pub/';
-</script>
-<script src='/assets/js/sdg.js?v=20190426074530'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/autotrack/2.4.1/autotrack.js"></script>
+<script src='/assets/js/sdg.js?v=20190702072734'></script>
 <script>
 $(function() {
     if($('#indicatorData').length) {
@@ -285,7 +314,7 @@ $(function() {
       });
 
       $.ajax({
-        url: 'https://sustainabledevelopment-germany.github.io/sdg-data-pub//comb/' + domData.id + '.json',
+        url: opensdg.remoteDataBaseUrl + '/comb/' + domData.id + '.json',
         success: function(res) {
 
           $('.async-loading').remove();
@@ -305,7 +334,8 @@ $(function() {
             geographicalArea: domData.geographicalarea,
             showData: domData.showdata,
             footnote: domData.footnote,
-            graphType: domData.graphtype
+            graphType: domData.graphtype,
+            startValues: domData.startvalues
           }),
           view  = new indicatorView(model, {
             rootElement: '#indicatorData',

@@ -5,6 +5,28 @@
         <script crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js?features=Array.prototype.forEach%2CString.prototype.includes"></script>
 
         <script>
+// This is where we initialise any global variables, namespaced in "opensdg".
+var opensdg = {
+
+  // A base URL for asynchronous calls to SDG data.
+  remoteDataBaseUrl: 'https://sustainabledevelopment-germany.github.io/sdg-data-pub/',
+
+  // A hook which can be replaced to modify the configuration for Chart.js.
+  // To see where this is used, see indicatorView.js createPlot() and updatePlot().
+  // To see an example of replacing it, see binary.html.
+  chartConfigAlter: function(config) {
+    // Alterations go here.
+    return config;
+  },
+};
+
+// For backwards compatibility, some of these might need to be global.
+// @TODO: Remove these eventually.
+var remoteDataBaseUrl = opensdg.remoteDataBaseUrl;
+
+</script>
+
+        <script>
 // JavaScript container for translation data.
 var translations = {
   //Javascript version of the "t" filter from jekyll-open-sdg-plugins.
@@ -82,10 +104,10 @@ var translations = {
         
 
         
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/3.2.3/css/fixedColumns.dataTables.min.css">
-        <link rel="stylesheet" href="/assets/css/default.css?v=20190426074530">
+        <link rel="stylesheet" href="/assets/css/default.css?v=20190702072734">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet">
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
           integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
@@ -93,7 +115,7 @@ var translations = {
         <link rel="stylesheet" href="https://cdn.rawgit.com/socib/Leaflet.TimeDimension/master/dist/leaflet.timedimension.control.min.css" />
         <link rel="stylesheet" href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' />
         <link rel="stylesheet" href="https://bowercdn.net/c/leaflet.zoomhome-latest/dist/leaflet.zoomhome.css" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-search@2.9.7/dist/leaflet-search.min.css"><link rel="stylesheet" href="/assets/css/custom.css?v=20190426074530"></head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-search@2.9.7/dist/leaflet-search.min.css"><link rel="stylesheet" href="/assets/css/custom.css?v=20190702072734"></head>
 <body class="language-de">
 <!-- <div class="container"> -->
 
@@ -179,11 +201,19 @@ var translations = {
 
 <p>Neben den eigenen Inhalten bietet das Statistische Bundesamt Querverweise (“externe Links”) auf die von anderen Anbietern bereitgehaltenen Inhalte. Die fremden Inhalte stammen weder vom Statistischen Bundesamt noch hat das Statistische Bundesamt die Möglichkeit, den Inhalt von Seiten Dritter zu beeinflussen. Die Inhalte fremder Seiten, auf die das Statistische Bundesamt mittels Links hinweist, spiegeln nicht die Meinung des Statistischen Bundesamts wider, sondern dienen lediglich der Information und der Darstellung von Zusammenhängen. Das Statistische Bundesamt haftet nicht für fremde Inhalte, auf die es lediglich im oben genannten Sinne hinweist. Die Verantwortlichkeit liegt alleine bei dem Anbieter der Inhalte. Bei Nutzungsausfällen der Website wegen technischer oder organisatorischer Störungen bestehen keinerlei Ansprüche - gleich welcher Art - gegen das Statistische Bundesamt.</p>
 
+<h2 id="hinweise-zum-datenschutz">Hinweise zum Datenschutz</h2>
+
+<p><strong>Das Statistische Bundesamt nimmt den Schutz Ihrer Privat- und Persönlichkeitssphäre ernst und beachtet die datenschutzrechtlichen Bestimmungen. Ihr Vertrauen ist uns wichtig!</strong></p>
+
+<p>Mit diesen Hinweisen kommen wir auch unseren Informationspflichten nach Artikel 13 der Datenschutz-Grundverordnung (DS-GVO) bei der Erhebung personenbezogener Daten nach. Beim Zugriff auf diese Nationale Berichtsplattform werden vom Statistischen Bundesamt keine personenbezogene Daten erhoben.</p>
+
+<p>Für Datenschutzhinweise im Zusammenhang mit der Nutzung des Kontaktformulares und sozialen Medien sowie des weiteren Internet-Angebotes des Statistischen Bundesamtes, gilt die <a href="https://www.destatis.de/DE/Service/Datenschutz/_inhalt.html">Datenschutzerklärung</a> des Statistischen Bundesamtes.</p>
+
 <h2 id="copyright-allgemein">Copyright allgemein</h2>
 
-<p>Für die Standard-Veröffentlichungen des Statistischen Bundesamtes in gedruckter und elektronischer Form sowie für die Inhalte auf unserer Website www.destatis.de einschließlich Grafiken sowie der zum Download bereitgestellten Produkte gilt, soweit bei dem jeweiligen Produkt/Internetseite keine ergänzenden oder anderslautenden Angaben ausgewiesen sind,</p>
+<p>Für die Standard-Veröffentlichungen des Statistischen Bundesamtes in gedruckter und elektronischer Form sowie für die Inhalte auf dieser Website einschließlich Grafiken sowie der zum Download bereitgestellten Produkte gilt, soweit bei dem jeweiligen Produkt/Internetseite keine ergänzenden oder anderslautenden Angaben ausgewiesen sind,</p>
 
-<p>© Statistisches Bundesamt (Destatis), 2019
+<p>© Statistisches Bundesamt (Destatis), 2019 <br />
 Vervielfältigung und Verbreitung, auch auszugsweise, mit Quellennachweis gestattet.</p>
 
 <p>Diese Regelung gilt für jede Art der Weiterverbreitung von Texten, Daten und Grafiken durch Dritte, soweit das Statistische Bundesamt Inhaber des Urheberrechts ist und die alleinigen Herausgeberrechte besitzt. Die Weiterverwendung ist sowohl für nicht gewerbliche als auch gewerbliche Zwecke erlaubt. Auch die Verbreitungsform elektronisch, via Internet oder als Print ist nicht eingeschränkt. Es bedarf keiner ausdrücklichen Genehmigung durch unser Haus. Eine Quellenangabe ist jedoch erforderlich. Das Statistische Bundesamt (Destatis) ist als Herausgeber in den Quellennachweis aufzunehmen.</p>
@@ -194,9 +224,9 @@ Vervielfältigung und Verbreitung, auch auszugsweise, mit Quellennachweis gestat
 
 <p>Bei Verwendung unserer Daten empfiehlt es sich daher, auf die Ausbringung der Copyright-Angaben im jeweiligen Produkt zu achten und im Bedarfsfalle die im Impressum genannten Copyright-Inhaber zu kontakten.</p>
 
-<h2 id="allgemeine-geschäftsbedingungen-agb">Allgemeine Geschäftsbedingungen (AGB)</h2>
-
-<p>Es gelten die <a href="https://www.destatis.de/DE/Service/Impressum/agb.pdf?__blob=publicationFile&amp;v=3">Allgemeine Geschäftsbedingungen</a> des Statistischen Bundesamtes (Stand 12.07.2018) für die Vertriebsabwicklung im Verkauf von gedruckten und auf Datenträger angebotenen Publikationen.</p>
+<p>Logo und Pictogramme der Globalen Ziele nachhaltiger Entwicklung (SDGs):<br />
+© United Nations / <a href="http://www.globalgoals.org/asset-licence/">www.globalgoals.org</a><br />
+für die deutsche Übersetzung Bundespresseamt / <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a></p>
 
     </div>
 </div>
@@ -205,7 +235,7 @@ Vervielfältigung und Verbreitung, auch auszugsweise, mit Quellennachweis gestat
   <div class="container">
     <div class="row">
       <div class="col-xs-9">
-        <a href="https://www.destatis.de/DE/Service/Kontakt/Kontakt.html">Kontakt</a> | <a class="twitter-follow-button" href="https://twitter.com/destatis?lang=de" data-show-count="false">@destatis</a>
+        <a href="https://www.destatis.de/DE/Service/Kontakt/Kontakt.html" target="_blank">Kontakt</a> | <a class="twitter-follow-button" href="https://twitter.com/destatis?lang=de" data-show-count="false">@destatis</a>
       </div>
       <div class="col-xs-3 text-right">
         <a href="/faq/">FAQ</a> | <a href="/imprint/">Im­pres­s­um</a>
@@ -236,7 +266,7 @@ ga('send', 'pageview');
 <!-- /.container </div> -->
 <script src="//code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script src="//cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
 <script src="//cdn.datatables.net/fixedcolumns/3.2.3/js/dataTables.fixedColumns.min.js"></script>
@@ -251,10 +281,8 @@ ga('send', 'pageview');
 <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
 <script src="https://bowercdn.net/c/leaflet.zoomhome-latest/dist/leaflet.zoomhome.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/leaflet-search@2.9.7/dist/leaflet-search.min.js"></script>
-<script>
-  var remoteDataBaseUrl = 'https://sustainabledevelopment-germany.github.io/sdg-data-pub/';
-</script>
-<script src='/assets/js/sdg.js?v=20190426074530'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/autotrack/2.4.1/autotrack.js"></script>
+<script src='/assets/js/sdg.js?v=20190702072734'></script>
 <script>
 $(function() {
     if($('#indicatorData').length) {
@@ -265,7 +293,7 @@ $(function() {
       });
 
       $.ajax({
-        url: 'https://sustainabledevelopment-germany.github.io/sdg-data-pub//comb/' + domData.id + '.json',
+        url: opensdg.remoteDataBaseUrl + '/comb/' + domData.id + '.json',
         success: function(res) {
 
           $('.async-loading').remove();
@@ -285,7 +313,8 @@ $(function() {
             geographicalArea: domData.geographicalarea,
             showData: domData.showdata,
             footnote: domData.footnote,
-            graphType: domData.graphtype
+            graphType: domData.graphtype,
+            startValues: domData.startvalues
           }),
           view  = new indicatorView(model, {
             rootElement: '#indicatorData',

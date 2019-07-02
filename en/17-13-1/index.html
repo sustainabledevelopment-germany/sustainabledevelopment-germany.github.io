@@ -5,11 +5,35 @@
 
 
 
+
+
 <!DOCTYPE html>
 <html lang="en" class="no-js">
     <head>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
         <script crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js?features=Array.prototype.forEach%2CString.prototype.includes"></script>
+
+        <script>
+// This is where we initialise any global variables, namespaced in "opensdg".
+var opensdg = {
+
+  // A base URL for asynchronous calls to SDG data.
+  remoteDataBaseUrl: 'https://sustainabledevelopment-germany.github.io/sdg-data-pub/',
+
+  // A hook which can be replaced to modify the configuration for Chart.js.
+  // To see where this is used, see indicatorView.js createPlot() and updatePlot().
+  // To see an example of replacing it, see binary.html.
+  chartConfigAlter: function(config) {
+    // Alterations go here.
+    return config;
+  },
+};
+
+// For backwards compatibility, some of these might need to be global.
+// @TODO: Remove these eventually.
+var remoteDataBaseUrl = opensdg.remoteDataBaseUrl;
+
+</script>
 
         <script>
 // JavaScript container for translation data.
@@ -91,10 +115,10 @@ var translations = {
         
 
         
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/3.2.3/css/fixedColumns.dataTables.min.css">
-        <link rel="stylesheet" href="/assets/css/default.css?v=20190426074530">
+        <link rel="stylesheet" href="/assets/css/default.css?v=20190702072734">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet">
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
           integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
@@ -102,7 +126,7 @@ var translations = {
         <link rel="stylesheet" href="https://cdn.rawgit.com/socib/Leaflet.TimeDimension/master/dist/leaflet.timedimension.control.min.css" />
         <link rel="stylesheet" href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' />
         <link rel="stylesheet" href="https://bowercdn.net/c/leaflet.zoomhome-latest/dist/leaflet.zoomhome.css" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-search@2.9.7/dist/leaflet-search.min.css"><link rel="stylesheet" href="/assets/css/custom.css?v=20190426074530"></head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-search@2.9.7/dist/leaflet-search.min.css"><link rel="stylesheet" href="/assets/css/custom.css?v=20190702072734"></head>
 <body class="language-en">
 <!-- <div class="container"> -->
 
@@ -178,7 +202,7 @@ var translations = {
 <script type="text/template" id="item_template">
   <% _.each(series, function(seriesItem) { %>
     <div class="variable-selector<% if(allowedFields.indexOf(seriesItem.field) == -1) { %> disallowed child<% }%>" data-field="<%=seriesItem.field%>">
-      <button class='accessBtn' tabindex='0'><h5><%=translations.t(seriesItem.field)%><i class="fa fa-chevron-down"></i></h5></button>
+      <button class='accessBtn' tabindex='0' aria-expanded='false'><h5><%=translations.t(seriesItem.field)%><i class="fa fa-chevron-down"></i></h5></button>
       <div class="bar">
         <div class="selected"></div>
       </div>
@@ -213,9 +237,9 @@ var translations = {
   <% } %>
 </script>
 
-<script>translations['indicator'] = {"chart":"Chart","clear_all":"Clear all","clear_selections":"Clear selections","dataset_size_warning":"There are too many datasets to show on the chart. Not all will be shown until you remove some selections.","download_chart":"Download Chart CSV","download_csv":"Download CSV","download_csv_title":"Download as CSV","download_headline":"Download Headline CSV","download_headline_title":"Download headline data as CSV","download_source":"Download Source CSV","download_source_title":"Download source data as CSV","download_table":"Download Table CSV","edit":"Edit","edit_data":"Edit Data","edit_metadata":"Edit Metadata","footnote":"Footnote","geographical_area":"Geographical Area","global_metadata":"Global Metadata","global_metadata_blurb":"This table provides information on metadata for SDG indicators as defined by the UN Statistical Commission. <a href=\"https://unstats.un.org/sdgs/metadata/\">Complete global metadata</a> is provided by the UN Statistics Division.","legend_help":"Click on the legend to remove individual lines from the chart.","loading_map":"Loading map","map":"Map","national_metadata":"National Metadata","national_metadata_blurb":"This table provides metadata for the actual indicator available from %country_name statistics closest to the corresponding global SDG indicator. Please note that even when the global SDG indicator is fully available from %country_adjective statistics, this table should be consulted for information on national methodology and other %country_adjective-specific metadata information.","no_data_hint":"No options available because of filters above","select_all":"Select all","series_help":"Choose categories from the dropdowns below to see different breakdowns of the data. Some will not be available until a higher level is chosen.","source":"Source","sources":"Sources","sub_categories":"Sub-categories","table":"Table","unit_of_measurement":"Unit of Measurement","units_type":"Units type","variable_hint":"Available when '%field' is selected","view_indicator_list":"View this goal's indicator list"};</script>
+<script>translations['indicator'] = {"chart":"Chart","clear_all":"Clear all","clear_selections":"Clear selections","data-footnote":"Specification","data_footnote":"Specification","dataset_size_warning":"There are too many datasets to show on the chart. Not all will be shown until you remove some selections.","download_chart":"Download Chart CSV","download_csv":"Download CSV","download_csv_title":"Download as CSV","download_headline":"Download Headline CSV","download_headline_title":"Download headline data as CSV","download_source":"Download Source CSV","download_source_title":"Download source data as CSV","download_table":"Download Table CSV","edit":"Edit","edit_data":"Edit Data","edit_metadata":"Edit Metadata","footnote":"Specification","geographical_area":"Geographical Area","global_metadata":"Global Metadata","global_metadata_blurb":"This table provides information on metadata for SDG indicators as defined by the UN Statistical Commission. <a href=\"https://unstats.un.org/sdgs/metadata/\">Complete global metadata</a> is provided by the UN Statistics Division.","legend_help":"Click on the legend to remove individual lines from the chart.","loading_map":"Loading map","map":"Map","national_metadata":"National Metadata","national_metadata_blurb":"This table provides metadata for the actual indicator available from %country_name statistics closest to the corresponding global SDG indicator. Please note that even when the global SDG indicator is fully available from %country_adjective statistics, this table should be consulted for information on national methodology and other country specific metadata information.","no_data":"LoremIpsum123","no_data_hint":"No options available because of filters above","select_all":"Select all","series_help":"Choose categories from the dropdowns below to see different breakdowns of the data. Some will not be available until a higher level is chosen.","source":"Source","sources":"Sources","sub_categories":"Sub-categories","table":"Table","unit_of_measurement":"Copyright","units_type":"Units type","variable_hint":"Available when '%field' is selected","view_indicator_list":"View this goal's indicator list"};</script>
 
-<script>translations['data'] = {"age":"Age group","disability":"Disability status","disabled":"Persons with disability","education":"Education level","female":"Female","income":"Income or wealth quantile","male":"Male","nondisabled":"Persons without disability","number":"Number","occupation":"Occupation","other":"Other","percent":"Percent","primary":"Primary education","quintile1":"Quintile 1 (poorest)","quintile2":"Quintile 2","quintile3":"Quintile 3","quintile4":"Quintile 4","quintile5":"Quintile 5 (richest)","ratio":"Ratio","rural":"Rural","secondary":"Secondary education","sex":"Sex","tertiary":"Tertiary education","unit":"Unit of measure","unknown":"Unknown","urban":"Urban","urbanisation":"Degree of urbanisation"};</script>
+<script>translations['data'] = null;</script>
 
 
 <div class="heading indicator goal-17">
@@ -223,7 +247,7 @@ var translations = {
     <div class="row">
       <div class="col-xs-4 col-md-3 col-lg-2">
         <a href="/en/17" title="View this goal's indicator list">
-          <img src="/assets/img/goals/en/17/17.png" alt="Partnerships for the goals - Goal 17" />
+          <img src="/assets/img/goals/en/17.png" alt="Partnerships for the goals - Goal 17" />
         </a>
       </div>
       <div class="col-xs-8 col-md-9 col-lg-10">
@@ -264,7 +288,7 @@ var translations = {
   </div>
 
   <div class="row" id="indicatorData" data-indicatorid='indicator_17-13-1' data-id="17-13-1" data-country="Total"
-  data-charttitle="" data-measurementunit="" data-datasource="" data-footnote="" data-showdata="true" data-graphtype="line" data-geocoderegex="" data-showmap="">
+  data-charttitle="" data-measurementunit="&copy; Federal Statistical Office (Destatis), 2019" data-datasource="Federal Statistical Office (Destatis)" data-footnote="2014 to 2018 partly preliminary data." data-showdata="true" data-graphtype="line" data-geocoderegex="" data-showmap="">
     
     <div class="col-md-3">
       <div id="toolbar">
@@ -389,7 +413,7 @@ var translations = {
           
           
           
-          <td class="table-value">1.9</td>
+          <td class="table-value">2.2</td>
           
           
         </tr>
@@ -421,7 +445,7 @@ var translations = {
           
           
           
-          <td class="table-value">1.9</td>
+          <td class="table-value">2.2</td>
           
           
         </tr>
@@ -453,7 +477,7 @@ var translations = {
           
           
           
-          <td class="table-value"></td>
+          <td class="table-value">1.4</td>
           
           
         </tr>
@@ -533,7 +557,7 @@ var translations = {
           
           
           
-          <td class="table-value">1709.8</td>
+          <td class="table-value">1711.3</td>
           
           
         </tr>
@@ -549,7 +573,7 @@ var translations = {
           
           
           
-          <td class="table-value">1753.7</td>
+          <td class="table-value">1755.2</td>
           
           
         </tr>
@@ -565,7 +589,7 @@ var translations = {
           
           
           
-          <td class="table-value">1805.0</td>
+          <td class="table-value">1807.7</td>
           
           
         </tr>
@@ -581,7 +605,7 @@ var translations = {
           
           
           
-          <td class="table-value">1873.3</td>
+          <td class="table-value">1869.9</td>
           
           
         </tr>
@@ -597,7 +621,7 @@ var translations = {
           
           
           
-          <td class="table-value"></td>
+          <td class="table-value">1930.0</td>
           
           
         </tr>
@@ -677,7 +701,7 @@ var translations = {
           
           
           
-          <td class="table-value">1540.6</td>
+          <td class="table-value">1541.3</td>
           
           
         </tr>
@@ -693,7 +717,7 @@ var translations = {
           
           
           
-          <td class="table-value">1577.2</td>
+          <td class="table-value">1578.3</td>
           
           
         </tr>
@@ -709,7 +733,7 @@ var translations = {
           
           
           
-          <td class="table-value">1619.1</td>
+          <td class="table-value">1622.1</td>
           
           
         </tr>
@@ -725,7 +749,7 @@ var translations = {
           
           
           
-          <td class="table-value">1732.8</td>
+          <td class="table-value">1676.6</td>
           
           
         </tr>
@@ -741,7 +765,7 @@ var translations = {
           
           
           
-          <td class="table-value"></td>
+          <td class="table-value">1717.3</td>
           
           
         </tr>
@@ -965,7 +989,7 @@ var translations = {
           
           
           
-          <td class="table-value">9.5</td>
+          <td class="table-value">16.7</td>
           
           
         </tr>
@@ -981,7 +1005,7 @@ var translations = {
           
           
           
-          <td class="table-value">19.4</td>
+          <td class="table-value">23.9</td>
           
           
         </tr>
@@ -997,7 +1021,7 @@ var translations = {
           
           
           
-          <td class="table-value">25.7</td>
+          <td class="table-value">28.7</td>
           
           
         </tr>
@@ -1013,7 +1037,7 @@ var translations = {
           
           
           
-          <td class="table-value">38.2</td>
+          <td class="table-value">34.0</td>
           
           
         </tr>
@@ -1029,7 +1053,7 @@ var translations = {
           
           
           
-          <td class="table-value"></td>
+          <td class="table-value">57.3</td>
           
           
         </tr>
@@ -1109,7 +1133,7 @@ var translations = {
           
           
           
-          <td class="table-value">586.6</td>
+          <td class="table-value">587.5</td>
           
           
         </tr>
@@ -1125,7 +1149,7 @@ var translations = {
           
           
           
-          <td class="table-value">604.3</td>
+          <td class="table-value">605.5</td>
           
           
         </tr>
@@ -1141,7 +1165,7 @@ var translations = {
           
           
           
-          <td class="table-value">630.0</td>
+          <td class="table-value">634.0</td>
           
           
         </tr>
@@ -1157,7 +1181,7 @@ var translations = {
           
           
           
-          <td class="table-value">663.1</td>
+          <td class="table-value">665.7</td>
           
           
         </tr>
@@ -1173,7 +1197,7 @@ var translations = {
           
           
           
-          <td class="table-value"></td>
+          <td class="table-value">703.4</td>
           
           
         </tr>
@@ -1253,7 +1277,7 @@ var translations = {
           
           
           
-          <td class="table-value">49713.0</td>
+          <td class="table-value">49703.0</td>
           
           
         </tr>
@@ -1269,7 +1293,7 @@ var translations = {
           
           
           
-          <td class="table-value">50381.0</td>
+          <td class="table-value">50454.0</td>
           
           
         </tr>
@@ -1285,7 +1309,7 @@ var translations = {
           
           
           
-          <td class="table-value">50801.0</td>
+          <td class="table-value">51013.0</td>
           
           
         </tr>
@@ -1301,7 +1325,7 @@ var translations = {
           
           
           
-          <td class="table-value">51716.0</td>
+          <td class="table-value">51949.0</td>
           
           
         </tr>
@@ -1317,7 +1341,7 @@ var translations = {
           
           
           
-          <td class="table-value"></td>
+          <td class="table-value">53002.0</td>
           
           
         </tr>
@@ -1397,7 +1421,7 @@ var translations = {
           
           
           
-          <td class="table-value">58336.0</td>
+          <td class="table-value">58327.0</td>
           
           
         </tr>
@@ -1413,7 +1437,7 @@ var translations = {
           
           
           
-          <td class="table-value">58923.0</td>
+          <td class="table-value">58997.0</td>
           
           
         </tr>
@@ -1429,7 +1453,7 @@ var translations = {
           
           
           
-          <td class="table-value">59286.0</td>
+          <td class="table-value">59477.0</td>
           
           
         </tr>
@@ -1445,7 +1469,7 @@ var translations = {
           
           
           
-          <td class="table-value">60044.0</td>
+          <td class="table-value">60222.0</td>
           
           
         </tr>
@@ -1461,7 +1485,7 @@ var translations = {
           
           
           
-          <td class="table-value"></td>
+          <td class="table-value">61068.0</td>
           
           
         </tr>
@@ -1541,7 +1565,7 @@ var translations = {
           
           
           
-          <td class="table-value">102.7</td>
+          <td class="table-value">103.0</td>
           
           
         </tr>
@@ -1557,7 +1581,7 @@ var translations = {
           
           
           
-          <td class="table-value">103.1</td>
+          <td class="table-value">103.2</td>
           
           
         </tr>
@@ -1573,7 +1597,7 @@ var translations = {
           
           
           
-          <td class="table-value">104.2</td>
+          <td class="table-value">104.4</td>
           
           
         </tr>
@@ -1605,7 +1629,7 @@ var translations = {
           
           
           
-          <td class="table-value"></td>
+          <td class="table-value">104.1</td>
           
           
         </tr>
@@ -1685,7 +1709,7 @@ var translations = {
           
           
           
-          <td class="table-value">104.3</td>
+          <td class="table-value">104.6</td>
           
           
         </tr>
@@ -1701,7 +1725,7 @@ var translations = {
           
           
           
-          <td class="table-value">105.0</td>
+          <td class="table-value">105.2</td>
           
           
         </tr>
@@ -1717,7 +1741,7 @@ var translations = {
           
           
           
-          <td class="table-value">106.4</td>
+          <td class="table-value">106.7</td>
           
           
         </tr>
@@ -1733,7 +1757,7 @@ var translations = {
           
           
           
-          <td class="table-value">107.4</td>
+          <td class="table-value">107.6</td>
           
           
         </tr>
@@ -1749,7 +1773,7 @@ var translations = {
           
           
           
-          <td class="table-value"></td>
+          <td class="table-value">107.6</td>
           
           
         </tr>
@@ -1829,7 +1853,7 @@ var translations = {
           
           
           
-          <td class="table-value">42672.0</td>
+          <td class="table-value">42671.0</td>
           
           
         </tr>
@@ -1845,7 +1869,7 @@ var translations = {
           
           
           
-          <td class="table-value">43069.0</td>
+          <td class="table-value">43071.0</td>
           
           
         </tr>
@@ -1861,7 +1885,7 @@ var translations = {
           
           
           
-          <td class="table-value">43638.0</td>
+          <td class="table-value">43642.0</td>
           
           
         </tr>
@@ -1877,7 +1901,7 @@ var translations = {
           
           
           
-          <td class="table-value">44271.0</td>
+          <td class="table-value">44269.0</td>
           
           
         </tr>
@@ -1893,7 +1917,7 @@ var translations = {
           
           
           
-          <td class="table-value"></td>
+          <td class="table-value">44841.0</td>
           
           
         </tr>
@@ -1973,7 +1997,7 @@ var translations = {
           
           
           
-          <td class="table-value">105.8</td>
+          <td class="table-value">106.0</td>
           
           
         </tr>
@@ -1989,7 +2013,7 @@ var translations = {
           
           
           
-          <td class="table-value">106.7</td>
+          <td class="table-value">107.0</td>
           
           
         </tr>
@@ -2005,7 +2029,7 @@ var translations = {
           
           
           
-          <td class="table-value">107.9</td>
+          <td class="table-value">108.5</td>
           
           
         </tr>
@@ -2021,7 +2045,7 @@ var translations = {
           
           
           
-          <td class="table-value">109.9</td>
+          <td class="table-value">110.4</td>
           
           
         </tr>
@@ -2037,7 +2061,7 @@ var translations = {
           
           
           
-          <td class="table-value"></td>
+          <td class="table-value">111.6</td>
           
           
         </tr>
@@ -2117,7 +2141,7 @@ var translations = {
           
           
           
-          <td class="table-value">203.0</td>
+          <td class="table-value">203.5</td>
           
           
         </tr>
@@ -2133,7 +2157,7 @@ var translations = {
           
           
           
-          <td class="table-value">243.3</td>
+          <td class="table-value">244.1</td>
           
           
         </tr>
@@ -2149,7 +2173,7 @@ var translations = {
           
           
           
-          <td class="table-value">250.6</td>
+          <td class="table-value">247.5</td>
           
           
         </tr>
@@ -2165,7 +2189,7 @@ var translations = {
           
           
           
-          <td class="table-value">247.2</td>
+          <td class="table-value">247.8</td>
           
           
         </tr>
@@ -2181,7 +2205,7 @@ var translations = {
           
           
           
-          <td class="table-value"></td>
+          <td class="table-value">229.2</td>
           
           
         </tr>
@@ -2221,8 +2245,6 @@ var translations = {
           <div class="tab-content data-view">
             <div role="tabpanel" class="tab-pane active" id="chartview">
               
-    
-    
 
     <div id="dataset-size-warning" style="display:none">
       <i class="fa fa-bolt"></i> There are too many datasets to show on the chart. Not all will be shown until you remove some selections.
@@ -2232,6 +2254,7 @@ var translations = {
     <div class="plot-container">
         
 <canvas></canvas>
+
     </div>
     <div id="plotLegend"></div>
 
@@ -2277,7 +2300,7 @@ var translations = {
                 <p>
                   
                   
-                  This table provides metadata for the actual indicator available from Germany statistics closest to the corresponding global SDG indicator. Please note that even when the global SDG indicator is fully available from German statistics, this table should be consulted for information on national methodology and other German-specific metadata information.
+                  This table provides metadata for the actual indicator available from Germany statistics closest to the corresponding global SDG indicator. Please note that even when the global SDG indicator is fully available from German statistics, this table should be consulted for information on national methodology and other country specific metadata information.
                 </p>
                 <table class="table table-hover">
   
@@ -2299,7 +2322,7 @@ var translations = {
         <th scope="row">Indicator available </th>
         <td>
           
-            Annual growth rate of real GDP <br> Real GDP per capita <br> Government fiscal balance <br> Debt level of the total public budget <br> Consumption by private households <br> Available income of private households <br> Gross fixed capital formation <br> Trade balance <br> Persons employed <br> Hours worked by persons employed <br> Hours worked by employees <br> Labour productivity per hour worked by persons employed <br> Labour productivity per hour worked by employee
+            Annual growth rate of real GDP <br> Available income of private households <br> Consumption by private households <br> Debt level of the total public budget <br> Government fiscal balance <br>  Gross fixed capital formation <br> Hours worked by employees <br> Hours worked by persons employed <br> Labour productivity per hour worked by persons employed <br> Labour productivity per hour worked by employee <br> Persons employed <br> Real GDP per capita <br> Trade balance
           
         </td>
         </tr>
@@ -2308,10 +2331,10 @@ var translations = {
   
       
       <tr>
-        <th scope="row">Comparisons to SDG metadata </th>
+        <th scope="row">Comparability with UN metadata </th>
         <td>
           
-            
+            The time series are not compliant with the international metadata description.
           
         </td>
         </tr>
@@ -2328,6 +2351,10 @@ var translations = {
             
             
 
+            
+              <a href="https://g205sdgs.github.io/sdg-indicators/public/MetaDe/17.13.1.pdf" target="_blank">
+                National metadata <span class="visuallyhidden">opens in a new window</span>
+              </a>
             
 
           
@@ -2350,8 +2377,8 @@ var translations = {
             
 
             
-              <a href="https://github.com/G205SDGs/sdg-data/commit/61fa629e37c7050539ffb23faca2eb69a24051dd" target="_blank">
-                2019-04-11: see changes on GitHub <span class="visuallyhidden">opens in a new window</span>
+              <a href="https://github.com/G205SDGs/sdg-data/commit/5bf64665485482725303d39ee6ff8b2b82a37397" target="_blank">
+                2019-06-27: see changes on GitHub <span class="visuallyhidden">opens in a new window</span>
               </a>
             
 
@@ -2375,8 +2402,8 @@ var translations = {
             
 
             
-              <a href="https://github.com/G205SDGs/sdg-data/commit/33941359e064997a415b73ba04f17a26158e0126" target="_blank">
-                2019-04-08: see changes on GitHub <span class="visuallyhidden">opens in a new window</span>
+              <a href="https://github.com/G205SDGs/sdg-data/commit/5bf64665485482725303d39ee6ff8b2b82a37397" target="_blank">
+                2019-06-27: see changes on GitHub <span class="visuallyhidden">opens in a new window</span>
               </a>
             
 
@@ -2390,32 +2417,26 @@ var translations = {
       
   
   
+      
+      <tr>
+        <th scope="row">Additional Information </th>
+        <td>
+          
+            
+            
+            
+            
+
+            
+
+          
+        </td>
+        </tr>
+        
+      
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+      
+      
   
   
   
@@ -2558,7 +2579,7 @@ var translations = {
   
       
       <tr>
-        <th scope="row">Link to UN metadata </th>
+        <th scope="row">Link to the global metadata of this indicator </th>
         <td>
           
             
@@ -2630,6 +2651,109 @@ var translations = {
   
   
   
+</table>
+
+              </article>
+            </div>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="sources">
+            <!-- Count the non-empty sources (up to 5) -->
+
+
+
+
+  <div class="row no-gutters">
+  
+   
+    
+    <div class="col-md-6">
+      
+        <h4>Source 1</h4>
+      
+      <table class="table table-hover">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+      
+      <tr>
+        <th scope="row"> </th>
+        <td>
+          
+            <a href="https://www.destatis.de"><img src="https://g205sdgs.github.io/sdg-indicators/public/LogosEn/destatis.png" alt="Logo Destatis" /></a>
+          
+        </td>
+        </tr>
+        
+      
+  
+      
+      <tr>
+        <th scope="row">Organisation </th>
+        <td>
+          
+            Federal Statistical Office (Destatis)
+          
+        </td>
+        </tr>
+        
+      
+  
+      
+      <tr>
+        <th scope="row">Link to <br>data source </th>
+        <td>
+          
+            
+            
+            
+            
+
+            
+              <a href="https://www-genesis.destatis.de/genesis/online/data;sid=184D23926978650FC4D74421A19E7CCC.GO_1_1?Menu=Willkommen" target="_blank">
+                -GENESIS online 81000-0001 <span class="visuallyhidden">opens in a new window</span>
+              </a>
+            
+
+          
+        </td>
+        </tr>
+        
+      
+  
+      
+      
+  
   
   
   
@@ -2657,14 +2781,247 @@ var translations = {
   
 </table>
 
-              </article>
-            </div>
-          </div>
-          <div role="tabpanel" class="tab-pane" id="sources">
-            <!-- Count the non-empty sources (up to 5) -->
+    </div>
+    
+   
+    
+    <div class="col-md-6">
+      
+        <h4>Source 2</h4>
+      
+      <table class="table table-hover">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+      
+      <tr>
+        <th scope="row"> </th>
+        <td>
+          
+            <a href="https://www.destatis.de"><img src="https://g205sdgs.github.io/sdg-indicators/public/LogosEn/destatis.png" alt="Logo Destatis" /></a>
+          
+        </td>
+        </tr>
+        
+      
+  
+      
+      <tr>
+        <th scope="row">Organisation </th>
+        <td>
+          
+            Federal Statistical Office (Destatis)
+          
+        </td>
+        </tr>
+        
+      
+  
+      
+      <tr>
+        <th scope="row">Link to <br>data source </th>
+        <td>
+          
+            
+            
+            
+            
 
+            
+              <a href="https://www.destatis.de/DE/Themen/Staat/Steuern/Steuereinnahmen/Publikationen/Downloads-Steuerhaushalt/steuerhaushalt-jahr-2140400187004.html" target="_blank">
+                -Steuerhaushalt - subject-matter series 14, series 4 – 2018 (Only available in German) <span class="visuallyhidden">opens in a new window</span>
+              </a>
+            
 
+          
+        </td>
+        </tr>
+        
+      
+  
+      
+      
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</table>
 
+    </div>
+    
+   
+    
+    <div class="col-md-6">
+      
+        <h4>Source 3</h4>
+      
+      <table class="table table-hover">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+      
+      <tr>
+        <th scope="row"> </th>
+        <td>
+          
+            <a href="https://www.destatis.de"><img src="https://g205sdgs.github.io/sdg-indicators/public/LogosEn/destatis.png" alt="Logo Destatis" /></a>
+          
+        </td>
+        </tr>
+        
+      
+  
+      
+      <tr>
+        <th scope="row">Organisation </th>
+        <td>
+          
+            Federal Statistical Office (Destatis)
+          
+        </td>
+        </tr>
+        
+      
+  
+      
+      <tr>
+        <th scope="row">Link to <br>data source </th>
+        <td>
+          
+            
+            
+            
+            
+
+            
+              <a href="https://www.destatis.de/DE/Themen/Wirtschaft/Volkswirtschaftliche-Gesamtrechnungen-Inlandsprodukt/Publikationen/Downloads-Inlandsprodukt/inlandsprodukt-vorlaeufig-pdf-2180140.html" target="_blank">
+                -National Accounts of Germany - subject-matter series 18, series 1.4 - 2018 (Only available in German) <span class="visuallyhidden">opens in a new window</span>
+              </a>
+            
+
+          
+        </td>
+        </tr>
+        
+      
+  
+      
+      
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</table>
+
+    </div>
+    
+  </div>
 
 
           </div>
@@ -2679,10 +3036,10 @@ var translations = {
   <div class="container">
     <div class="row">
       <div class="col-xs-9">
-        <a href="https://www.destatis.de/DE/Service/Kontakt/Kontakt.html">Contact us</a> | <a class="twitter-follow-button" href="https://twitter.com/destatis?lang=de" data-show-count="false">@destatis</a>
+        <a href="https://www.destatis.de/DE/Service/Kontakt/Kontakt.html" target="_blank">Contact us</a> | <a class="twitter-follow-button" href="https://twitter.com/destatis?lang=de" data-show-count="false">@destatis</a>
       </div>
       <div class="col-xs-3 text-right">
-        <a href="/en/faq/">FAQ</a> | <a href="/en/imprint/">Imprint</a>
+        <a href="/en/faq/">FAQ</a> | <a href="/en/imprint/">Legal Notice</a>
       </div>
     </div>
   </div>
@@ -2710,7 +3067,7 @@ ga('send', 'pageview');
 <!-- /.container </div> -->
 <script src="//code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script src="//cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
 <script src="//cdn.datatables.net/fixedcolumns/3.2.3/js/dataTables.fixedColumns.min.js"></script>
@@ -2725,10 +3082,8 @@ ga('send', 'pageview');
 <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
 <script src="https://bowercdn.net/c/leaflet.zoomhome-latest/dist/leaflet.zoomhome.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/leaflet-search@2.9.7/dist/leaflet-search.min.js"></script>
-<script>
-  var remoteDataBaseUrl = 'https://sustainabledevelopment-germany.github.io/sdg-data-pub/';
-</script>
-<script src='/assets/js/sdg.js?v=20190426074530'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/autotrack/2.4.1/autotrack.js"></script>
+<script src='/assets/js/sdg.js?v=20190702072734'></script>
 <script>
 $(function() {
     if($('#indicatorData').length) {
@@ -2739,7 +3094,7 @@ $(function() {
       });
 
       $.ajax({
-        url: 'https://sustainabledevelopment-germany.github.io/sdg-data-pub//comb/' + domData.id + '.json',
+        url: opensdg.remoteDataBaseUrl + '/comb/' + domData.id + '.json',
         success: function(res) {
 
           $('.async-loading').remove();
@@ -2759,7 +3114,8 @@ $(function() {
             geographicalArea: domData.geographicalarea,
             showData: domData.showdata,
             footnote: domData.footnote,
-            graphType: domData.graphtype
+            graphType: domData.graphtype,
+            startValues: domData.startvalues
           }),
           view  = new indicatorView(model, {
             rootElement: '#indicatorData',
