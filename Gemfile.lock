@@ -99,7 +99,7 @@ DEPENDENCIES
   html-proofer
   jekyll (= 3.8.4)
   jekyll-get-json (~> 0.0.1)
-  jekyll-open-sdg-plugins (~> 0.0.10)
+  jekyll-open-sdg-plugins (~> 0.0.12)
   jekyll-remote-theme
 
 BUNDLED WITH
