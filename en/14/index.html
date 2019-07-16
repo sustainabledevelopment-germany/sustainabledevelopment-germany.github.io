@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en" class="no-js">
     <head>
@@ -18,6 +17,13 @@ var opensdg = {
   chartConfigAlter: function(config) {
     // Alterations go here.
     return config;
+  },
+
+  // A hook which can be replaced to alter whether/how the values that are
+  // displayed on indicator tables/graphs get rounded.
+  dataRounding: function(value) {
+    // Alterations go here.
+    return value;
   },
 };
 
@@ -39,12 +45,12 @@ var translations = {
 
     // The majority of uses of this function are to translate disaggregation
     // data. To spare data providers of needing to enter "data." in front of
-    // their disaggregation data, we do it for them here.
-    var originalKey = key;
-    if (!key.includes('.') && this.data) {
-      key = 'data.' + key.toLowerCase();
+    // their disaggregation data, we specifically look for that here.
+    if (typeof this.data === 'object' && this.data !== null && this.data[key]) {
+      return this.data[key];
     }
 
+    var originalKey = key;
     var drilled = this;
     var levelsDrilled = 0;
     var levels = key.split('.');
@@ -108,7 +114,7 @@ var translations = {
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/3.2.3/css/fixedColumns.dataTables.min.css">
-        <link rel="stylesheet" href="/assets/css/default.css?v=20190709152809">
+        <link rel="stylesheet" href="/assets/css/default.css?v=20190716124931">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet">
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
           integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
@@ -116,7 +122,7 @@ var translations = {
         <link rel="stylesheet" href="https://cdn.rawgit.com/socib/Leaflet.TimeDimension/master/dist/leaflet.timedimension.control.min.css" />
         <link rel="stylesheet" href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' />
         <link rel="stylesheet" href="https://bowercdn.net/c/leaflet.zoomhome-latest/dist/leaflet.zoomhome.css" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-search@2.9.7/dist/leaflet-search.min.css"><link rel="stylesheet" href="/assets/css/custom.css?v=20190709152809"></head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-search@2.9.7/dist/leaflet-search.min.css"><link rel="stylesheet" href="/assets/css/custom.css?v=20190716124931"></head>
 <body class="language-en">
 <!-- <div class="container"> -->
 
@@ -196,9 +202,7 @@ var translations = {
   <div class="container">
     <div class="row">
       <div class="col-xs-4 col-md-3 col-lg-2">
-        <!-- einzeiliger Kommentar -->
-        <!-- <img src="/assets/img/goals/en/17/14.png" alt="Life below water - Goal 14" /> -->
-        <img src="/assets/img/goals/en/14.png" alt="Life below water - Goal 14" />
+        <img src="https://g205sdgs.github.io/sdg-indicators/assets/img/goals/en/14.png" alt="Life below water - Goal 14" />
       </div>
       <div class="col-xs-8 col-md-9 col-lg-10">
         <h1>
@@ -209,7 +213,7 @@ var translations = {
   </div>
 </div>
 
-<div id="main-content" class="container goal-indicators goal-14">
+<div id="main-content" class="container goal-indicators goal-14 goal-by-target">
 
   
 
@@ -233,6 +237,7 @@ var translations = {
   
     
     
+    
     <div class="indicator-cards target col-md-6">
       <span>
         <label class="hidden-md hidden-lg">Target</label>
@@ -242,28 +247,32 @@ var translations = {
     </div>
     <div class="indicator-cards col-md-6 row no-gutters">
     
-      
-      
-      
-      
-      
-      
-      
 
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="col-md-12 ">
         <a href="/en/14-1-1">
           <span>
-            <label class="hidden-md hidden-lg">Indicator</label>
             14.1.1
-            <span class="status danger">Exploring data sources</span>
-          </span> Index of coastal eutrophication and floating plastic debris density
+            <span class="status notstarted">
+              Exploring data sources
+            </span>
+          </span>
+          Index of coastal eutrophication and floating plastic debris density
           
         </a>
       </div>
     
     </div>
+  
+    
     
     
     <div class="indicator-cards target col-md-6">
@@ -275,28 +284,32 @@ var translations = {
     </div>
     <div class="indicator-cards col-md-6 row no-gutters">
     
-      
-      
-      
-      
-      
-      
-      
 
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="col-md-12 ">
         <a href="/en/14-2-1">
           <span>
-            <label class="hidden-md hidden-lg">Indicator</label>
             14.2.1
-            <span class="status danger">Exploring data sources</span>
-          </span> Proportion of national exclusive economic zones managed using ecosystem-based approaches
+            <span class="status notstarted">
+              Exploring data sources
+            </span>
+          </span>
+          Proportion of national exclusive economic zones managed using ecosystem-based approaches
           
         </a>
       </div>
     
     </div>
+  
+    
     
     
     <div class="indicator-cards target col-md-6">
@@ -308,28 +321,32 @@ var translations = {
     </div>
     <div class="indicator-cards col-md-6 row no-gutters">
     
-      
-      
-      
-      
-      
-      
-      
 
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="col-md-12 ">
         <a href="/en/14-3-1">
           <span>
-            <label class="hidden-md hidden-lg">Indicator</label>
             14.3.1
-            <span class="status success">Reported online</span>
-          </span> Average marine acidity (pH) measured at agreed suite of representative sampling stations
+            <span class="status complete">
+              Reported online
+            </span>
+          </span>
+          Average marine acidity (pH) measured at agreed suite of representative sampling stations
           
         </a>
       </div>
     
     </div>
+  
+    
     
     
     <div class="indicator-cards target col-md-6">
@@ -341,28 +358,32 @@ var translations = {
     </div>
     <div class="indicator-cards col-md-6 row no-gutters">
     
-      
-      
-      
-      
-      
-      
-      
 
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="col-md-12 ">
         <a href="/en/14-4-1">
           <span>
-            <label class="hidden-md hidden-lg">Indicator</label>
             14.4.1
-            <span class="status success">Reported online</span>
-          </span> Proportion of fish stocks within biologically sustainable levels
+            <span class="status complete">
+              Reported online
+            </span>
+          </span>
+          Proportion of fish stocks within biologically sustainable levels
           
         </a>
       </div>
     
     </div>
+  
+    
     
     
     <div class="indicator-cards target col-md-6">
@@ -374,28 +395,32 @@ var translations = {
     </div>
     <div class="indicator-cards col-md-6 row no-gutters">
     
-      
-      
-      
-      
-      
-      
-      
 
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="col-md-12 ">
         <a href="/en/14-5-1">
           <span>
-            <label class="hidden-md hidden-lg">Indicator</label>
             14.5.1
-            <span class="status success">Reported online</span>
-          </span> Coverage of protected areas in relation to marine areas
+            <span class="status complete">
+              Reported online
+            </span>
+          </span>
+          Coverage of protected areas in relation to marine areas
           
         </a>
       </div>
     
     </div>
+  
+    
     
     
     <div class="indicator-cards target col-md-6">
@@ -407,28 +432,32 @@ var translations = {
     </div>
     <div class="indicator-cards col-md-6 row no-gutters">
     
-      
-      
-      
-      
-      
-      
-      
 
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="col-md-12 ">
         <a href="/en/14-6-1">
           <span>
-            <label class="hidden-md hidden-lg">Indicator</label>
             14.6.1
-            <span class="status success">Reported online</span>
-          </span> Progress by countries in the degree of implementation of international instruments aiming to combat illegal, unreported and unregulated fishing
+            <span class="status complete">
+              Reported online
+            </span>
+          </span>
+          Progress by countries in the degree of implementation of international instruments aiming to combat illegal, unreported and unregulated fishing
           
         </a>
       </div>
     
     </div>
+  
+    
     
     
     <div class="indicator-cards target col-md-6">
@@ -440,28 +469,32 @@ var translations = {
     </div>
     <div class="indicator-cards col-md-6 row no-gutters">
     
-      
-      
-      
-      
-      
-      
-      
 
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="col-md-12 ">
         <a href="/en/14-7-1">
           <span>
-            <label class="hidden-md hidden-lg">Indicator</label>
             14.7.1
-            <span class="status danger">Exploring data sources</span>
-          </span> Sustainable fisheries as a proportion of GDP in small island developing States, least developed countries and all countries
+            <span class="status notstarted">
+              Exploring data sources
+            </span>
+          </span>
+          Sustainable fisheries as a proportion of GDP in small island developing States, least developed countries and all countries
           
         </a>
       </div>
     
     </div>
+  
+    
     
     
     <div class="indicator-cards target col-md-6">
@@ -473,28 +506,32 @@ var translations = {
     </div>
     <div class="indicator-cards col-md-6 row no-gutters">
     
-      
-      
-      
-      
-      
-      
-      
 
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="col-md-12 ">
         <a href="/en/14-a-1">
           <span>
-            <label class="hidden-md hidden-lg">Indicator</label>
             14.a.1
-            <span class="status success">Reported online</span>
-          </span> Proportion of total research budget allocated to research in the field of marine technology
+            <span class="status complete">
+              Reported online
+            </span>
+          </span>
+          Proportion of total research budget allocated to research in the field of marine technology
           
         </a>
       </div>
     
     </div>
+  
+    
     
     
     <div class="indicator-cards target col-md-6">
@@ -506,28 +543,32 @@ var translations = {
     </div>
     <div class="indicator-cards col-md-6 row no-gutters">
     
-      
-      
-      
-      
-      
-      
-      
 
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="col-md-12 ">
         <a href="/en/14-b-1">
           <span>
-            <label class="hidden-md hidden-lg">Indicator</label>
             14.b.1
-            <span class="status notapplicable">Not applicable</span>
-          </span> Progress by countries in the degree of application of a legal/regulatory/policy/institutional framework which recognizes and protects access rights for small-scale fisheries
+            <span class="status notapplicable">
+              Not applicable
+            </span>
+          </span>
+          Progress by countries in the degree of application of a legal/regulatory/policy/institutional framework which recognizes and protects access rights for small-scale fisheries
           
         </a>
       </div>
     
     </div>
+  
+    
     
     
     <div class="indicator-cards target col-md-6">
@@ -539,28 +580,32 @@ var translations = {
     </div>
     <div class="indicator-cards col-md-6 row no-gutters">
     
-      
-      
-      
-      
-      
-      
-      
 
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="col-md-12 ">
         <a href="/en/14-c-1">
           <span>
-            <label class="hidden-md hidden-lg">Indicator</label>
             14.c.1
-            <span class="status danger">Exploring data sources</span>
-          </span> Number of countries making progress in ratifying, accepting and implementing through legal, policy and institutional frameworks, ocean-related instruments that implement international law, as reflected in the United Nations Convention on the Law of the Sea, for the conservation and sustainable use of the oceans and their resources
+            <span class="status notstarted">
+              Exploring data sources
+            </span>
+          </span>
+          Number of countries making progress in ratifying, accepting and implementing through legal, policy and institutional frameworks, ocean-related instruments that implement international law, as reflected in the United Nations Convention on the Law of the Sea, for the conservation and sustainable use of the oceans and their resources
           
         </a>
       </div>
     
-    </div></div>
+    </div>
+  
+</div>
 
 <footer role="contentinfo">
   <div class="container">
@@ -575,26 +620,6 @@ var translations = {
   </div>
 </footer>
 
-<!-- Digital Analytics Program roll-up, see https://analytics.usa.gov for data -->
-<!-- <script id="_fed_an_ua_tag" src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=GSA"></script> -->
-<!-- Google Analytics -->
-
-<script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-ga('create', '', 'auto');
-// anonymize user IPs (chops off the last IP triplet)
-ga('set', 'anonymizeIp', true);
-// forces SSL even if the page were somehow loaded over http://
-ga('set', 'forceSSL', true);
-ga('send', 'pageview');
-
-</script>
-
-<!-- /.container </div> -->
 <script src="//code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -613,8 +638,7 @@ ga('send', 'pageview');
 <script src="https://bowercdn.net/c/leaflet.zoomhome-latest/dist/leaflet.zoomhome.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/leaflet-search@2.9.7/dist/leaflet-search.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/autotrack/2.4.1/autotrack.js"></script>
-<script src='/assets/js/sdg.js?v=20190709152809'></script>
-<script>
+<script src='/assets/js/sdg.js?v=20190716124931'></script><script>
 $(function() {
     if($('#indicatorData').length) {
       var domData = $('#indicatorData').data();
@@ -668,6 +692,9 @@ $(function() {
 
 });
 </script>
+
+
+
 
 </body>
 </html>
