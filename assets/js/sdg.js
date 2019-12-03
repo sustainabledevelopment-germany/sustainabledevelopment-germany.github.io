@@ -885,10 +885,9 @@ var indicatorDataStore = function(dataUrl) {
   }
   else if(this.indicatorId.includes('_17-')){
     var colors = ['19486a', '0a1c2a', '8ca3b4', '16377c', 'd1dae1', '11324a', '466c87', '5b73a3', '0f2656'];
-  }
+  };
   //SDG goal colors
   //['e5243b', 'e5b735', '4c9f38', 'c5192d', 'ff3a21', '26bde2', 'fcc30b', 'a21942', 'fd6925', 'dd1367'];
-
 
   // allow headline + (2 x others)
   var maxDatasetCount = 2 * colors.length;
@@ -1057,6 +1056,7 @@ var indicatorDataStore = function(dataUrl) {
           //return key + ' ' + combination[key];
         }).join(', ');
       },
+
       getColor = function(datasetIndex) {
 
         // offset if there is no headline data:
@@ -1076,8 +1076,8 @@ var indicatorDataStore = function(dataUrl) {
 
         return datasetIndex === 0 ? headlineColor : colors[datasetIndex];
       },
-      getBorderDash = function(datasetIndex) {
 
+      getBorderDash = function(datasetIndex) {
         // offset if there is no headline data:
         if(!this.hasHeadline) {
           datasetIndex += 1;
@@ -1269,7 +1269,9 @@ var indicatorDataStore = function(dataUrl) {
         hasGeoData: this.hasGeoData,
         geoData: this.geoData,
         geoCodeRegEx: this.geoCodeRegEx,
-        showMap: this.showMap
+        showMap: this.showMap//,
+
+        //indicatorId: this.indicatorId
       });
 
 
@@ -1364,7 +1366,7 @@ var mapView = function () {
     $('#map').sdgMap({
       geoData: geoData,
       geoCodeRegEx: geoCodeRegEx,
-      mapOptions: {"tileURL":"https://api.mapbox.com/styles/v1/mobosse/cjzmrn62k0ek11cmgea7a1i1h/tiles/256/{z}/{x}/{y}?&access_token={accessToken}","tileOptions":{"id":"mapbox.light","accessToken":"pk.eyJ1IjoibW9ib3NzZSIsImEiOiJjanplNTNhMmQwMTFjM21wNHEzazRlejhwIn0.ecHE5G83cklfW5AXYjI_0A","attribution":"<a href=\"https://www.mapbox.com\">Mapbox</a> | <a href=\"https://www.bkg.bund.de\">&copy; GeoBasis-De / BKG 2019</a>"},"colorRange":["#F6E8EC","#EED3DB","#E5BFCA","#DDAAB9","#D495A8","#CC8197","#C46C86","#BB5775","#B34264","#AA2E53","#A21942"],"noValueColor":"#f0f0f0"},
+      mapOptions: {"tileURL":"https://api.mapbox.com/styles/v1/mobosse/cjzmrn62k0ek11cmgea7a1i1h/tiles/256/{z}/{x}/{y}?&access_token={accessToken}","tileOptions":{"id":"mapbox.light","accessToken":"pk.eyJ1IjoibW9ib3NzZSIsImEiOiJjanplNTNhMmQwMTFjM21wNHEzazRlejhwIn0.ecHE5G83cklfW5AXYjI_0A","attribution":"<a href=\"https://www.mapbox.com\">Mapbox</a> | <a href=\"https://www.bkg.bund.de\">&copy; GeoBasis-De / BKG 2019</a> | <a href=\"https://www.destatis.de/DE/Home/_inhalt.html\">&copy; Statistisches Bundesamt (Destatis), 2019</a>"},"colorRange":["#F6E8EC","#E3BAC6","#D18CA1","#BE5E7B","#AB3055","#A21942","#821435","#610F28","#410A1A","#20050D"],"noValueColor":"#f0f0f0"},
       mapLayers: [{"min_zoom":0,"max_zoom":20,"serviceUrl":"https://g205sdgs.github.io/sdg-indicators/assets/maps/Ländergrenzen_ohne_Seegrenzen.geojson","nameProperty":"GEN","idProperty":"AGS","staticBorders":true}],
     });
   };
@@ -1484,9 +1486,29 @@ var indicatorView = function (model, options) {
   this._model.onSeriesComplete.attach(function(sender, args) {
     view_obj.initialiseSeries(args);
 
+    //--------------------------------
+    //if (args.indicatorId.includes('_1-')){var goalNr = 0;}
+    //else if (args.indicatorId.includes('_2-')) {var goalNr = 1;}
+    //else if (args.indicatorId.includes('_3-')) {var goalNr = 2;}
+    //else if (args.indicatorId.includes('_4-')) {var goalNr = 3;}
+    //else if (args.indicatorId.includes('_5-')) {var goalNr = 4;}
+    //else if (args.indicatorId.includes('_6-')) {var goalNr = 5;}
+    //else if (args.indicatorId.includes('_7-')) {var goalNr = 6;}
+    //else if (args.indicatorId.includes('_8-')) {var goalNr = 7;}
+    //else if (args.indicatorId.includes('_9-')) {var goalNr = 8;}
+    //else if (args.indicatorId.includes('_10-')) {var goalNr = 9;}
+    //else if (args.indicatorId.includes('_11-')) {var goalNr = 10;}
+    //else if (args.indicatorId.includes('_12-')) {var goalNr = 11;}
+    //else if (args.indicatorId.includes('_13-')) {var goalNr = 12;}
+    //else if (args.indicatorId.includes('_14-')) {var goalNr = 13;}
+    //else if (args.indicatorId.includes('_15-')) {var goalNr = 14;}
+    //else if (args.indicatorId.includes('_16-')) {var goalNr = 15;}
+    //else if (args.indicatorId.includes('_17-')) {var goalNr = 16;}
+
+
     if(args.hasGeoData && args.showMap) {
       view_obj._mapView = new mapView();
-      view_obj._mapView.initialise(args.geoData, args.geoCodeRegEx);
+      view_obj._mapView.initialise(args.geoData, args.geoCodeRegEx); //, goalNr);
     }
   });
 
@@ -2376,30 +2398,45 @@ $(function() {
     },
 
     onAdd: function() {
-      var controlTpl = '' +
+      var controlTpl = '' + //'<span id="mapHead">{title}</span>' +//<<<----------------
         '<ul id="selection-list"></ul>' +
-        '<div class="legend-swatches">' +
+        '<div class="legend-swatches">' + //bar
           '{legendSwatches}' +
         '</div>' +
-        '<div class="legend-values">' +
+        '<div class="legend-values">' + //values
           '<span class="legend-value left">{lowValue}</span>' +
           '<span class="arrow left"></span>' +
           '<span class="legend-value right">{highValue}</span>' +
           '<span class="arrow right"></span>' +
         '</div>';
       var swatchTpl = '<span class="legend-swatch" style="width:{width}%; background:{color};"></span>';
-      var swatchWidth = 100 / this.plugin.options.colorRange.length;
-      var swatches = this.plugin.options.colorRange.map(function(swatchColor) {
+      var swatchWidth = 100 / this.plugin.options.colorRange.length; //[this.plugin.goalNr].length;
+      var swatches = this.plugin.options.colorRange.map(function(swatchColor) { //[this.plugin.goalNr].map(function(swatchColor) {
         return L.Util.template(swatchTpl, {
           width: swatchWidth,
           color: swatchColor,
         });
       }).join('');
       var div = L.DomUtil.create('div', 'selection-legend');
+
+      //-----------------------------------------------------------------------
+      //var headline
+      //if (this.plugin.ageName){
+        //headline = this.plugin.timeSeriesName + ', <br>' + this.plugin.ageName + ', <br>' + this.plugin.unitName;
+      //} else {
+        //headline = 'Test 4.4'; //this.plugin.timeSeriesName + ' <br>' + this.plugin.unitName;
+      //}
+      //-----------------------------------------------------------------------
+
       div.innerHTML = L.Util.template(controlTpl, {
         lowValue: this.plugin.valueRange[0],
         highValue: this.plugin.valueRange[1],
         legendSwatches: swatches,
+
+        //---
+        //title: headline,
+        //---
+
       });
       return div;
     },
@@ -2409,7 +2446,7 @@ $(function() {
       var selectionTpl = '' +
         '<li class="{valueStatus}">' +
           '<span class="selection-name">{name}</span>' +
-          '<span class="selection-value" style="left: {percentage}%;">{value}</span>' +
+          //'<span class="selection-value" style="left: {percentage}%;">{value}</span>' +
           '<span class="selection-bar" style="width: {percentage}%;"></span>' +
           '<i class="selection-close fa fa-remove"></i>' +
         '</li>';
@@ -2453,7 +2490,6 @@ $(function() {
     return new L.Control.SelectionLegend(plugin);
   };
 }());
-
 /*
  * Leaflet year Slider.
  *
