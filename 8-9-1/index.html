@@ -104,11 +104,16 @@ var translations = {
         <!-- Title and meta description
         ================================================== -->
 
+        <!---#15 setCorrectTitle---start-------------------->
+        
+        
+        
         <title>
           
             Indikator 8.9.1 - Ziel 8
           
         </title>
+        <!---#15 setCorrectTitle---stop--------------------->
 
         
           <meta name="description" content= "Daten für Deutschland zu SDG-Indikator 8.9.1 - Direktes BIP des Tourismus als Anteil am gesamten BIP und als Wachstumsrate" >
@@ -127,7 +132,7 @@ var translations = {
         <!-- Favicons ================================================== -->
         <!-- 128x128 -->
         <link rel="shortcut icon" type="image/ico" href="/assets/img/favicons/favicon.ico">
-        <link rel="icon" type="image/png" href="/assets/img/favicons/favicon.png"><!-- 192x192, as recommended for Android
+        <link rel="icon" type="image/png" href="/assets/img/favicons/de/favicon.png"><!-- 192x192, as recommended for Android
         http://updates.html5rocks.com/2014/11/Support-for-theme-color-in-Chrome-39-for-Android
         -->
 
@@ -137,7 +142,7 @@ var translations = {
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" crossorigin="">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" crossorigin="">
         <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/3.2.3/css/fixedColumns.dataTables.min.css" crossorigin="">
-        <link rel="stylesheet" href="/assets/css/default.css?v=20191203122728">
+        <link rel="stylesheet" href="/assets/css/default.css?v=20191218110045">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet" crossorigin="">
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
           integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
@@ -145,7 +150,7 @@ var translations = {
         <link rel="stylesheet" href="https://cdn.rawgit.com/socib/Leaflet.TimeDimension/master/dist/leaflet.timedimension.control.min.css"  crossorigin=""/>
         <link rel="stylesheet" href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css'  crossorigin=""/>
         <link rel="stylesheet" href="https://bowercdn.net/c/leaflet.zoomhome-latest/dist/leaflet.zoomhome.css"  crossorigin=""/>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-search@2.9.7/dist/leaflet-search.min.css" crossorigin=""><link rel="stylesheet" href="/assets/css/custom.css?v=20191203122728"><!-- ShareThis BEGIN --><!-- ShareThis END -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-search@2.9.7/dist/leaflet-search.min.css" crossorigin=""><link rel="stylesheet" href="/assets/css/custom.css?v=20191218110045"><!-- ShareThis BEGIN --><!-- ShareThis END -->
 
     </head>
 <body class="language-de layout-indicator">
@@ -213,7 +218,15 @@ var translations = {
 </a>
 <ul class="language-options language-toggle"><li><a href="/en/8-9-1/">English</a></li></ul>
 
-        </li></ul>
+        </li><!---#17 addLinkToOtherPage---start------------
+        <li class="nav-link">
+          <a href="https://nachhaltige-entwicklung-deutschland.github.io/open-sdg-site-starter/">
+            <img class="link_btn" src="https://g205sdgs.github.io/sdg-indicators/public/DNS Wheel.png" title="Zur Seite der nationalen Indikatoren" alt="Link DNS" style="width:24px;height:24px;"/>
+            <span class="hidden-sm hidden-md hidden-lg">SDG-NRP</span>
+          </a>
+        </li>
+        <!---#17 addLinkToOtherPage---stop------------->
+      </ul>
 
       <div id="search" class="menu-target">
   <input id="indicator_search" title="Indikatorensuche" placeholder="Indikatorensuche" data-url="/indicators.json" data-pageurl="/search/?q=" />
@@ -222,11 +235,6 @@ var translations = {
   </label>
 </div>
 
-<!--
-      <a class="header_img" href="https://nachhaltige-entwicklung-deutschland.github.io/open-sdg-site-starter/" id="menu">
-        <img src="https://g205sdgs.github.io/sdg-indicators/public/DNS Wheel.png" title="Nationale Indikatoren zu Ziel" alt="Link DNS" />
-      </a>
--->      
     </nav>
   </div>
 
@@ -263,7 +271,7 @@ var translations = {
 </script>
 
 <script type="text/template" id="units_template">
-  <% if(units.length) { %>
+  <% if(units.length>1) { %>
     <h5>Einheit</h5>
     <% _.each(units, function(unitsItem, index) { %>
       <% var checked = (selectedUnit) ? (selectedUnit==unitsItem) : (index==0); %>
@@ -306,6 +314,9 @@ var translations = {
   
 </ol>
 
+  <!---#8 addNavigationButtons---start----------------------------------->
+  
+  <!---#8 addNavigationButtons---stop------------------------------------>
 
   <div class="row" id="page-content-row">
     <div class="col-xs-12">
@@ -393,25 +404,46 @@ var translations = {
         <div class="async-loaded" style="display:none">
           <ul class="nav nav-tabs data-view" role="tablist">
             <li role="presentation" class="nav-item active">
+              <!---#12 addIconsForTabs---start------------------------------------------->
+              <!--<a class="nav-link" data-toggle="tab" href="#chartview" aria-controls="chartview" role="tab" data-on="click"
+data-event-category="Tab change"
+data-event-action="Change data view"
+data-event-label="Change to Chart tab"
+>Grafik</a>-->
               <a class="nav-link" data-toggle="tab" href="#chartview" aria-controls="chartview" role="tab" data-on="click"
 data-event-category="Tab change"
 data-event-action="Change data view"
 data-event-label="Change to Chart tab"
->Grafik</a>
+> <i class="fa fa-line-chart" aria-hidden="true"></i> <span class="hidden-sm hidden-xs">Grafik</span> </a>
+              <!---#12 addIconsForTabs---stop-------------------------------------------->
             </li>
             <li role="presentation" class="nav-item">
+              <!---#12 addIconsForTabs---start------------------------------------------->
+              <!--<a class="nav-link" data-toggle="tab" href="#tableview" aria-controls="tableview" role="tab" data-on="click"
+data-event-category="Tab change"
+data-event-action="Change data view"
+data-event-label="Change to Table tab"
+>Tabelle</a>-->
               <a class="nav-link" data-toggle="tab" href="#tableview" aria-controls="tableview" role="tab" data-on="click"
 data-event-category="Tab change"
 data-event-action="Change data view"
 data-event-label="Change to Table tab"
->Tabelle</a>
+> <i class="fa fa-table" aria-hidden="true"></i> <span class="hidden-sm hidden-xs">Tabelle</span> </a>
+              <!---#12 addIconsForTabs---stop-------------------------------------------->
             </li>
             <li role="presentation" class="nav-item map" style="display:none">
+              <!---#12 addIconsForTabs---start------------------------------------------->
+              <!--<a data-no-disagg="true" class="nav-link" data-toggle="tab" href="#mapview" aria-controls="mapview" role="tab" data-on="click"
+data-event-category="Tab change"
+data-event-action="Change data view"
+data-event-label="Change to Map tab"
+>Karte</a>-->
               <a data-no-disagg="true" class="nav-link" data-toggle="tab" href="#mapview" aria-controls="mapview" role="tab" data-on="click"
 data-event-category="Tab change"
 data-event-action="Change data view"
 data-event-label="Change to Map tab"
->Karte</a>
+><i class="fa fa-map" aria-hidden="true"></i> <span class="hidden-sm hidden-xs">Karte</span></a>
+              <!---#12 addIconsForTabs---stop-------------------------------------------->
             </li></ul>
 
           <!-- Tab panes -->
@@ -451,6 +483,16 @@ data-event-label="Change to Map tab"
               <div id="map">
                 <img src="/assets/img/loading.gif" alt="Karte wird geladen" />
               </div>
+              <!---#16 showMapDataSources---start--------------------->
+              <div id="mapfooter" class="table-footer-text">
+                
+                  
+                  
+                    <p>Datenquelle: Bundesministerium für Wirtschaft und Energie (BMWI)</p>
+                  
+                
+              </div>
+              <!---#16 showMapDataSources---stop---------------------->
             </div>
             
           </div>
@@ -1172,7 +1214,7 @@ data-event-label="Change to Sources tab"
 <script src="https://cdnjs.cloudflare.com/ajax/libs/autotrack/2.4.1/autotrack.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.3/dist/html2canvas.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.2/dist/FileSaver.min.js"></script>
-<script src='/assets/js/sdg.js?v=20191203122728'></script><script src="/assets/js/custom.js?v=20191203122728"></script><script>
+<script src='/assets/js/sdg.js?v=20191218110045'></script><script src="/assets/js/custom.js?v=20191218110045"></script><script>
 $(function() {
     if($('#indicatorData').length) {
       var domData = $('#indicatorData').data();

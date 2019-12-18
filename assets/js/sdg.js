@@ -47,7 +47,7 @@ opensdg.autotrack = function(preset, category, action, label) {
     },
     // Zoom limits.
     minZoom: 5,
-    maxZoom: 10,
+    maxZoom: 15,
     // Visual/choropleth considerations.
     colorRange: chroma.brewer.BuGn,
     noValueColor: '#f0f0f0',
@@ -89,6 +89,9 @@ opensdg.autotrack = function(preset, category, action, label) {
     this.mapLayers = [];
     this.geoData = options.geoData;
     this.geoCodeRegEx = options.geoCodeRegEx;
+    //---#1 GoalDependendMapColor---start--------------------------------------
+    this.goalNr = options.goal;
+    //---#1 GoalDependendMapColor---stop---------------------------------------
 
     // Require at least one geoLayer.
     if (!options.mapLayers.length) {
@@ -105,30 +108,45 @@ opensdg.autotrack = function(preset, category, action, label) {
     this._name = 'sdgMap';
 
     this.valueRange = [_.min(_.pluck(this.geoData, 'Value')), _.max(_.pluck(this.geoData, 'Value'))];
-    this.colorScale = chroma.scale(this.options.colorRange)
+    //---#1 GoalDependendMapColor---start--------------------------------------
+    //this.colorScale = chroma.scale()
+    this.colorScale = chroma.scale(this.options.colorRange[this.goalNr])
+    //---#1 GoalDependendMapColor---stop---------------------------------------
       .domain(this.valueRange)
-      .classes(this.options.colorRange.length);
+      //---#1 GoalDependendMapColor---start--------------------------------------
+      //.classes(9);
+      .classes(this.options.colorRange[this.goalNr].length);
+      //---#1 GoalDependendMapColor---stop-------------------------------------
 
     this.years = _.uniq(_.pluck(this.geoData, 'Year')).sort();
     this.currentYear = this.years[0];
 
+    //---#2 TimeSeriesNameDisplayedInMaps---start--------------------------------------------------------------
+    this.timeSeries = _.pluck(this.geoData, 'timeseries');
+    this.timeSeriesName = translations.t(this.timeSeries[this.timeSeries.length -1]);
+    this.unit = _.pluck(this.geoData, 'Units');
+    this.unitName = translations.t(this.unit[this.unit.length -1]);
+    //---#2 TimeSeriesNameDisplayedInMaps---stop---------------------------------------------------------------
     this.init();
   }
 
   Plugin.prototype = {
 
     // Add time series to GeoJSON data and normalize the name and geocode.
-    prepareGeoJson: function(geoJson, idProperty, nameProperty) {
+    prepareGeoJson: function(geoJson, idProperty, nameProperty) {//prepareGeoJson: function(geoJson, idProperty, nameProperty, cat, exp) { //--------------------------------added cat & exp
       var geoData = this.geoData;
       geoJson.features.forEach(function(feature) {
         var geocode = feature.properties[idProperty];
         var name = feature.properties[nameProperty];
-        // First add the time series data.
+
         var records = _.where(geoData, { GeoCode: geocode });
+
+        //var records = _.where(geoData, { GeoCode: geocode, cat: exp });
         records.forEach(function(record) {
           // Add the Year data into the properties.
           feature.properties[record.Year] = record.Value;
         });
+
         // Next normalize the geocode and name.
         feature.properties.name = translations.t(name);
         feature.properties.geocode = geocode;
@@ -237,14 +255,13 @@ opensdg.autotrack = function(preset, category, action, label) {
 
     // Initialize the map itself.
     init: function() {
-
       // Create the map.
       this.map = L.map(this.element, {
         minZoom: this.options.minZoom,
         maxZoom: this.options.maxZoom,
         zoomControl: false,
       });
-      this.map.setView([0, 0], 0);
+      this.map.setView([51.9, 10.26],0);
       this.dynamicLayers = new ZoomShowHide();
       this.dynamicLayers.addTo(this.map);
       this.staticLayers = new ZoomShowHide();
@@ -259,6 +276,7 @@ opensdg.autotrack = function(preset, category, action, label) {
       // Add scale.
       this.map.addControl(L.control.scale({position: 'bottomright'}));
 
+
       // Add tile imagery.
       L.tileLayer(this.options.tileURL, this.options.tileOptions).addTo(this.map);
 
@@ -272,8 +290,19 @@ opensdg.autotrack = function(preset, category, action, label) {
           plugin.currentYear = new Date(e.time).getFullYear();
           plugin.updateColors();
           plugin.selectionLegend.update();
+
         }
       }));
+
+      //---#7 addMapboxWordmark---start-----------------------------------------------------------------------------------------
+      var logo = L.control({position: 'bottomleft'});
+      logo.onAdd = function (map) {
+        var div = L.DomUtil.create('div', 'logo');
+        div.innerHTML = '<a href="https://mapbox.com"> <img src="https://g205sdgs.github.io/sdg-indicators/public/mapbox-logo-white.png"/ width=140 height=30> </a>'
+        return div;
+      };
+      logo.addTo(this.map);
+      //---#7 addMapboxWordmark---stop-----------------------------------------------------------------------------------------
 
       // Add the selection legend.
       this.selectionLegend = L.Control.selectionLegend(plugin);
@@ -317,7 +346,7 @@ opensdg.autotrack = function(preset, category, action, label) {
           // Now go on to add the geoJson again as choropleth dynamic regions.
           var idProperty = plugin.mapLayers[i].idProperty;
           var nameProperty = plugin.mapLayers[i].nameProperty;
-          var geoJson = plugin.prepareGeoJson(geoJsons[i][0], idProperty, nameProperty);
+          var geoJson = plugin.prepareGeoJson(geoJsons[i][0], idProperty, nameProperty);//-
 
           var layer = L.geoJson(geoJson, {
             style: plugin.options.styleNormal,
@@ -334,6 +363,8 @@ opensdg.autotrack = function(preset, category, action, label) {
           // Add the layer to the ZoomShowHide group.
           plugin.dynamicLayers.addLayer(layer);
         }
+
+
         plugin.updateColors();
 
         // Now that we have layers, we can add the search feature.
@@ -350,6 +381,7 @@ opensdg.autotrack = function(preset, category, action, label) {
           },
           autoCollapse: true,
         });
+        
         plugin.map.addControl(plugin.searchControl);
         // The search plugin messes up zoomShowHide, so we have to reset that
         // with this hacky method. Is there a better way?
@@ -857,7 +889,7 @@ var indicatorDataStore = function(dataUrl) {
     var colors = ['fcc30b', '977506', 'fddb6c', '322702', 'fef3ce', 'c99c08', 'fccf3b', '644e04', 'fde79d'];
   }
   else if(this.indicatorId.includes('_8-')){
-    var colors = ['a21942', '610f27', 'c7758d', 'a21942', 'ecd1d9', '811434', 'b44667', '400a1a', 'd9a3b3'];
+    var colors = ['a21942', '610f27', 'c7758d', '610F28', 'ecd1d9', '811434', 'b44667', '400a1a', 'd9a3b3'];
   }
   else if(this.indicatorId.includes('_9-')){
     var colors = ['fd6925', '973f16', 'fda57c', '321507', 'fee1d3', 'ca541d', 'fd8750', '652a0e', 'fec3a7'];
@@ -888,6 +920,8 @@ var indicatorDataStore = function(dataUrl) {
   };
   //SDG goal colors
   //['e5243b', 'e5b735', '4c9f38', 'c5192d', 'ff3a21', '26bde2', 'fcc30b', 'a21942', 'fd6925', 'dd1367'];
+  //var headlinePointstyle = 'circle';
+  //var pointStyles = ['circle', 'triangle', 'cross', 'crossRot', 'dash', 'line', 'rect', 'rectRounded', 'rectRot', 'star', 'triangle'];
 
   // allow headline + (2 x others)
   var maxDatasetCount = 2 * colors.length;
@@ -1050,6 +1084,7 @@ var indicatorDataStore = function(dataUrl) {
       seriesData = [],
       headlineTable = undefined,
       datasetIndex = 0,
+
       getCombinationDescription = function(combination) {
         return _.map(Object.keys(combination), function(key) {
           return translations.t(combination[key]);
@@ -1091,8 +1126,10 @@ var indicatorDataStore = function(dataUrl) {
         // var fieldIndex = field ? _.findIndex(that.selectedFields, function (f) {
         //     return f === field;
         //   }) : undefined,
+
         var fieldIndex,
           ds = _.extend({
+
             label: combinationDescription ? combinationDescription : that.country,
             borderColor: '#' + getColor(datasetIndex),
             backgroundColor: '#' + getColor(datasetIndex),
@@ -1104,8 +1141,10 @@ var indicatorDataStore = function(dataUrl) {
               });
               return found ? found.Value : null;
             }),
+            //type: getChartStyle(combinationDescription),
             borderWidth: combinationDescription ? 2 : 4
           }, that.datasetObject);
+
         datasetIndex++;
         return ds;
       };
@@ -1269,9 +1308,11 @@ var indicatorDataStore = function(dataUrl) {
         hasGeoData: this.hasGeoData,
         geoData: this.geoData,
         geoCodeRegEx: this.geoCodeRegEx,
-        showMap: this.showMap//,
-
-        //indicatorId: this.indicatorId
+        showMap: this.showMap,
+        //---#1 GoalDependendMapColor---start------------------------------------------
+        indicatorId: this.indicatorId,
+        title: this.chartTitle,
+        //---#1 GoalDependendMapColor---stop-------------------------------------------
       });
 
 
@@ -1360,14 +1401,20 @@ indicatorModel.prototype = {
 var mapView = function () {
 
   "use strict";
-
-  this.initialise = function(geoData, geoCodeRegEx) {
+  //---#1 GoalDependendMapColor---start--------------------------------------
+  //this.initialise = function(geoData, geoCodeRegEx) {
+  this.initialise = function(geoData, geoCodeRegEx, goal) {
+  //---#1 GoalDependendMapColor---stop---------------------------------------
     $('.map').show();
     $('#map').sdgMap({
       geoData: geoData,
       geoCodeRegEx: geoCodeRegEx,
-      mapOptions: {"tileURL":"https://api.mapbox.com/styles/v1/mobosse/cjzmrn62k0ek11cmgea7a1i1h/tiles/256/{z}/{x}/{y}?&access_token={accessToken}","tileOptions":{"id":"mapbox.light","accessToken":"pk.eyJ1IjoibW9ib3NzZSIsImEiOiJjanplNTNhMmQwMTFjM21wNHEzazRlejhwIn0.ecHE5G83cklfW5AXYjI_0A","attribution":"<a href=\"https://www.mapbox.com\">Mapbox</a> | <a href=\"https://www.bkg.bund.de\">&copy; GeoBasis-De / BKG 2019</a> | <a href=\"https://www.destatis.de/DE/Home/_inhalt.html\">&copy; Statistisches Bundesamt (Destatis), 2019</a>"},"colorRange":["#F6E8EC","#E3BAC6","#D18CA1","#BE5E7B","#AB3055","#A21942","#821435","#610F28","#410A1A","#20050D"],"noValueColor":"#f0f0f0"},
+      mapOptions: {"tileURL":"https://api.mapbox.com/styles/v1/mobosse/cjzmrn62k0ek11cmgea7a1i1h/tiles/256/{z}/{x}/{y}?&access_token={accessToken}","tileOptions":{"id":"mapbox.light","accessToken":"pk.eyJ1IjoibW9ib3NzZSIsImEiOiJjanplNTNhMmQwMTFjM21wNHEzazRlejhwIn0.ecHE5G83cklfW5AXYjI_0A","attribution":"<a href=\"https://www.mapbox.com/about/maps\">&copy; Mapbox</a> |<br class=\"visible-xs\"> <a href=\"https://www.openstreetmap.org/copyright\">&copy; OpenStreetMap</a> |<br class=\"visible-xs\"> <a href=\"https://www.bkg.bund.de\">&copy; GeoBasis-De / BKG 2019</a> |<br class=\"hidden-lg\"> <a href=\"https://www.destatis.de/DE/Home/_inhalt.html\">&copy; Statistisches Bundesamt (Destatis), 2019</a> |<br class=\"visible-xs\"> <a href=\"https://www.mapbox.com/map-feedback/\"><b>Impove this map</b>"},"colorRange":[["#FCE9EB","#F7BDC4","#F2929D","#ED6676","#E83A4F","#E5243B","#B71D2F","#891623","#5C0E18","#2E070C"],["#FCF8EB","#F7E9C2","#F2DB9A","#EDCD72","#E8BE49","#E5B735","#CEA530","#A08025","#735C1B","#453710"],["#EDF5EB","#C9E2C3","#A6CF9C","#82BC74","#5EA94C","#4C9F38","#3D7F2D","#2E5F22","#1E4016","#0F200B"],["#F9E8EA","#EEBAC0","#E28C96","#D65E6C","#CB3042","#C5192D","#9E1424","#760F1B","#4F0A12","#270509"],["#FFEBE9","#FFC4BC","#FF9D90","#FF7564","#FF4E37","#FF3A21","#CC2E1A","#992314","#66170D","#330C07"],["#E9F8FB","#BEEBF6","#93DEF0","#67D1EA","#3CC4E5","#26BDE2","#1E97B5","#177188","#0F4C5A","#08262D"],["#FFF9E7","#FEEDB6","#FEE185","#FDD554","#FCC923","#FCC30B","#CA9C09","#977507","#654E04","#322702"],["#F6E8EC","#E3BAC6","#D18CA1","#BE5E7B","#AB3055","#A21942","#821435","#610F28","#410A1A","#20050D"],["#FFF0E9","#FED2BE","#FEB492","#FE9666","#FD783B","#FD6925","#CA541E","#983F16","#652A0F","#331507"],["#FCE7F0","#F5B8D1","#EE89B3","#E75A95","#E02B76","#DD1367","#B10F52","#850B3E","#580829","#2C0415"],["#FFF5E6","#FEE2B3","#FECE80","#FEBA4D","#FDA71A","#FD9D00","#CA7E00","#985E00","#653F00","#331F00"],["#FAF5EA","#EFE0C0","#E4CC96","#D9B86C","#CEA342","#C9992D","#A17A24","#795C1B","#503D12","#281F09"],["#ECF2EC","#C5D8C7","#9FBFA2","#79A57C","#528B57","#3F7E44","#326536","#264C29","#19321B","#0D190E"],["#E7F5FB","#B6E0F4","#85CBEC","#54B6E4","#23A1DD","#0A97D9","#0879AE","#065B82","#043C57","#021E2B"],["#EEF9EA","#CCECBF","#ABE095","#89D36B","#67C640","#56C02B","#459A22","#34731A","#224D11","#112609"],["#E6F0F5","#B3D2E2","#80B4CE","#4D95BA","#1A77A7","#00689D","#00537E","#003E5E","#002A3F","#00151F"],["#E8EDF0","#BAC8D2","#8CA4B5","#5E7F97","#305A79","#19486A","#143A55","#0F2B40","#0A1D2A","#050E15"]],"noValueColor":"#f0f0f0"},
       mapLayers: [{"min_zoom":0,"max_zoom":20,"serviceUrl":"https://g205sdgs.github.io/sdg-indicators/assets/maps/Ländergrenzen_ohne_Seegrenzen.geojson","nameProperty":"GEN","idProperty":"AGS","staticBorders":true}],
+      //---#1 GoalDependendMapColor---start--------------------------------------
+      goal: goal,
+      //---#1 GoalDependendMapColor---stop---------------------------------------
+      //title: title
     });
   };
 };
@@ -1486,29 +1533,31 @@ var indicatorView = function (model, options) {
   this._model.onSeriesComplete.attach(function(sender, args) {
     view_obj.initialiseSeries(args);
 
-    //--------------------------------
-    //if (args.indicatorId.includes('_1-')){var goalNr = 0;}
-    //else if (args.indicatorId.includes('_2-')) {var goalNr = 1;}
-    //else if (args.indicatorId.includes('_3-')) {var goalNr = 2;}
-    //else if (args.indicatorId.includes('_4-')) {var goalNr = 3;}
-    //else if (args.indicatorId.includes('_5-')) {var goalNr = 4;}
-    //else if (args.indicatorId.includes('_6-')) {var goalNr = 5;}
-    //else if (args.indicatorId.includes('_7-')) {var goalNr = 6;}
-    //else if (args.indicatorId.includes('_8-')) {var goalNr = 7;}
-    //else if (args.indicatorId.includes('_9-')) {var goalNr = 8;}
-    //else if (args.indicatorId.includes('_10-')) {var goalNr = 9;}
-    //else if (args.indicatorId.includes('_11-')) {var goalNr = 10;}
-    //else if (args.indicatorId.includes('_12-')) {var goalNr = 11;}
-    //else if (args.indicatorId.includes('_13-')) {var goalNr = 12;}
-    //else if (args.indicatorId.includes('_14-')) {var goalNr = 13;}
-    //else if (args.indicatorId.includes('_15-')) {var goalNr = 14;}
-    //else if (args.indicatorId.includes('_16-')) {var goalNr = 15;}
-    //else if (args.indicatorId.includes('_17-')) {var goalNr = 16;}
-
-
+    //---#1 GoalDependendMapColor---start--------------------------
+    if (args.indicatorId.includes('_1-')){var goalNr = 0;}
+    else if (args.indicatorId.includes('_2-')) {var goalNr = 1;}
+    else if (args.indicatorId.includes('_3-')) {var goalNr = 2;}
+    else if (args.indicatorId.includes('_4-')) {var goalNr = 3;}
+    else if (args.indicatorId.includes('_5-')) {var goalNr = 4;}
+    else if (args.indicatorId.includes('_6-')) {var goalNr = 5;}
+    else if (args.indicatorId.includes('_7-')) {var goalNr = 6;}
+    else if (args.indicatorId.includes('_8-')) {var goalNr = 7;}
+    else if (args.indicatorId.includes('_9-')) {var goalNr = 8;}
+    else if (args.indicatorId.includes('_10-')) {var goalNr = 9;}
+    else if (args.indicatorId.includes('_11-')) {var goalNr = 10;}
+    else if (args.indicatorId.includes('_12-')) {var goalNr = 11;}
+    else if (args.indicatorId.includes('_13-')) {var goalNr = 12;}
+    else if (args.indicatorId.includes('_14-')) {var goalNr = 13;}
+    else if (args.indicatorId.includes('_15-')) {var goalNr = 14;}
+    else if (args.indicatorId.includes('_16-')) {var goalNr = 15;}
+    else if (args.indicatorId.includes('_17-')) {var goalNr = 16;}
+    //---#1 GoalDependendMapColor---stop---------------------------
     if(args.hasGeoData && args.showMap) {
       view_obj._mapView = new mapView();
-      view_obj._mapView.initialise(args.geoData, args.geoCodeRegEx); //, goalNr);
+            //---#1 GoalDependendMapColor---start--------------------------
+            //view_obj._mapView.initialise(args.geoData, args.geoCodeRegEx);
+            view_obj._mapView.initialise(args.geoData, args.geoCodeRegEx, goalNr);
+            //---#1 GoalDependendMapColor---stop---------------------------
     }
   });
 
@@ -1718,6 +1767,7 @@ var indicatorView = function (model, options) {
   };
 
   this.updatePlot = function(chartInfo) {
+
     view_obj._chartInstance.data.datasets = chartInfo.datasets;
 
     if(chartInfo.selectedUnit) {
@@ -1742,11 +1792,10 @@ var indicatorView = function (model, options) {
   };
 
 
-
   this.createPlot = function (chartInfo) {
 
+    //console.log (chartInfo);
     var that = this;
-
     var chartConfig = {
       type: this._model.graphType,
       data: chartInfo,
@@ -1788,6 +1837,7 @@ var indicatorView = function (model, options) {
             text.push('</ul>');
             return text.join('');
         },
+
         legend: {
           display: false
         },
@@ -1801,8 +1851,8 @@ var indicatorView = function (model, options) {
     };
     chartConfig = opensdg.chartConfigAlter(chartConfig);
 
-    this._chartInstance = new Chart($(this._rootElement).find('canvas'), chartConfig);
 
+    this._chartInstance = new Chart($(this._rootElement).find('canvas'), chartConfig);
     Chart.pluginService.register({
       afterDraw: function(chart) {
         var $canvas = $(that._rootElement).find('canvas'),
@@ -2398,7 +2448,10 @@ $(function() {
     },
 
     onAdd: function() {
-      var controlTpl = '' + //'<span id="mapHead">{title}</span>' +//<<<----------------
+      //---#2 TimeSeriesNameDisplayedInMaps---start--------------------------------------------------------------
+      //var controlTpl = '' +
+      var controlTpl = '<span id="mapHead">{title}</span>' +
+      //---#2 TimeSeriesNameDisplayedInMaps---stop---------------------------------------------------------------
         '<ul id="selection-list"></ul>' +
         '<div class="legend-swatches">' + //bar
           '{legendSwatches}' +
@@ -2410,8 +2463,12 @@ $(function() {
           '<span class="arrow right"></span>' +
         '</div>';
       var swatchTpl = '<span class="legend-swatch" style="width:{width}%; background:{color};"></span>';
-      var swatchWidth = 100 / this.plugin.options.colorRange.length; //[this.plugin.goalNr].length;
-      var swatches = this.plugin.options.colorRange.map(function(swatchColor) { //[this.plugin.goalNr].map(function(swatchColor) {
+      //---#1 GoalDependendMapColor---start---------------------------------------------------------------------------------------------------------------
+      //var swatchWidth = 100 / this.plugin.options.colorRange.length;
+      var swatchWidth = 100 / this.plugin.options.colorRange[this.plugin.goalNr].length;
+      //var swatches = this.plugin.options.colorRange.map(function(swatchColor) {
+      var swatches = this.plugin.options.colorRange[this.plugin.goalNr].map(function(swatchColor) {
+      //---#1 GoalDependendMapColor---stop----------------------------------------------------------------------------------------------------------------
         return L.Util.template(swatchTpl, {
           width: swatchWidth,
           color: swatchColor,
@@ -2419,23 +2476,19 @@ $(function() {
       }).join('');
       var div = L.DomUtil.create('div', 'selection-legend');
 
-      //-----------------------------------------------------------------------
-      //var headline
-      //if (this.plugin.ageName){
-        //headline = this.plugin.timeSeriesName + ', <br>' + this.plugin.ageName + ', <br>' + this.plugin.unitName;
-      //} else {
-        //headline = 'Test 4.4'; //this.plugin.timeSeriesName + ' <br>' + this.plugin.unitName;
-      //}
-      //-----------------------------------------------------------------------
+      //---#2 TimeSeriesNameDisplayedInMaps---start--------------------------------------------------------------
+      var headline = this.plugin.timeSeriesName
+      headline += ', <br>' + this.plugin.unitName;
+      //---#2 TimeSeriesNameDisplayedInMaps---stop---------------------------------------------------------------
 
       div.innerHTML = L.Util.template(controlTpl, {
         lowValue: this.plugin.valueRange[0],
         highValue: this.plugin.valueRange[1],
         legendSwatches: swatches,
 
-        //---
-        //title: headline,
-        //---
+        //---#2 TimeSeriesNameDisplayedInMaps---start--------------------------------------------------------------
+        title: headline,
+        //---#2 TimeSeriesNameDisplayedInMaps---stop---------------------------------------------------------------
 
       });
       return div;

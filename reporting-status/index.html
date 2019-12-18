@@ -91,11 +91,16 @@ var translations = {
         <!-- Title and meta description
         ================================================== -->
 
+        <!---#15 setCorrectTitle---start-------------------->
+        
+        
+        
         <title>
           
             Deutschlands Indikatoren zu den Sustainable Development Goals
           
         </title>
+        <!---#15 setCorrectTitle---stop--------------------->
 
         
           <meta name="description" content= "Übersichtlicher Stand der Indikatoren der 17 Sustainable Development Goals (SDGs) in Deutschland samt öffentlich zur Verfügung stehender Datengrundlage" >
@@ -114,7 +119,7 @@ var translations = {
         <!-- Favicons ================================================== -->
         <!-- 128x128 -->
         <link rel="shortcut icon" type="image/ico" href="/assets/img/favicons/favicon.ico">
-        <link rel="icon" type="image/png" href="/assets/img/favicons/favicon.png"><!-- 192x192, as recommended for Android
+        <link rel="icon" type="image/png" href="/assets/img/favicons/de/favicon.png"><!-- 192x192, as recommended for Android
         http://updates.html5rocks.com/2014/11/Support-for-theme-color-in-Chrome-39-for-Android
         -->
 
@@ -124,7 +129,7 @@ var translations = {
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" crossorigin="">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" crossorigin="">
         <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/3.2.3/css/fixedColumns.dataTables.min.css" crossorigin="">
-        <link rel="stylesheet" href="/assets/css/default.css?v=20191203122728">
+        <link rel="stylesheet" href="/assets/css/default.css?v=20191218110045">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet" crossorigin="">
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
           integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
@@ -132,7 +137,7 @@ var translations = {
         <link rel="stylesheet" href="https://cdn.rawgit.com/socib/Leaflet.TimeDimension/master/dist/leaflet.timedimension.control.min.css"  crossorigin=""/>
         <link rel="stylesheet" href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css'  crossorigin=""/>
         <link rel="stylesheet" href="https://bowercdn.net/c/leaflet.zoomhome-latest/dist/leaflet.zoomhome.css"  crossorigin=""/>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-search@2.9.7/dist/leaflet-search.min.css" crossorigin=""><link rel="stylesheet" href="/assets/css/custom.css?v=20191203122728"><!-- ShareThis BEGIN --><!-- ShareThis END -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-search@2.9.7/dist/leaflet-search.min.css" crossorigin=""><link rel="stylesheet" href="/assets/css/custom.css?v=20191218110045"><!-- ShareThis BEGIN --><!-- ShareThis END -->
 
     </head>
 <body class="language-de layout-reportingstatus">
@@ -200,7 +205,15 @@ var translations = {
 </a>
 <ul class="language-options language-toggle"><li><a href="/en/reporting-status/">English</a></li></ul>
 
-        </li></ul>
+        </li><!---#17 addLinkToOtherPage---start------------
+        <li class="nav-link">
+          <a href="https://nachhaltige-entwicklung-deutschland.github.io/open-sdg-site-starter/">
+            <img class="link_btn" src="https://g205sdgs.github.io/sdg-indicators/public/DNS Wheel.png" title="Zur Seite der nationalen Indikatoren" alt="Link DNS" style="width:24px;height:24px;"/>
+            <span class="hidden-sm hidden-md hidden-lg">SDG-NRP</span>
+          </a>
+        </li>
+        <!---#17 addLinkToOtherPage---stop------------->
+      </ul>
 
       <div id="search" class="menu-target">
   <input id="indicator_search" title="Indikatorensuche" placeholder="Indikatorensuche" data-url="/indicators.json" data-pageurl="/search/?q=" />
@@ -209,11 +222,6 @@ var translations = {
   </label>
 </div>
 
-<!--
-      <a class="header_img" href="https://nachhaltige-entwicklung-deutschland.github.io/open-sdg-site-starter/" id="menu">
-        <img src="https://g205sdgs.github.io/sdg-indicators/public/DNS Wheel.png" title="Nationale Indikatoren zu Ziel" alt="Link DNS" />
-      </a>
--->      
     </nav>
   </div>
 
@@ -240,7 +248,31 @@ var translations = {
             </div><br style="clear:both;">
           </div>
         </div>
-        <div class="goal-stats"><span class="complete" style="width:61.4754%" title="Daten verfügbar: 62%"></span><span class="inprogress" style="width:2.459016%" title="in Bearbeitung: 3%"></span><span class="notstarted" style="width:32.78688%" title="Datenquellenanalyse: 33%"></span><span class="notapplicable" style="width:3.278688%" title="Nicht zutreffend: 3%"></span></div>
+        <div class="goal-stats"><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+              <!--<span class="complete" style="width:61.5%" title="Daten verfügbar: 62%"></span>-->
+              
+              
+              
+              <span class="complete" style="width:61.47540983606558%" title="Daten verfügbar: 62%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+              <!--<span class="inprogress" style="width:2.5%" title="in Bearbeitung: 3%"></span>-->
+              
+              
+              
+              <span class="inprogress" style="width:2.459016393442623%" title="in Bearbeitung: 3%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+              <!--<span class="notstarted" style="width:32.8%" title="Datenquellenanalyse: 33%"></span>-->
+              
+              
+              
+              <span class="notstarted" style="width:32.78688524590164%" title="Datenquellenanalyse: 33%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+              <!--<span class="notapplicable" style="width:3.3%" title="Nicht zutreffend: 3%"></span>-->
+              
+              
+              
+              <span class="notapplicable" style="width:3.278688524590164%" title="Nicht zutreffend: 3%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------></div>
 
       </div>
     <!--</li>-->
@@ -255,7 +287,7 @@ var translations = {
         </div>
         <div class="details">
           <h3 class="status-goal">
-            <a href="/1/"></a>
+            <a href="/1/">Keine Armut</a>
             <span class="total">14<span></span> Indikatoren</span>
           </h3>
           <div class="summary">
@@ -270,7 +302,31 @@ var translations = {
               </div><br style="clear:both;">
             </div>
           </div>
-          <div class="goal-stats"><span class="complete" style="width:35.7%" title="Daten verfügbar: 36%"></span><span class="inprogress" style="width:7.1%" title="in Bearbeitung: 7%"></span><span class="notstarted" style="width:50.0%" title="Datenquellenanalyse: 50%"></span><span class="notapplicable" style="width:7.1%" title="Nicht zutreffend: 7%"></span></div>
+          <div class="goal-stats"><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="complete" style="width:35.7%" title="Daten verfügbar: 36%"></span>-->
+            
+            
+            
+            <span class="complete" style="width:35.714285714285715%" title="Daten verfügbar: 36%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="inprogress" style="width:7.1%" title="in Bearbeitung: 7%"></span>-->
+            
+            
+            
+            <span class="inprogress" style="width:7.142857142857142%" title="in Bearbeitung: 7%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="notstarted" style="width:50.0%" title="Datenquellenanalyse: 50%"></span>-->
+            
+            
+            
+            <span class="notstarted" style="width:50.0%" title="Datenquellenanalyse: 50%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="notapplicable" style="width:7.1%" title="Nicht zutreffend: 7%"></span>-->
+            
+            
+            
+            <span class="notapplicable" style="width:7.142857142857142%" title="Nicht zutreffend: 7%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------></div>
           <div class="divider">
           </div>
         </div>
@@ -284,7 +340,7 @@ var translations = {
         </div>
         <div class="details">
           <h3 class="status-goal">
-            <a href="/2/"></a>
+            <a href="/2/">Kein Hunger</a>
             <span class="total">13<span></span> Indikatoren</span>
           </h3>
           <div class="summary">
@@ -299,7 +355,31 @@ var translations = {
               </div><br style="clear:both;">
             </div>
           </div>
-          <div class="goal-stats"><span class="complete" style="width:69.2%" title="Daten verfügbar: 69%"></span><span class="inprogress" style="width:7.7%" title="in Bearbeitung: 8%"></span><span class="notstarted" style="width:23.1%" title="Datenquellenanalyse: 23%"></span><span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0%"></span></div>
+          <div class="goal-stats"><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="complete" style="width:69.2%" title="Daten verfügbar: 69%"></span>-->
+            
+            
+            
+            <span class="complete" style="width:69.23076923076923%" title="Daten verfügbar: 69%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="inprogress" style="width:7.7%" title="in Bearbeitung: 8%"></span>-->
+            
+            
+            
+            <span class="inprogress" style="width:7.692307692307693%" title="in Bearbeitung: 8%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="notstarted" style="width:23.1%" title="Datenquellenanalyse: 23%"></span>-->
+            
+            
+            
+            <span class="notstarted" style="width:23.076923076923077%" title="Datenquellenanalyse: 23%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0%"></span>-->
+            
+            
+            
+            <span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------></div>
           <div class="divider">
           </div>
         </div>
@@ -313,7 +393,7 @@ var translations = {
         </div>
         <div class="details">
           <h3 class="status-goal">
-            <a href="/3/"></a>
+            <a href="/3/">Gesundheit und Wohlergehen</a>
             <span class="total">27<span></span> Indikatoren</span>
           </h3>
           <div class="summary">
@@ -328,7 +408,31 @@ var translations = {
               </div><br style="clear:both;">
             </div>
           </div>
-          <div class="goal-stats"><span class="complete" style="width:77.8%" title="Daten verfügbar: 78%"></span><span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0%"></span><span class="notstarted" style="width:22.2%" title="Datenquellenanalyse: 22%"></span><span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0%"></span></div>
+          <div class="goal-stats"><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="complete" style="width:77.8%" title="Daten verfügbar: 78%"></span>-->
+            
+            
+            
+            <span class="complete" style="width:77.77777777777779%" title="Daten verfügbar: 78%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0%"></span>-->
+            
+            
+            
+            <span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="notstarted" style="width:22.2%" title="Datenquellenanalyse: 22%"></span>-->
+            
+            
+            
+            <span class="notstarted" style="width:22.22222222222222%" title="Datenquellenanalyse: 22%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0%"></span>-->
+            
+            
+            
+            <span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------></div>
           <div class="divider">
           </div>
         </div>
@@ -342,7 +446,7 @@ var translations = {
         </div>
         <div class="details">
           <h3 class="status-goal">
-            <a href="/4/"></a>
+            <a href="/4/">Hochwertige Bildung</a>
             <span class="total">11<span></span> Indikatoren</span>
           </h3>
           <div class="summary">
@@ -357,7 +461,31 @@ var translations = {
               </div><br style="clear:both;">
             </div>
           </div>
-          <div class="goal-stats"><span class="complete" style="width:72.7%" title="Daten verfügbar: 73%"></span><span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0%"></span><span class="notstarted" style="width:27.3%" title="Datenquellenanalyse: 27%"></span><span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0%"></span></div>
+          <div class="goal-stats"><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="complete" style="width:72.7%" title="Daten verfügbar: 73%"></span>-->
+            
+            
+            
+            <span class="complete" style="width:72.72727272727273%" title="Daten verfügbar: 73%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0%"></span>-->
+            
+            
+            
+            <span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="notstarted" style="width:27.3%" title="Datenquellenanalyse: 27%"></span>-->
+            
+            
+            
+            <span class="notstarted" style="width:27.27272727272727%" title="Datenquellenanalyse: 27%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0%"></span>-->
+            
+            
+            
+            <span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------></div>
           <div class="divider">
           </div>
         </div>
@@ -371,7 +499,7 @@ var translations = {
         </div>
         <div class="details">
           <h3 class="status-goal">
-            <a href="/5/"></a>
+            <a href="/5/">Geschlechtergleichstellung</a>
             <span class="total">14<span></span> Indikatoren</span>
           </h3>
           <div class="summary">
@@ -386,7 +514,31 @@ var translations = {
               </div><br style="clear:both;">
             </div>
           </div>
-          <div class="goal-stats"><span class="complete" style="width:57.1%" title="Daten verfügbar: 57%"></span><span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0%"></span><span class="notstarted" style="width:42.9%" title="Datenquellenanalyse: 43%"></span><span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0%"></span></div>
+          <div class="goal-stats"><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="complete" style="width:57.1%" title="Daten verfügbar: 57%"></span>-->
+            
+            
+            
+            <span class="complete" style="width:57.14285714285714%" title="Daten verfügbar: 57%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0%"></span>-->
+            
+            
+            
+            <span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="notstarted" style="width:42.9%" title="Datenquellenanalyse: 43%"></span>-->
+            
+            
+            
+            <span class="notstarted" style="width:42.857142857142854%" title="Datenquellenanalyse: 43%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0%"></span>-->
+            
+            
+            
+            <span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------></div>
           <div class="divider">
           </div>
         </div>
@@ -400,7 +552,7 @@ var translations = {
         </div>
         <div class="details">
           <h3 class="status-goal">
-            <a href="/6/"></a>
+            <a href="/6/">Sauberes Wasser und Sanitärversorgung</a>
             <span class="total">11<span></span> Indikatoren</span>
           </h3>
           <div class="summary">
@@ -415,7 +567,31 @@ var translations = {
               </div><br style="clear:both;">
             </div>
           </div>
-          <div class="goal-stats"><span class="complete" style="width:81.8%" title="Daten verfügbar: 82%"></span><span class="inprogress" style="width:9.1%" title="in Bearbeitung: 9%"></span><span class="notstarted" style="width:9.1%" title="Datenquellenanalyse: 9%"></span><span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0%"></span></div>
+          <div class="goal-stats"><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="complete" style="width:81.8%" title="Daten verfügbar: 82%"></span>-->
+            
+            
+            
+            <span class="complete" style="width:81.81818181818181%" title="Daten verfügbar: 82%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="inprogress" style="width:9.1%" title="in Bearbeitung: 9%"></span>-->
+            
+            
+            
+            <span class="inprogress" style="width:9.090909090909092%" title="in Bearbeitung: 9%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="notstarted" style="width:9.1%" title="Datenquellenanalyse: 9%"></span>-->
+            
+            
+            
+            <span class="notstarted" style="width:9.090909090909092%" title="Datenquellenanalyse: 9%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0%"></span>-->
+            
+            
+            
+            <span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------></div>
           <div class="divider">
           </div>
         </div>
@@ -429,7 +605,7 @@ var translations = {
         </div>
         <div class="details">
           <h3 class="status-goal">
-            <a href="/7/"></a>
+            <a href="/7/">Bezahlbare und saubere Energie</a>
             <span class="total">6<span></span> Indikatoren</span>
           </h3>
           <div class="summary">
@@ -444,7 +620,31 @@ var translations = {
               </div><br style="clear:both;">
             </div>
           </div>
-          <div class="goal-stats"><span class="complete" style="width:50.0%" title="Daten verfügbar: 50%"></span><span class="inprogress" style="width:16.7%" title="in Bearbeitung: 17%"></span><span class="notstarted" style="width:33.3%" title="Datenquellenanalyse: 33%"></span><span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0%"></span></div>
+          <div class="goal-stats"><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="complete" style="width:50.0%" title="Daten verfügbar: 50%"></span>-->
+            
+            
+            
+            <span class="complete" style="width:50.0%" title="Daten verfügbar: 50%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="inprogress" style="width:16.7%" title="in Bearbeitung: 17%"></span>-->
+            
+            
+            
+            <span class="inprogress" style="width:16.666666666666664%" title="in Bearbeitung: 17%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="notstarted" style="width:33.3%" title="Datenquellenanalyse: 33%"></span>-->
+            
+            
+            
+            <span class="notstarted" style="width:33.33333333333333%" title="Datenquellenanalyse: 33%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0%"></span>-->
+            
+            
+            
+            <span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------></div>
           <div class="divider">
           </div>
         </div>
@@ -458,7 +658,7 @@ var translations = {
         </div>
         <div class="details">
           <h3 class="status-goal">
-            <a href="/8/"></a>
+            <a href="/8/">Menschenwürdige Arbeit und Wirtschaftswachstum</a>
             <span class="total">17<span></span> Indikatoren</span>
           </h3>
           <div class="summary">
@@ -473,7 +673,31 @@ var translations = {
               </div><br style="clear:both;">
             </div>
           </div>
-          <div class="goal-stats"><span class="complete" style="width:82.4%" title="Daten verfügbar: 82%"></span><span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0%"></span><span class="notstarted" style="width:17.6%" title="Datenquellenanalyse: 18%"></span><span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0%"></span></div>
+          <div class="goal-stats"><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="complete" style="width:82.4%" title="Daten verfügbar: 82%"></span>-->
+            
+            
+            
+            <span class="complete" style="width:82.35294117647058%" title="Daten verfügbar: 82%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0%"></span>-->
+            
+            
+            
+            <span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="notstarted" style="width:17.6%" title="Datenquellenanalyse: 18%"></span>-->
+            
+            
+            
+            <span class="notstarted" style="width:17.647058823529413%" title="Datenquellenanalyse: 18%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0%"></span>-->
+            
+            
+            
+            <span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------></div>
           <div class="divider">
           </div>
         </div>
@@ -487,7 +711,7 @@ var translations = {
         </div>
         <div class="details">
           <h3 class="status-goal">
-            <a href="/9/"></a>
+            <a href="/9/">Industrie, Innovationen und Infrastruktur</a>
             <span class="total">12<span></span> Indikatoren</span>
           </h3>
           <div class="summary">
@@ -502,7 +726,31 @@ var translations = {
               </div><br style="clear:both;">
             </div>
           </div>
-          <div class="goal-stats"><span class="complete" style="width:83.3%" title="Daten verfügbar: 83%"></span><span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0%"></span><span class="notstarted" style="width:16.7%" title="Datenquellenanalyse: 17%"></span><span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0%"></span></div>
+          <div class="goal-stats"><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="complete" style="width:83.3%" title="Daten verfügbar: 83%"></span>-->
+            
+            
+            
+            <span class="complete" style="width:83.33333333333334%" title="Daten verfügbar: 83%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0%"></span>-->
+            
+            
+            
+            <span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="notstarted" style="width:16.7%" title="Datenquellenanalyse: 17%"></span>-->
+            
+            
+            
+            <span class="notstarted" style="width:16.666666666666664%" title="Datenquellenanalyse: 17%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0%"></span>-->
+            
+            
+            
+            <span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------></div>
           <div class="divider">
           </div>
         </div>
@@ -516,7 +764,7 @@ var translations = {
         </div>
         <div class="details">
           <h3 class="status-goal">
-            <a href="/10/"></a>
+            <a href="/10/">Weniger Ungleichheiten</a>
             <span class="total">11<span></span> Indikatoren</span>
           </h3>
           <div class="summary">
@@ -531,7 +779,31 @@ var translations = {
               </div><br style="clear:both;">
             </div>
           </div>
-          <div class="goal-stats"><span class="complete" style="width:45.5%" title="Daten verfügbar: 46%"></span><span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0%"></span><span class="notstarted" style="width:45.5%" title="Datenquellenanalyse: 46%"></span><span class="notapplicable" style="width:9.1%" title="Nicht zutreffend: 9%"></span></div>
+          <div class="goal-stats"><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="complete" style="width:45.5%" title="Daten verfügbar: 46%"></span>-->
+            
+            
+            
+            <span class="complete" style="width:45.45454545454545%" title="Daten verfügbar: 46%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0%"></span>-->
+            
+            
+            
+            <span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="notstarted" style="width:45.5%" title="Datenquellenanalyse: 46%"></span>-->
+            
+            
+            
+            <span class="notstarted" style="width:45.45454545454545%" title="Datenquellenanalyse: 46%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="notapplicable" style="width:9.1%" title="Nicht zutreffend: 9%"></span>-->
+            
+            
+            
+            <span class="notapplicable" style="width:9.090909090909092%" title="Nicht zutreffend: 9%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------></div>
           <div class="divider">
           </div>
         </div>
@@ -545,7 +817,7 @@ var translations = {
         </div>
         <div class="details">
           <h3 class="status-goal">
-            <a href="/11/"></a>
+            <a href="/11/">Nachhaltige Städte und Gemeinden</a>
             <span class="total">15<span></span> Indikatoren</span>
           </h3>
           <div class="summary">
@@ -560,7 +832,31 @@ var translations = {
               </div><br style="clear:both;">
             </div>
           </div>
-          <div class="goal-stats"><span class="complete" style="width:53.3%" title="Daten verfügbar: 53%"></span><span class="inprogress" style="width:6.7%" title="in Bearbeitung: 7%"></span><span class="notstarted" style="width:40.0%" title="Datenquellenanalyse: 40%"></span><span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0%"></span></div>
+          <div class="goal-stats"><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="complete" style="width:53.3%" title="Daten verfügbar: 53%"></span>-->
+            
+            
+            
+            <span class="complete" style="width:53.33333333333333%" title="Daten verfügbar: 53%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="inprogress" style="width:6.7%" title="in Bearbeitung: 7%"></span>-->
+            
+            
+            
+            <span class="inprogress" style="width:6.666666666666667%" title="in Bearbeitung: 7%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="notstarted" style="width:40.0%" title="Datenquellenanalyse: 40%"></span>-->
+            
+            
+            
+            <span class="notstarted" style="width:40.0%" title="Datenquellenanalyse: 40%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0%"></span>-->
+            
+            
+            
+            <span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------></div>
           <div class="divider">
           </div>
         </div>
@@ -574,7 +870,7 @@ var translations = {
         </div>
         <div class="details">
           <h3 class="status-goal">
-            <a href="/12/"></a>
+            <a href="/12/">Verantwortungsvolle Konsum- und Produktionsmuster</a>
             <span class="total">13<span></span> Indikatoren</span>
           </h3>
           <div class="summary">
@@ -589,7 +885,31 @@ var translations = {
               </div><br style="clear:both;">
             </div>
           </div>
-          <div class="goal-stats"><span class="complete" style="width:53.8%" title="Daten verfügbar: 54%"></span><span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0%"></span><span class="notstarted" style="width:46.2%" title="Datenquellenanalyse: 46%"></span><span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0%"></span></div>
+          <div class="goal-stats"><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="complete" style="width:53.8%" title="Daten verfügbar: 54%"></span>-->
+            
+            
+            
+            <span class="complete" style="width:53.84615384615384%" title="Daten verfügbar: 54%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0%"></span>-->
+            
+            
+            
+            <span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="notstarted" style="width:46.2%" title="Datenquellenanalyse: 46%"></span>-->
+            
+            
+            
+            <span class="notstarted" style="width:46.15384615384615%" title="Datenquellenanalyse: 46%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0%"></span>-->
+            
+            
+            
+            <span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------></div>
           <div class="divider">
           </div>
         </div>
@@ -603,7 +923,7 @@ var translations = {
         </div>
         <div class="details">
           <h3 class="status-goal">
-            <a href="/13/"></a>
+            <a href="/13/">Maßnahmen zum Klimaschutz</a>
             <span class="total">8<span></span> Indikatoren</span>
           </h3>
           <div class="summary">
@@ -618,7 +938,31 @@ var translations = {
               </div><br style="clear:both;">
             </div>
           </div>
-          <div class="goal-stats"><span class="complete" style="width:12.5%" title="Daten verfügbar: 13%"></span><span class="inprogress" style="width:12.5%" title="in Bearbeitung: 13%"></span><span class="notstarted" style="width:62.5%" title="Datenquellenanalyse: 63%"></span><span class="notapplicable" style="width:12.5%" title="Nicht zutreffend: 13%"></span></div>
+          <div class="goal-stats"><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="complete" style="width:12.5%" title="Daten verfügbar: 13%"></span>-->
+            
+            
+            
+            <span class="complete" style="width:12.5%" title="Daten verfügbar: 13%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="inprogress" style="width:12.5%" title="in Bearbeitung: 13%"></span>-->
+            
+            
+            
+            <span class="inprogress" style="width:12.5%" title="in Bearbeitung: 13%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="notstarted" style="width:62.5%" title="Datenquellenanalyse: 63%"></span>-->
+            
+            
+            
+            <span class="notstarted" style="width:62.5%" title="Datenquellenanalyse: 63%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="notapplicable" style="width:12.5%" title="Nicht zutreffend: 13%"></span>-->
+            
+            
+            
+            <span class="notapplicable" style="width:12.5%" title="Nicht zutreffend: 13%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------></div>
           <div class="divider">
           </div>
         </div>
@@ -632,7 +976,7 @@ var translations = {
         </div>
         <div class="details">
           <h3 class="status-goal">
-            <a href="/14/"></a>
+            <a href="/14/">Leben unter Wasser</a>
             <span class="total">10<span></span> Indikatoren</span>
           </h3>
           <div class="summary">
@@ -647,7 +991,31 @@ var translations = {
               </div><br style="clear:both;">
             </div>
           </div>
-          <div class="goal-stats"><span class="complete" style="width:50.0%" title="Daten verfügbar: 50%"></span><span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0%"></span><span class="notstarted" style="width:40.0%" title="Datenquellenanalyse: 40%"></span><span class="notapplicable" style="width:10.0%" title="Nicht zutreffend: 10%"></span></div>
+          <div class="goal-stats"><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="complete" style="width:50.0%" title="Daten verfügbar: 50%"></span>-->
+            
+            
+            
+            <span class="complete" style="width:50.0%" title="Daten verfügbar: 50%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0%"></span>-->
+            
+            
+            
+            <span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="notstarted" style="width:40.0%" title="Datenquellenanalyse: 40%"></span>-->
+            
+            
+            
+            <span class="notstarted" style="width:40.0%" title="Datenquellenanalyse: 40%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="notapplicable" style="width:10.0%" title="Nicht zutreffend: 10%"></span>-->
+            
+            
+            
+            <span class="notapplicable" style="width:10.0%" title="Nicht zutreffend: 10%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------></div>
           <div class="divider">
           </div>
         </div>
@@ -661,7 +1029,7 @@ var translations = {
         </div>
         <div class="details">
           <h3 class="status-goal">
-            <a href="/15/"></a>
+            <a href="/15/">Leben an Land</a>
             <span class="total">14<span></span> Indikatoren</span>
           </h3>
           <div class="summary">
@@ -676,7 +1044,31 @@ var translations = {
               </div><br style="clear:both;">
             </div>
           </div>
-          <div class="goal-stats"><span class="complete" style="width:64.3%" title="Daten verfügbar: 64%"></span><span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0%"></span><span class="notstarted" style="width:35.7%" title="Datenquellenanalyse: 36%"></span><span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0%"></span></div>
+          <div class="goal-stats"><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="complete" style="width:64.3%" title="Daten verfügbar: 64%"></span>-->
+            
+            
+            
+            <span class="complete" style="width:64.28571428571429%" title="Daten verfügbar: 64%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0%"></span>-->
+            
+            
+            
+            <span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="notstarted" style="width:35.7%" title="Datenquellenanalyse: 36%"></span>-->
+            
+            
+            
+            <span class="notstarted" style="width:35.714285714285715%" title="Datenquellenanalyse: 36%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0%"></span>-->
+            
+            
+            
+            <span class="notapplicable" style="width:0.0%" title="Nicht zutreffend: 0%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------></div>
           <div class="divider">
           </div>
         </div>
@@ -690,7 +1082,7 @@ var translations = {
         </div>
         <div class="details">
           <h3 class="status-goal">
-            <a href="/16/"></a>
+            <a href="/16/">Frieden, Gerechtigkeit und starke Institutionen</a>
             <span class="total">23<span></span> Indikatoren</span>
           </h3>
           <div class="summary">
@@ -705,7 +1097,31 @@ var translations = {
               </div><br style="clear:both;">
             </div>
           </div>
-          <div class="goal-stats"><span class="complete" style="width:69.6%" title="Daten verfügbar: 70%"></span><span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0%"></span><span class="notstarted" style="width:21.7%" title="Datenquellenanalyse: 22%"></span><span class="notapplicable" style="width:8.7%" title="Nicht zutreffend: 9%"></span></div>
+          <div class="goal-stats"><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="complete" style="width:69.6%" title="Daten verfügbar: 70%"></span>-->
+            
+            
+            
+            <span class="complete" style="width:69.56521739130434%" title="Daten verfügbar: 70%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0%"></span>-->
+            
+            
+            
+            <span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="notstarted" style="width:21.7%" title="Datenquellenanalyse: 22%"></span>-->
+            
+            
+            
+            <span class="notstarted" style="width:21.73913043478261%" title="Datenquellenanalyse: 22%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="notapplicable" style="width:8.7%" title="Nicht zutreffend: 9%"></span>-->
+            
+            
+            
+            <span class="notapplicable" style="width:8.695652173913043%" title="Nicht zutreffend: 9%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------></div>
           <div class="divider">
           </div>
         </div>
@@ -719,7 +1135,7 @@ var translations = {
         </div>
         <div class="details">
           <h3 class="status-goal">
-            <a href="/17/"></a>
+            <a href="/17/">Partnerschaften zur Erreichung der Ziele</a>
             <span class="total">25<span></span> Indikatoren</span>
           </h3>
           <div class="summary">
@@ -734,7 +1150,31 @@ var translations = {
               </div><br style="clear:both;">
             </div>
           </div>
-          <div class="goal-stats"><span class="complete" style="width:48.0%" title="Daten verfügbar: 48%"></span><span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0%"></span><span class="notstarted" style="width:44.0%" title="Datenquellenanalyse: 44%"></span><span class="notapplicable" style="width:8.0%" title="Nicht zutreffend: 8%"></span></div>
+          <div class="goal-stats"><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="complete" style="width:48.0%" title="Daten verfügbar: 48%"></span>-->
+            
+            
+            
+            <span class="complete" style="width:48.0%" title="Daten verfügbar: 48%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0%"></span>-->
+            
+            
+            
+            <span class="inprogress" style="width:0.0%" title="in Bearbeitung: 0%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="notstarted" style="width:44.0%" title="Datenquellenanalyse: 44%"></span>-->
+            
+            
+            
+            <span class="notstarted" style="width:44.0%" title="Datenquellenanalyse: 44%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------><!--#10 fixReportingStatus---start---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--<span class="notapplicable" style="width:8.0%" title="Nicht zutreffend: 8%"></span>-->
+            
+            
+            
+            <span class="notapplicable" style="width:8.0%" title="Nicht zutreffend: 8%"></span>
+            <!--#10 fixReportingStatus---stop-----------------------------------------------------------------------------------------------------------------------------------------------------------------></div>
           <div class="divider">
           </div>
         </div>
@@ -776,7 +1216,7 @@ var translations = {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/autotrack/2.4.1/autotrack.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.3/dist/html2canvas.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.2/dist/FileSaver.min.js"></script>
-<script src='/assets/js/sdg.js?v=20191203122728'></script><script src="/assets/js/custom.js?v=20191203122728"></script><script>
+<script src='/assets/js/sdg.js?v=20191218110045'></script><script src="/assets/js/custom.js?v=20191218110045"></script><script>
 $(function() {
     if($('#indicatorData').length) {
       var domData = $('#indicatorData').data();
