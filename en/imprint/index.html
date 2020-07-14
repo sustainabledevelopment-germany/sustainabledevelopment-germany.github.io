@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
-        <script crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js?features=Promise%2CArray.prototype.forEach%2CString.prototype.includes"></script>
+        <script crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js?features=Promise%2CArray.prototype.forEach%2CString.prototype.includes%2CURLSearchParams%2CCustomEvent%2CArray.prototype.includes%2CArray.prototype.filter%2CArray.prototype.some%2CArray.prototype.find%2CObject.assign%2CArray.isArray%2CObject.values"></script>
 <script crossorigin="anonymous" src="https://cdnjs.cloudflare.com/ajax/libs/javascript-canvas-to-blob/3.15.0/js/canvas-to-blob.min.js"></script>
 
         <script>
@@ -11,14 +11,12 @@
 var opensdg = {
 
   // A base URL for asynchronous calls to SDG data.
-  remoteDataBaseUrl: 'https://sustainabledevelopment-germany.github.io/sdg-data-pub/',
+  remoteDataBaseUrl: 'https://sustainabledevelopment-germany.github.io/sdg-data-pub/en',
 
-  // A hook which can be replaced to modify the configuration for Chart.js.
-  // To see where this is used, see indicatorView.js createPlot() and updatePlot().
-  // To see an example of replacing it, see binary.html.
-  chartConfigAlter: function(config) {
-    // Alterations go here.
-    return config;
+  chartConfigAlterations: [],
+  // A hook which can be used to modify the configuration for Chart.js.
+  chartConfigAlter: function(callback) {
+    this.chartConfigAlterations.push(callback);
   },
 
   // A hook which can be replaced to alter whether/how the values that are
@@ -27,6 +25,8 @@ var opensdg = {
     // Alterations go here.
     return value;
   },
+
+  language: 'en',
 };
 
 // For backwards compatibility, some of these might need to be global.
@@ -90,21 +90,13 @@ var translations = {
         <!-- Title and meta description
         ================================================== -->
 
-        <!---#15 setCorrectTitle---start-------------------->
-        
-        
-        
         <title>
           
             German Indicators For The Sustainable Development Goals
           
         </title>
-        <!---#15 setCorrectTitle---stop--------------------->
 
-        
-          <meta name="description" content= "Current status of the national indicators for the 17 Sustainable Development Goals (SDGs) in Germany with a publicly available data basis" >
-        
-
+        <meta name="description" content="">
         <meta property="og:description" content="">
         
         <link rel="canonical" href="/">
@@ -118,7 +110,7 @@ var translations = {
         <!-- Favicons ================================================== -->
         <!-- 128x128 -->
         <link rel="shortcut icon" type="image/ico" href="/assets/img/favicons/favicon.ico">
-        <link rel="icon" type="image/png" href="/assets/img/favicons/en/favicon.png"><!-- 192x192, as recommended for Android
+        <link rel="icon" type="image/png" href="/assets/img/favicons/favicon.png"><!-- 192x192, as recommended for Android
         http://updates.html5rocks.com/2014/11/Support-for-theme-color-in-Chrome-39-for-Android
         -->
 
@@ -128,7 +120,7 @@ var translations = {
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" crossorigin="">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" crossorigin="">
         <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/3.2.3/css/fixedColumns.dataTables.min.css" crossorigin="">
-        <link rel="stylesheet" href="/assets/css/default.css?v=20200616072246">
+        <link rel="stylesheet" href="/assets/css/style.css?v=20200714130024">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet" crossorigin="">
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
           integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
@@ -136,21 +128,20 @@ var translations = {
         <link rel="stylesheet" href="https://cdn.rawgit.com/socib/Leaflet.TimeDimension/master/dist/leaflet.timedimension.control.min.css"  crossorigin=""/>
         <link rel="stylesheet" href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css'  crossorigin=""/>
         <link rel="stylesheet" href="https://bowercdn.net/c/leaflet.zoomhome-latest/dist/leaflet.zoomhome.css"  crossorigin=""/>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-search@2.9.7/dist/leaflet-search.min.css" crossorigin=""><link rel="stylesheet" href="/assets/css/custom.css?v=20200616072246"><!-- ShareThis BEGIN --><!-- ShareThis END -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-search@2.9.7/dist/leaflet-search.min.css" crossorigin=""><!-- ShareThis BEGIN --><!-- ShareThis END -->
 
     </head>
 <body class="language-en layout-page">
 <!-- <div class="container"> -->
-
-
 
 <script>translations['header'] = {"alpha":"Alpha","disclaimer":"This is a development website. We welcome your <a href=\"mailto:%email_address\">feedback</a>.","skip_link":"Skip to main content","tag_line":"17 Goals to Transform our World"};</script>
 
 <a class="sr-only sr-only-focusable" id="skiplink" href="#main-content" tabindex="0">Skip to main content</a>
 <div id="disclaimer">
   <div class="container">
-  <div class="alert alert-danger" role="alert">
+  <div class="disclaimer-alert" role="alert">
     <strong class="phase-tag">Alpha</strong>
+    
     This is a development website. We welcome your <a href="mailto:sdg-indicators@destatis.de">feedback</a>.
   </div>
 </div>
@@ -172,6 +163,7 @@ var translations = {
   <i class="language-toggle fa fa-chevron-down"></i>
   <i class="language-toggle fa fa-chevron-up" style="display:none;"></i>
 </a>
+
 <ul class="language-options language-toggle"><li><a href="/imprint/">Deutsch</a></li></ul>
 
     </div></div>
@@ -189,38 +181,96 @@ var translations = {
         <li><span data-target="search">Search</span></li>
       </ul>
 
-      <ul class="nav navbar-nav menu-target contrast-switcher" id="menu"><li class="nav-link ">
-            <a href="/en/">Goals</a>
-          </li><li class="nav-link ">
-            <a href="/en/reporting-status/">Reporting Status</a>
-          </li><li class="nav-link ">
-            <a href="/en/about/">About</a>
-          </li><li class="nav-link ">
-            <a href="/en/guidance/">Guidance</a>
-          </li><li>
+      <div id="search" class="menu-target">
+  <form action="/en/search">
+    <input name="q" id="indicator_search" title="Search" />
+    <label for="indicator_search">
+      <button aria-label="Search" id="search-btn" type="submit"><i class="fa fa-search" aria-hidden="false"></i></button><span>Search:</span>
+    </label>
+  </form>
+</div>
+
+
+      <ul class="nav navbar-nav menu-target contrast-switcher" id="menu">
+              <li class="nav-link ">
+                <a href="/en/">17 Goals</a>
+              </li>
+            
+              <li class="nav-link ">
+                <a href="/en/reporting-status/">Availability&nbspof&nbspData</a>
+              </li>
+            
+              <li class="nav-link  hidden-sm hidden-md hidden-lg">
+                <a href="/en/about_platform/">About: The&nbspplatform</a>
+              </li>
+            
+              <li class="nav-link  hidden-sm hidden-md hidden-lg">
+                <a href="/en/about_navigation/">About: Navigation</a>
+              </li>
+            
+              <li class="nav-link  hidden-sm hidden-md hidden-lg">
+                <a href="/en/about_guidance/">About: Guidance</a>
+              </li>
+            
+              <li class="nav-link  hidden-sm hidden-md hidden-lg">
+                <a href="/en/facts_agenda/">Interesting Facts: Agenda 2030</a>
+              </li>
+            
+              <li class="nav-link  hidden-sm hidden-md hidden-lg">
+                <a href="/en/facts_dns/">Interesting Facts: DNS</a>
+              </li>
+            <li class="nav-link visible-sm visible-md visible-lg">
+          <a class="language-toggle-button" onclick="$(this).next('.language-toggle').toggle(); return false;" style="margin-right: 0px;">
+            <span class="language-toggle-text">About</span>
+            <i class="language-toggle fa fa-chevron-down"></i>
+          </a>
+          <ul class="language-options language-toggle"><li class="nav-link ">
+                    <a href="/en/about_platform/">The&nbspplatform</a>
+                  </li>
+              <li class="nav-link ">
+                    <a href="/en/about_navigation/">Navigation</a>
+                  </li>
+              <li class="nav-link ">
+                    <a href="/en/about_guidance/">Guidance</a>
+                  </li>
+              </ul>
+        </li>
+
+        <li class="nav-link visible-sm visible-md visible-lg">
+          <a class="language-toggle-button" onclick="$(this).next('.language-toggle').toggle(); return false;" style="margin-right: 0px;">
+            <span class="language-toggle-text">Interesting Facts</span>
+            <i class="language-toggle fa fa-chevron-down"></i>
+          </a>
+          <ul class="language-options language-toggle"><li class="nav-link ">
+                    <a href="/en/facts_agenda/">Agenda 2030</a>
+                  </li>
+              <li class="nav-link ">
+                    <a href="/en/facts_dns/">DNS</a>
+                  </li>
+              </ul>
+
+        </li><li>
           <a class="language-toggle-button" onclick="$(this).next('.language-toggle').toggle(); return false;">
   <i class="fa fa-globe"></i>
   <span class="language-toggle-text">English</span>
   <i class="language-toggle fa fa-chevron-down"></i>
   <i class="language-toggle fa fa-chevron-up" style="display:none;"></i>
 </a>
+
 <ul class="language-options language-toggle"><li><a href="/imprint/">Deutsch</a></li></ul>
 
-        </li><li class="nav-link">
-          <a href="https://sustainabledevelopment-deutschland.github.io/en/">
-            <img class="link_btn" src="https://g205sdgs.github.io/sdg-indicators/public/DNS Wheel.png" title="To the page of the national indicators" alt="Link DNS" style="width:24px;height:24px;"/>
-            <span class="hidden-sm hidden-md hidden-lg">DNS-platform</span>
-          </a>
+        </li><!--Add Btn to link to DNS Page-->
+        <li class="nav-link">
+          
+            <a href="https://sustainabledevelopment-deutschland.github.io/en">
+              <img class="link_btn" src="https://g205sdgs.github.io/sdg-indicators/public/DNS Wheel.png" title="To the page of the national indicators" alt="Link DNS" style="width:24px;height:24px;"/>
+              <span class="hidden-sm hidden-md hidden-lg">DNS-platform</span>
+            </a>
+          
         </li>
+        <!--     -->
 
       </ul>
-
-      <div id="search" class="menu-target">
-  <input id="indicator_search" title="Indicator search" placeholder="Indicator search" data-url="/en/indicators.json" data-pageurl="/en/search/?q=" />
-  <label for="indicator_search">
-    <button id="search-btn" type="submit"><i class="fa fa-search" aria-hidden="false" aria-label=Indicator search></i></button><span>Search:</span>
-  </label>
-</div>
 
     </nav>
   </div>
@@ -235,7 +285,7 @@ var translations = {
 
 <p>These web pages are published by Statistisches Bundesamt (Federal Statistical Office), Wiesbaden, represented by the President.</p>
 
-<h2 id="liability-exclusion">Liability exclusion</h2>
+<h2 id="disclaimer">Disclaimer</h2>
 
 <p>The information on this website is researched and implemented with maximum care. Nevertheless, it cannot be ruled out that errors occur in the process. Please send any comments and corrections to one of the indicated addresses of the Federal Statistical Office.</p>
 
@@ -243,13 +293,80 @@ var translations = {
 
 <p>In addition to information of its own, the Federal Statistical Office offers links to external websites offering information of other providers. Neither is such external information provided by the Federal Statistical Office itself, nor is the Federal Statistical Office in a position to exert influence on the information offered on third-party pages. The information offered on external pages to which the Federal Statistical Office provides links does not reflect the opinion of the Federal Statistical Office; such links only serve the purpose of providing additional information and illustrating connections. The Federal Statistical Office is not liable for external information to which the Office just offers links as described above. Responsibility lies only with the provider of such information. If, due to technical or organisational errors, users should not be able to utilise the website, they shall not have any claim whatsoever against the Federal Statistical Office.</p>
 
-<h2 id="data-protection-notes">Data protection notes</h2>
+<h2 id="data-protection-declaration">Data protection declaration</h2>
 
 <p>With these notes we fulfill our information obligations regarding the collection of personal data, which are laid down in Article 13 of the General Data Protection Regulation (GDPR).</p>
 
 <p>The Federal Statistical Office does not collect any personal data when the National Reporting Platform is accessed. However you are also using the services of the provider GitHub. GitHub’s data protection declaration can be found at <a href="https://help.github.com/en/articles/github-privacy-statement">https://help.github.com/en/articles/github-privacy-statement</a>. As website visitor, technical information, including the IP address, is recorded: this can be personal data. Personal data is collected when you create an account.</p>
 
 <p>For data protection notes with regards to the use of our contact form, social media and our general website, the <a href="https://www.destatis.de/EN/Service/PrivacyPolicy/privacypolicy_node.html">data protection declaration</a> of the Federal Statistical Office applies.</p>
+
+<h3 id="personal-data">Personal data</h3>
+
+<p>Personal data is information about yourself, such as your name, address, postal address or user behaviour, if the latter is not anonymised. This does not include information which cannot be related to you.</p>
+
+<p>We collect your data when you give them to us. In that case, the processing of your data is based on your consent. You may have entered such data in a contact form.</p>
+
+<h3 id="use-of-cookies">Use of cookies</h3>
+
+<p>We use cookies on its web pages. Most browsers are set to accept cookies automatically. However, you can deactivate the storage of cookies or set your browser to store cookies only for the respective internet session.</p>
+
+<p>If you use a browser extension which prevents the setting of our cookies, we will of course accept your decision. Then no cookies will be placed. Please note that you may not be able in this case to make full use of all the features of this website.</p>
+
+<h3 id="social-media">Social Media</h3>
+
+<p>The Federal Statistical Office uses the Twitter messaging service.</p>
+
+<p>Its functions are offered by Twitter Inc., 1355 Market Street, Suite 900, San Francisco, CA 94103, USA. If you use Twitter and the re-tweet function, the websites you visit will be linked with your Twitter account and revealed to other users. Data will also be passed on to Twitter. Please note that we, the provider of the website content, do not know the data which are passed on or how Twitter uses them. For more information on the subject please refer to Twitter’s privacy policy. <a href="https://twitter.com/privacy">https://twitter.com/privacy</a>.</p>
+
+<p>You can change the Twitter privacy settings for your account at <a href="https://twitter.com/account/settings">https://twitter.com/account/settings</a>.</p>
+
+<p>To plan what information should be released and then post it in the social networks, not to miss any relevant posts and to interact with users, the Federal Statistical Office uses the product “social hub” of the provider maloon GmbH, Schütterlettenweg 4, 85053 Ingolstadt, Deutschland, tel: +49 (0)841 493 990-0, fax: +49 (0)841 493 990-10, e-mail: hallo@socialhub.io, web: www.socialhub.io.</p>
+
+<h3 id="enquiries-via-our-user-service">Enquiries via our user service</h3>
+
+<p>In addition to the information supplied on our website, we offer various services you may use. If you are interested, you will in most cases have to supply more personal data. These will be used to provide the respective service and are subject to the above data processing principles.</p>
+
+<p>We will ask for your express consent to such usage at the appropriate place on the website and provide a data protection notice. The rights you have vis-a-vis the Federal Statistical Office with regard to the processing of your personal data (see section further down) also apply to all the services offered on our website.</p>
+
+<h3 id="protection-of-minors">Protection of minors</h3>
+
+<p>Persons under the age of 18 should not transmit any personal data to us without the consent of their parents or legal guardians. We do not request any personal data from children or adolescents. We do not knowingly collect such data and do not pass them on.</p>
+
+<h3 id="links-to-websites-of-other-providers">Links to websites of other providers</h3>
+
+<p>Our website contains links to websites of other providers. Their adherence to the data protection provisions is out of our control.</p>
+
+<h3 id="your-rights">Your rights</h3>
+
+<p>Pursuant to the General Data Protection Regulation (GDPR) and provided that the conditions mentioned therein are met, you have the following rights vis-a-vis the Federal Statistical Office with regard to data that relate to you:</p>
+
+<ul>
+  <li>right of access (Article 15 GDPR)</li>
+  <li>right to rectification (Article 16 GDPR)</li>
+  <li>right to erasure (Article 17 GDPR)</li>
+  <li>right to restriction of processing (Article 18 GDPR)</li>
+  <li>right to object to processing of personal data (Article 21 GDPR)</li>
+  <li>right to data portability (Article 20 GDPR).</li>
+</ul>
+
+<p>If you believe there has been a breach of the data protection provisions, you also have the right to lodge a complaint with a data protection supervisory authority (Der Bundesbeauftragte für den Datenschutz und die Informationsfreiheit, Husarenstrasse 30, 53117 Bonn) about the Federal Statistical Office processing your personal data (Article 77 EU-GDPR).</p>
+
+<h3 id="contact-details-of-the-party-responsible">Contact details of the party responsible</h3>
+
+<p>Statistisches Bundesamt - Gustav-Stresemann-Ring 11 - D-65189 Wiesbaden – represented by the <a href="https://www.destatis.de/EN/About-Us/Seniormanagement-Organisation/_node.html">president</a>.</p>
+
+<h3 id="contact-details-of-our-data-protection-commissioner">Contact details of our data protection commissioner</h3>
+
+<p>As the trust you place in the Federal Statistical Office is of great importance to us, we will be pleased to answer your questions regarding the processing of your personal data. If you have questions that have not been answered by this data protection declaration, please do not hesitate to contact our data protection commissioner.</p>
+
+<p>Data protection commissioner of the Federal Statistical Office, 65180 Wiesbaden<br />
+Phone: +49 611 75 4449<br />
+datenschutzbeauftragter@destatis.de</p>
+
+<h2 id="contact">Contact</h2>
+
+<p>Communication via e-mail may involve security gaps. For example, e-mails may be delayed, read and even manipulated by skilled internet users before they reach the relevant staff members of the Federal Statistical Office. Therefore, only informal contacts are possible via e-mail. Legally binding statements currently cannot be made in this way. Should we receive an e-mail from you, we assume that we are authorised to reply by e-mail. Should this not be the case, we would explicitly ask you to choose a different medium for communication.</p>
 
 <h2 id="copyright---general">Copyright - general</h2>
 
@@ -267,7 +384,8 @@ Reproduction and distribution, also of parts, are permitted provided that the so
 <p>It is therefore recommended that, when exploiting our data, users ensure that the copyright information is included in the product in question and, if necessary, that they contact the copyright owner given in the imprint.</p>
 
 <p>Rights to the SDG logos used on this website:<br />
-© United Nations Department of Public Information</p>
+© United Nations Department of Public Information / <a href="http://www.globalgoals.org/asset-licence/">www.globalgoals.org</a><br />
+for the german translation: Bundespresseamt / <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a></p>
 
     </div>
 </div>
@@ -275,83 +393,122 @@ Reproduction and distribution, also of parts, are permitted provided that the so
 <footer role="contentinfo">
   <div class="container">
     <div class="row">
-      <div class="col-xs-9">
-        <a href="https://www.destatis.de/DE/Service/Kontakt/Kontakt.html" target="_blank">Contact us</a> | <a class="twitter-follow-button" href="https://twitter.com/destatis?lang=de" data-show-count="false"><i class="fa fa-twitter" aria-hidden="true"></i>@destatis</a>
-      </div>
-      <div class="col-xs-3 text-right">
-        <a href="/en/faq/">FAQ</a> | <a href="/en/imprint/">Legal Notice</a>
+      <div class="col-xs-12">
+        <div id="footerLinks">
+          <ul>
+            <li><a href="https://open-sdg.readthedocs.io/en/latest/">Built using Open SDG</a></li>
+            
+              
+                <li>
+                
+                  <a href="https://www.destatis.de/DE/Service/Kontakt/Kontakt.html" target="_blank">Contact us</a>
+                
+                </li>
+              
+                <li>
+                
+                  <a href="https://twitter.com/destatis?lang=de" target="_blank">Twitter</a>
+                
+                </li>
+              
+                <li>
+                <a href="/en/faq/">FAQ</a>
+                
+                </li>
+              
+                <li>
+                <a href="/en/imprint/">Legal Notice</a>
+                
+                </li>
+              
+            
+          </ul>
+        </div>
       </div>
     </div>
   </div>
 </footer>
-
-<script src="//code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<!-- Digital Analytics Program roll-up, see https://analytics.usa.gov for data -->
+<!-- <script id="_fed_an_ua_tag" src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=GSA"></script> -->
+<!-- Google Analytics -->
+<!-- /.container </div> -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script src="//cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
 <script src="//cdn.datatables.net/fixedcolumns/3.2.3/js/dataTables.fixedColumns.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
-<script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js" integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA==" crossorigin=""></script>
-<script src="https://cdn.jsdelivr.net/npm/leaflet.zoomshowhide@0.1.0/dist/leaflet-zoom-show-hide.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/1.4.0/chroma.min.js"></script>
-<script src="https://cdn.rawgit.com/nezasa/iso8601-js-period/master/iso8601.min.js"></script>
-<script src="https://cdn.rawgit.com/socib/Leaflet.TimeDimension/master/dist/leaflet.timedimension.min.js"></script>
-<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
-<script src="https://bowercdn.net/c/leaflet.zoomhome-latest/dist/leaflet.zoomhome.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/leaflet-search@2.9.7/dist/leaflet-search.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/patternomaly@1.3.2/dist/patternomaly.js"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/autotrack/2.4.1/autotrack.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.3/dist/html2canvas.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.2/dist/FileSaver.min.js"></script>
-<script src='/assets/js/sdg.js?v=20200616072246'></script><script src="/assets/js/custom.js?v=20200616072246"></script><script>
+<script>translations['general'] = translations['general'] || {};
+    translations['general']['hide'] = '';</script>
+
+<script>translations['search'] = translations['search'] || {};
+    translations['search']['search'] = 'Search';</script>
+
+<script src='/assets/js/sdg.js?v=20200714130024'></script><script src="/assets/js/custom.js?v=20200714130024"></script><script>
 $(function() {
     if($('#indicatorData').length) {
       var domData = $('#indicatorData').data();
 
-      $('.async-loading').each(function(i, obj) {
-          $(obj).append($('<img />').attr('src', $(obj).data('img')));
-      });
+      if (domData.showdata) {
 
-      $.ajax({
-        url: opensdg.remoteDataBaseUrl + '/comb/' + domData.id + '.json',
-        success: function(res) {
+        $('.async-loading').each(function(i, obj) {
+            $(obj).append($('<img />').attr('src', $(obj).data('img')).attr('alt', translations.indicator.loading));
+        });
 
-          $('.async-loading').remove();
-          $('.async-loaded').show();
-
-          var model = new indicatorModel({
-            data: res.data,
-            edgesData: res.edges,
-            geoCodeRegEx: domData.geocoderegex,
-            showMap: domData.showmap,
-            country: domData.country,
-            indicatorId: domData.indicatorid,
-            shortIndicatorId: domData.id,
-            chartTitle: domData.charttitle,
-            measurementUnit: domData.measurementunit,
-            copyright: domData.copyright,
-            dataSource: domData.datasource,
-            geographicalArea: domData.geographicalarea,
-            showData: domData.showdata,
-            footnote: domData.footnote,
-            graphType: domData.graphtype,
-            startValues: domData.startvalues
-          }),
-          view  = new indicatorView(model, {
-            rootElement: '#indicatorData',
-            legendElement: '#plotLegend',
-            maxChartHeight: 420,
-            tableColumnDefs: [
-              { maxCharCount: 25 }, // nowrap
-              { maxCharCount: 35, width: 200 },
-              { maxCharCount: Infinity, width: 250 }
-            ]
-          }),
-          controller = new indicatorController(model, view);
-          controller.initialise();
+        var remoteUrl = '/comb/' + domData.id + '.json';
+        if (opensdg.remoteDataBaseUrl !== '/') {
+          remoteUrl = opensdg.remoteDataBaseUrl + remoteUrl;
         }
-      });
+
+        $.ajax({
+          url: remoteUrl,
+          success: function(res) {
+
+            $('.async-loading').remove();
+            $('.async-loaded').show();
+
+            var model = new indicatorModel({
+              data: res.data,
+              edgesData: res.edges,
+              showMap: domData.showmap,
+              country: domData.country,
+              indicatorId: domData.indicatorid,
+              shortIndicatorId: domData.id,
+              chartTitle: domData.charttitle,
+              chartTitles: domData.charttitles,
+              measurementUnit: domData.measurementunit,
+              copyright: domData.copyright,
+              dataSource: domData.datasource,
+              geographicalArea: domData.geographicalarea,
+              showData: domData.showdata,
+              footnote: domData.footnote,
+              graphType: domData.graphtype,
+              startValues: domData.startvalues,
+              graphLimits: domData.graphlimits,
+              stackedDisaggregation: domData.stackeddisaggregation,
+            }),
+            view  = new indicatorView(model, {
+              rootElement: '#indicatorData',
+              legendElement: '#plotLegend',
+              maxChartHeight: 420,
+              tableColumnDefs: [
+                { maxCharCount: 25 }, // nowrap
+                { maxCharCount: 35, width: 200 },
+                { maxCharCount: Infinity, width: 250 }
+              ]
+            }),
+            controller = new indicatorController(model, view);
+            controller.initialise();
+          }
+        });
+      }
     }
 
     var switcher = new accessibilitySwitcher();
@@ -361,7 +518,6 @@ $(function() {
 </script>
 
 
-
-
 </body>
 </html>
+

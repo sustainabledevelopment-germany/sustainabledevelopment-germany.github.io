@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
-        <script crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js?features=Promise%2CArray.prototype.forEach%2CString.prototype.includes"></script>
+        <script crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js?features=Promise%2CArray.prototype.forEach%2CString.prototype.includes%2CURLSearchParams%2CCustomEvent%2CArray.prototype.includes%2CArray.prototype.filter%2CArray.prototype.some%2CArray.prototype.find%2CObject.assign%2CArray.isArray%2CObject.values"></script>
 <script crossorigin="anonymous" src="https://cdnjs.cloudflare.com/ajax/libs/javascript-canvas-to-blob/3.15.0/js/canvas-to-blob.min.js"></script>
 
         <script>
@@ -11,14 +11,12 @@
 var opensdg = {
 
   // A base URL for asynchronous calls to SDG data.
-  remoteDataBaseUrl: 'https://sustainabledevelopment-germany.github.io/sdg-data-pub/',
+  remoteDataBaseUrl: 'https://sustainabledevelopment-germany.github.io/sdg-data-pub/de',
 
-  // A hook which can be replaced to modify the configuration for Chart.js.
-  // To see where this is used, see indicatorView.js createPlot() and updatePlot().
-  // To see an example of replacing it, see binary.html.
-  chartConfigAlter: function(config) {
-    // Alterations go here.
-    return config;
+  chartConfigAlterations: [],
+  // A hook which can be used to modify the configuration for Chart.js.
+  chartConfigAlter: function(callback) {
+    this.chartConfigAlterations.push(callback);
   },
 
   // A hook which can be replaced to alter whether/how the values that are
@@ -27,6 +25,8 @@ var opensdg = {
     // Alterations go here.
     return value;
   },
+
+  language: 'de',
 };
 
 // For backwards compatibility, some of these might need to be global.
@@ -90,21 +90,13 @@ var translations = {
         <!-- Title and meta description
         ================================================== -->
 
-        <!---#15 setCorrectTitle---start-------------------->
-        
-        
-        
         <title>
           
-            Deutschlands Indikatoren zu den Sustainable Development Goals
+            German Indicators For The Sustainable Development Goals
           
         </title>
-        <!---#15 setCorrectTitle---stop--------------------->
 
-        
-          <meta name="description" content= "Übersichtlicher Stand der Indikatoren der 17 Sustainable Development Goals (SDGs) in Deutschland samt öffentlich zur Verfügung stehender Datengrundlage" >
-        
-
+        <meta name="description" content="">
         <meta property="og:description" content="">
         
         <link rel="canonical" href="/">
@@ -118,7 +110,7 @@ var translations = {
         <!-- Favicons ================================================== -->
         <!-- 128x128 -->
         <link rel="shortcut icon" type="image/ico" href="/assets/img/favicons/favicon.ico">
-        <link rel="icon" type="image/png" href="/assets/img/favicons/de/favicon.png"><!-- 192x192, as recommended for Android
+        <link rel="icon" type="image/png" href="/assets/img/favicons/favicon.png"><!-- 192x192, as recommended for Android
         http://updates.html5rocks.com/2014/11/Support-for-theme-color-in-Chrome-39-for-Android
         -->
 
@@ -128,7 +120,7 @@ var translations = {
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" crossorigin="">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" crossorigin="">
         <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/3.2.3/css/fixedColumns.dataTables.min.css" crossorigin="">
-        <link rel="stylesheet" href="/assets/css/default.css?v=20200616072246">
+        <link rel="stylesheet" href="/assets/css/style.css?v=20200714130024">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet" crossorigin="">
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
           integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
@@ -136,21 +128,20 @@ var translations = {
         <link rel="stylesheet" href="https://cdn.rawgit.com/socib/Leaflet.TimeDimension/master/dist/leaflet.timedimension.control.min.css"  crossorigin=""/>
         <link rel="stylesheet" href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css'  crossorigin=""/>
         <link rel="stylesheet" href="https://bowercdn.net/c/leaflet.zoomhome-latest/dist/leaflet.zoomhome.css"  crossorigin=""/>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-search@2.9.7/dist/leaflet-search.min.css" crossorigin=""><link rel="stylesheet" href="/assets/css/custom.css?v=20200616072246"><!-- ShareThis BEGIN --><!-- ShareThis END -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-search@2.9.7/dist/leaflet-search.min.css" crossorigin=""><!-- ShareThis BEGIN --><!-- ShareThis END -->
 
     </head>
 <body class="language-de layout-page">
 <!-- <div class="container"> -->
-
-
 
 <script>translations['header'] = {"alpha":"Alpha-Version","disclaimer":"Diese Seite befindet sich im Entwicklungsstadium. Wir freuen uns über Ihre <a href=\"mailto:%email_address\">Kommentare</a>.","skip_link":" Zum Hauptinhalt springen","tag_line":""};</script>
 
 <a class="sr-only sr-only-focusable" id="skiplink" href="#main-content" tabindex="0"> Zum Hauptinhalt springen</a>
 <div id="disclaimer">
   <div class="container">
-  <div class="alert alert-danger" role="alert">
+  <div class="disclaimer-alert" role="alert">
     <strong class="phase-tag">Alpha-Version</strong>
+    
     Diese Seite befindet sich im Entwicklungsstadium. Wir freuen uns über Ihre <a href="mailto:sdg-indicators@destatis.de">Kommentare</a>.
   </div>
 </div>
@@ -172,6 +163,7 @@ var translations = {
   <i class="language-toggle fa fa-chevron-down"></i>
   <i class="language-toggle fa fa-chevron-up" style="display:none;"></i>
 </a>
+
 <ul class="language-options language-toggle"><li><a href="/en/imprint/">English</a></li></ul>
 
     </div></div>
@@ -189,38 +181,96 @@ var translations = {
         <li><span data-target="search">Suche</span></li>
       </ul>
 
-      <ul class="nav navbar-nav menu-target contrast-switcher" id="menu"><li class="nav-link ">
-            <a href="/">Ziele</a>
-          </li><li class="nav-link ">
-            <a href="/reporting-status/">Berichtsstatus</a>
-          </li><li class="nav-link ">
-            <a href="/about/">Über uns</a>
-          </li><li class="nav-link ">
-            <a href="/guidance/">Technische&nbspHinweise</a>
-          </li><li>
+      <div id="search" class="menu-target">
+  <form action="/search">
+    <input name="q" id="indicator_search" title="Suche" />
+    <label for="indicator_search">
+      <button aria-label="Suche" id="search-btn" type="submit"><i class="fa fa-search" aria-hidden="false"></i></button><span>Suche:</span>
+    </label>
+  </form>
+</div>
+
+
+      <ul class="nav navbar-nav menu-target contrast-switcher" id="menu">
+              <li class="nav-link ">
+                <a href="/">17 Ziele</a>
+              </li>
+            
+              <li class="nav-link ">
+                <a href="/reporting-status/">Datenverfügbarkeit</a>
+              </li>
+            
+              <li class="nav-link  hidden-sm hidden-md hidden-lg">
+                <a href="/about_platform/">Über: Die&nbspBerichtsplattform</a>
+              </li>
+            
+              <li class="nav-link  hidden-sm hidden-md hidden-lg">
+                <a href="/about_navigation/">Über: Navigation</a>
+              </li>
+            
+              <li class="nav-link  hidden-sm hidden-md hidden-lg">
+                <a href="/about_guidance/">Über: Technische&nbspHinweise</a>
+              </li>
+            
+              <li class="nav-link  hidden-sm hidden-md hidden-lg">
+                <a href="/facts_agenda/">Wissenswertes: Agenda&nbsp2030</a>
+              </li>
+            
+              <li class="nav-link  hidden-sm hidden-md hidden-lg">
+                <a href="/facts_dns/">Wissenswertes: DNS</a>
+              </li>
+            <li class="nav-link visible-sm visible-md visible-lg">
+          <a class="language-toggle-button" onclick="$(this).next('.language-toggle').toggle(); return false;" style="margin-right: 0px;">
+            <span class="language-toggle-text">Über uns</span>
+            <i class="language-toggle fa fa-chevron-down"></i>
+          </a>
+          <ul class="language-options language-toggle"><li class="nav-link ">
+                    <a href="/about_platform/">Die&nbspBerichtsplattform</a>
+                  </li>
+              <li class="nav-link ">
+                    <a href="/about_navigation/">Navigation</a>
+                  </li>
+              <li class="nav-link ">
+                    <a href="/about_guidance/">Technische&nbspHinweise</a>
+                  </li>
+              </ul>
+        </li>
+
+        <li class="nav-link visible-sm visible-md visible-lg">
+          <a class="language-toggle-button" onclick="$(this).next('.language-toggle').toggle(); return false;" style="margin-right: 0px;">
+            <span class="language-toggle-text">Wissenswertes</span>
+            <i class="language-toggle fa fa-chevron-down"></i>
+          </a>
+          <ul class="language-options language-toggle"><li class="nav-link ">
+                    <a href="/facts_agenda/">Agenda&nbsp2030</a>
+                  </li>
+              <li class="nav-link ">
+                    <a href="/facts_dns/">DNS</a>
+                  </li>
+              </ul>
+
+        </li><li>
           <a class="language-toggle-button" onclick="$(this).next('.language-toggle').toggle(); return false;">
   <i class="fa fa-globe"></i>
   <span class="language-toggle-text">Deutsch</span>
   <i class="language-toggle fa fa-chevron-down"></i>
   <i class="language-toggle fa fa-chevron-up" style="display:none;"></i>
 </a>
+
 <ul class="language-options language-toggle"><li><a href="/en/imprint/">English</a></li></ul>
 
-        </li><li class="nav-link">
-          <a href="https://sustainabledevelopment-deutschland.github.io//">
-            <img class="link_btn" src="https://g205sdgs.github.io/sdg-indicators/public/DNS Wheel.png" title="Zur Seite der nationalen Indikatoren" alt="Link DNS" style="width:24px;height:24px;"/>
-            <span class="hidden-sm hidden-md hidden-lg">DNS-Berichtsplattform</span>
-          </a>
+        </li><!--Add Btn to link to DNS Page-->
+        <li class="nav-link">
+          
+            <a href="https://sustainabledevelopment-deutschland.github.io">
+              <img class="link_btn" src="https://g205sdgs.github.io/sdg-indicators/public/DNS Wheel.png" title="Zur Seite der nationalen Indikatoren" alt="Link DNS" style="width:24px;height:24px;"/>
+              <span class="hidden-sm hidden-md hidden-lg">DNS-Berichtsplattform</span>
+            </a>
+          
         </li>
+        <!--     -->
 
       </ul>
-
-      <div id="search" class="menu-target">
-  <input id="indicator_search" title="Indikatorensuche" placeholder="Indikatorensuche" data-url="/indicators.json" data-pageurl="/search/?q=" />
-  <label for="indicator_search">
-    <button id="search-btn" type="submit"><i class="fa fa-search" aria-hidden="false" aria-label=Indikatorensuche></i></button><span>Suche:</span>
-  </label>
-</div>
 
     </nav>
   </div>
@@ -275,7 +325,7 @@ Statistisches Bundesamt (Destatis)
 <p>Mit diesen Hinweisen kommen wir unseren Informationspflichten nach Artikel 13 der Datenschutz-Grundverordnung (DS-GVO) bei der Erhebung personenbezogener Daten nach.</p>
 
 <p>Beim Zugriff auf die Nationale Berichtsplattform werden vom Statistischen Bundesamt keine personenbezogenen Daten erhoben, Sie nutzen allerdings die Dienste des Anbieters GitHub. Die Datenschutzerklärung von GitHub finden Sie unter <a href="https://help.github.com/en/articles/github-privacy-statement">https://help.github.com/en/articles/github-privacy-statement</a>. Als Webseiten-Besucher werden technische Informationen, auch die IP-Adresse, erfasst: diese kann ein personenbezogenes Datum sein. Personenbezogene Daten werden erfasst, wenn Sie einen Account anlegen.
-Im Zusammenhang mit der Nutzung des Kontaktformulars, der Nutzung sozialer sozialen Medien sowie des weiteren Internet-Angebotes des Statistischen Bundesamtes gilt die Datenschutzerklärung unter <a href="https://www.destatis.de/DE/Service/Datenschutz/_inhalt.html">https://www.destatis.de/DE/Service/Datenschutz/_inhalt.html</a>.</p>
+Im Zusammenhang mit der Nutzung des Kontaktformulars, der Nutzung sozialen Medien sowie des weiteren Internet-Angebotes des Statistischen Bundesamtes gilt die Datenschutzerklärung unter <a href="https://www.destatis.de/DE/Service/Datenschutz/_inhalt.html">https://www.destatis.de/DE/Service/Datenschutz/_inhalt.html</a>.</p>
 
 <p>Im Zuge der Weiterentwicklung unserer Webseiten können auch Änderungen dieser Datenschutzerklärung erforderlich werden. Daher empfehlen wir Ihnen, sich diese Erklärung regelmäßig durchzulesen.</p>
 
@@ -284,6 +334,13 @@ Im Zusammenhang mit der Nutzung des Kontaktformulars, der Nutzung sozialer sozia
 <p>Personenbezogene Daten sind Informationen zu Ihrer Person, wie zum Beispiel Ihr Name, Adresse, Postanschrift oder auch Ihr Nutzerverhalten, wenn dies nicht anonymisiert wird. Informationen, die nicht mit Ihrer Identität in Verbindung gebracht werden, fallen nicht darunter.</p>
 
 <p>Ihre Daten werden dadurch erhoben, dass Sie uns diese mitteilen. Dabei beruht die Verarbeitung auf Ihrer Einwilligung. Hierbei kann es sich zum Beispiel um Daten handeln, die Sie in ein Kontaktformular eingeben.</p>
+
+<h3 id="einsatz-von-cookies">Einsatz von Cookies</h3>
+
+<p>Auf diesen Seiten kommen Cookies zum Einsatz. Diese sind zur optimalen Bereitstellung unseres Internetangebots technisch erforderlich. Der Einsatz dieser Cookies erfolgt auf der Grundlage des Art. 6 Absatz 1 lit. e DSGVO in Verbindung mit § 3 Bundesdatenschutzgesetz (BDSG).</p>
+
+<p>Die meisten Internetbrowser sind so eingestellt, dass sie Cookies automatisch akzeptieren. Sie können das Speichern von Cookies jedoch deaktivieren oder Ihren Browser so einstellen, dass Cookies nur für die Dauer der jeweiligen Verbindung zum Internet gespeichert werden.
+Sollten Sie eine Browsererweiterung nutzen, die die Ablage unserer Cookies verhindert, respektieren wir dies selbstverständlich. Cookies werden in diesem Fall nicht abgelegt. Wir weisen Sie jedoch darauf hin, dass Sie in diesem Fall gegebenenfalls nicht sämtliche Funktionen dieser Website vollumfänglich werden nutzen können.</p>
 
 <h3 id="soziale-medien">Soziale Medien</h3>
 
@@ -295,13 +352,11 @@ Im Zusammenhang mit der Nutzung des Kontaktformulars, der Nutzung sozialer sozia
 
 <p>Um Inhalte in den sozialen Netzwerken zu planen und zu posten, keine für uns relevanten Posts zu verpassen sowie mit Nutzerinnen und Nutzern zu interagieren, nutzt das Statistische Bundesamt das Produkt Social Hub des Dienstleisters maloon GmbH; Schütterlettenweg 4; 85053 Ingolstadt; Deutschland; Telefon: 0049 (0)841 493 990-0; Fax: 0049 (0)841 493 990-10; Email: hallo@socialhub.io; Web: www.socialhub.io</p>
 
-<h3 id="anfragen-und-bestellungen-über-unseren-kunden--und-nutzerservice">Anfragen und Bestellungen über unseren Kunden- und Nutzerservice</h3>
+<h3 id="anfragen-über-unseren-nutzerservice">Anfragen über unseren Nutzerservice</h3>
 
-<p>Neben der rein informatorischen Nutzung unserer Website bieten wir verschiedene Leistungen an, die Sie bei Interesse nutzen können. Dazu müssen Sie in der Regel weitere personen­bezogene Daten angeben, die wir zur Erbringung der jeweiligen Leistung nutzen und für die die zuvor genannten Grundsätze zur Daten­verarbeitung gelten.</p>
+<p>Die von Ihnen im Kontaktformular angegebenen und von uns damit erhobenen personenbezogenen Daten werden elektronisch gespeichert. Diese Angaben benötigen wir zur Beantwortung der Anfrage in Erfüllung unserer öffentlichen Aufgaben nach Artikel 6 Absatz 1 lit. e) DS-GVO i. V. m. § 3 Bundesdatenschutzgesetz (BDSG).</p>
 
-<p>Die von Ihnen im Kontaktformular angegebenen und von uns damit erhobenen personenbezogenen Daten werden elektronisch gespeichert. Diese Angaben benötigen wir zur Beantwortung der Anfrage in Erfüllung unserer öffentlichen Aufgaben nach Artikel 6 Absatz 1 lit. e) DS-GVO i. V. m. § 3 Bundesdatenschutzgesetz (BDSG). Die Daten Ihrer Anfrage werden anonymisiert für Nutzeranalysen zur Optimierung unserer Informationsangebote herangezogen.</p>
-
-<p>Darüber hinaus halten wir Ihre Daten zum Zwecke der Kundenpflege (also etwa zu optimalen Bearbeitung weiterer Anfragen) oder die Durchführung von Kundenbefragungen vor. Die Grundlage für die Verarbeitung Ihrer Daten zu diesen Zwecken ist die von Ihnen abgegebene Einwilligung gemäß Artikel 6 Absatz 1 lit. a) DS-GVO. Diese Einwilligung können Sie jederzeit mit Wirkung für die Zukunft widerrufen.</p>
+<p>Darüber hinaus halten wir Ihre Daten zum Zwecke der Kundenpflege (also etwa zu optimalen Bearbeitung weiterer Anfragen) vor. Die Grundlage für die Verarbeitung Ihrer Daten zu diesen Zwecken ist die von Ihnen abgegebene Einwilligung gemäß Artikel 6 Absatz 1 lit. a) DS-GVO. Diese Einwilligung können Sie jederzeit mit Wirkung für die Zukunft widerrufen.</p>
 
 <h3 id="anfragen-per-e-mail-oder-telefon">Anfragen per E-Mail oder Telefon</h3>
 
@@ -332,14 +387,14 @@ Im Zusammenhang mit der Nutzung des Kontaktformulars, der Nutzung sozialer sozia
 
 <h3 id="kontaktdaten-des-verantwortlichen">Kontaktdaten des Verantwortlichen</h3>
 
-<p>Statistisches Bundesamt - Gustav-Stresemann-Ring 11 - D-65189 Wiesbaden – vertreten durch den <a href="https://www.destatis.de/DE/Ueber-uns/Leitung-Organisation/_praesident.html?nn=206200">Präsidenten</a>.</p>
+<p>Statistisches Bundesamt - Gustav-Stresemann-Ring 11 - D-65189 Wiesbaden – vertreten durch den <a href="https://www.destatis.de/DE/Ueber-uns/Leitung-Organisation/_inhalt.html#sprg240100">Präsidenten</a>.</p>
 
 <h3 id="kontaktdaten-desder-behördlichen-datenschutzbeauftragten">Kontaktdaten des/der behördlichen Datenschutzbeauftragten</h3>
 
 <p>Da uns Ihr Vertrauen wichtig ist, möchten wir Ihnen jederzeit Rede und Antwort bezüglich der Verarbeitung Ihrer personenbezogenen Daten stehen. Wenn Sie Fragen haben, die diese Datenschutzerklärung nicht beantworten konnte, wenden Sie sich bitte jederzeit an die behördliche Datenschutzbeauftragte.</p>
 
 <p>Datenschutzbeauftragte im Statistischen Bundesamt, 65180 Wiesbaden<br />
-Telefon: +49 611 75 3929<br />
+Telefon: +49 611 75 4449<br />
 datenschutzbeauftragter@destatis.de</p>
 
 <h2 id="kontaktaufnahme">Kontaktaufnahme</h2>
@@ -374,83 +429,122 @@ für die deutsche Übersetzung Bundespresseamt / <a href="https://creativecommon
 <footer role="contentinfo">
   <div class="container">
     <div class="row">
-      <div class="col-xs-9">
-        <a href="https://www.destatis.de/DE/Service/Kontakt/Kontakt.html" target="_blank">Kontakt</a> | <a class="twitter-follow-button" href="https://twitter.com/destatis?lang=de" data-show-count="false"><i class="fa fa-twitter" aria-hidden="true"></i>@destatis</a>
-      </div>
-      <div class="col-xs-3 text-right">
-        <a href="/faq/">FAQ</a> | <a href="/imprint/">Im­pres­s­um</a>
+      <div class="col-xs-12">
+        <div id="footerLinks">
+          <ul>
+            <li><a href="https://open-sdg.readthedocs.io/en/latest/">Seite basiert auf Open SDG</a></li>
+            
+              
+                <li>
+                
+                  <a href="https://www.destatis.de/DE/Service/Kontakt/Kontakt.html" target="_blank">Kontakt</a>
+                
+                </li>
+              
+                <li>
+                
+                  <a href="https://twitter.com/destatis?lang=de" target="_blank">Twitter</a>
+                
+                </li>
+              
+                <li>
+                <a href="/faq/">FAQ</a>
+                
+                </li>
+              
+                <li>
+                <a href="/imprint/">Im­pres­s­um</a>
+                
+                </li>
+              
+            
+          </ul>
+        </div>
       </div>
     </div>
   </div>
 </footer>
-
-<script src="//code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<!-- Digital Analytics Program roll-up, see https://analytics.usa.gov for data -->
+<!-- <script id="_fed_an_ua_tag" src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=GSA"></script> -->
+<!-- Google Analytics -->
+<!-- /.container </div> -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script src="//cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
 <script src="//cdn.datatables.net/fixedcolumns/3.2.3/js/dataTables.fixedColumns.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
-<script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js" integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA==" crossorigin=""></script>
-<script src="https://cdn.jsdelivr.net/npm/leaflet.zoomshowhide@0.1.0/dist/leaflet-zoom-show-hide.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/1.4.0/chroma.min.js"></script>
-<script src="https://cdn.rawgit.com/nezasa/iso8601-js-period/master/iso8601.min.js"></script>
-<script src="https://cdn.rawgit.com/socib/Leaflet.TimeDimension/master/dist/leaflet.timedimension.min.js"></script>
-<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
-<script src="https://bowercdn.net/c/leaflet.zoomhome-latest/dist/leaflet.zoomhome.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/leaflet-search@2.9.7/dist/leaflet-search.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/patternomaly@1.3.2/dist/patternomaly.js"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/autotrack/2.4.1/autotrack.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.3/dist/html2canvas.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.2/dist/FileSaver.min.js"></script>
-<script src='/assets/js/sdg.js?v=20200616072246'></script><script src="/assets/js/custom.js?v=20200616072246"></script><script>
+<script>translations['general'] = translations['general'] || {};
+    translations['general']['hide'] = '';</script>
+
+<script>translations['search'] = translations['search'] || {};
+    translations['search']['search'] = 'Suche';</script>
+
+<script src='/assets/js/sdg.js?v=20200714130024'></script><script src="/assets/js/custom.js?v=20200714130024"></script><script>
 $(function() {
     if($('#indicatorData').length) {
       var domData = $('#indicatorData').data();
 
-      $('.async-loading').each(function(i, obj) {
-          $(obj).append($('<img />').attr('src', $(obj).data('img')));
-      });
+      if (domData.showdata) {
 
-      $.ajax({
-        url: opensdg.remoteDataBaseUrl + '/comb/' + domData.id + '.json',
-        success: function(res) {
+        $('.async-loading').each(function(i, obj) {
+            $(obj).append($('<img />').attr('src', $(obj).data('img')).attr('alt', translations.indicator.loading));
+        });
 
-          $('.async-loading').remove();
-          $('.async-loaded').show();
-
-          var model = new indicatorModel({
-            data: res.data,
-            edgesData: res.edges,
-            geoCodeRegEx: domData.geocoderegex,
-            showMap: domData.showmap,
-            country: domData.country,
-            indicatorId: domData.indicatorid,
-            shortIndicatorId: domData.id,
-            chartTitle: domData.charttitle,
-            measurementUnit: domData.measurementunit,
-            copyright: domData.copyright,
-            dataSource: domData.datasource,
-            geographicalArea: domData.geographicalarea,
-            showData: domData.showdata,
-            footnote: domData.footnote,
-            graphType: domData.graphtype,
-            startValues: domData.startvalues
-          }),
-          view  = new indicatorView(model, {
-            rootElement: '#indicatorData',
-            legendElement: '#plotLegend',
-            maxChartHeight: 420,
-            tableColumnDefs: [
-              { maxCharCount: 25 }, // nowrap
-              { maxCharCount: 35, width: 200 },
-              { maxCharCount: Infinity, width: 250 }
-            ]
-          }),
-          controller = new indicatorController(model, view);
-          controller.initialise();
+        var remoteUrl = '/comb/' + domData.id + '.json';
+        if (opensdg.remoteDataBaseUrl !== '/') {
+          remoteUrl = opensdg.remoteDataBaseUrl + remoteUrl;
         }
-      });
+
+        $.ajax({
+          url: remoteUrl,
+          success: function(res) {
+
+            $('.async-loading').remove();
+            $('.async-loaded').show();
+
+            var model = new indicatorModel({
+              data: res.data,
+              edgesData: res.edges,
+              showMap: domData.showmap,
+              country: domData.country,
+              indicatorId: domData.indicatorid,
+              shortIndicatorId: domData.id,
+              chartTitle: domData.charttitle,
+              chartTitles: domData.charttitles,
+              measurementUnit: domData.measurementunit,
+              copyright: domData.copyright,
+              dataSource: domData.datasource,
+              geographicalArea: domData.geographicalarea,
+              showData: domData.showdata,
+              footnote: domData.footnote,
+              graphType: domData.graphtype,
+              startValues: domData.startvalues,
+              graphLimits: domData.graphlimits,
+              stackedDisaggregation: domData.stackeddisaggregation,
+            }),
+            view  = new indicatorView(model, {
+              rootElement: '#indicatorData',
+              legendElement: '#plotLegend',
+              maxChartHeight: 420,
+              tableColumnDefs: [
+                { maxCharCount: 25 }, // nowrap
+                { maxCharCount: 35, width: 200 },
+                { maxCharCount: Infinity, width: 250 }
+              ]
+            }),
+            controller = new indicatorController(model, view);
+            controller.initialise();
+          }
+        });
+      }
     }
 
     var switcher = new accessibilitySwitcher();
@@ -460,7 +554,6 @@ $(function() {
 </script>
 
 
-
-
 </body>
 </html>
+
