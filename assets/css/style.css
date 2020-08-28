@@ -183,18 +183,45 @@ body.contrast-high footer a:visited {
     background: #0275d8; }
 
 .breadcrumb {
-  margin-bottom: 15px; }
+  margin-bottom: 0;
+  background-color: white;
+  padding: 0; }
   .breadcrumb a {
-    color: #285f8f;
-    text-decoration: underline; }
+    color: #333; }
   .breadcrumb > .active {
     display: inline;
     color: #333; }
+  .breadcrumb > li {
+    position: relative; }
+  .breadcrumb > li + li {
+    margin-left: 10px;
+    padding-left: 17px; }
+  .breadcrumb > li + li::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -4px;
+    width: 7px;
+    height: 7px;
+    margin: auto 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    border: solid;
+    border-width: 1px 1px 0 0;
+    border-color: #333;
+    padding: 0; }
 
 body.contrast-high .breadcrumb {
-  background: white; }
+  background: black; }
   body.contrast-high .breadcrumb li, body.contrast-high .breadcrumb a {
-    color: black !important; }
+    color: white; }
+  body.contrast-high .breadcrumb a:hover {
+    color: yellow; }
+  body.contrast-high .breadcrumb > li + li::before {
+    border-color: white; }
 
 #main-content .collapsible {
   border-top: 1px solid #e0e0e0;
@@ -237,12 +264,20 @@ body.contrast-high .breadcrumb {
   margin-top: 1.5rem;
   margin-right: 0.8rem;
   border: none !important;
-  background: #0F8243 !important;
-  color: white !important; }
-  .btn-download:hover, .btn-download:active, .btn-download:focus {
-    background: #0b5d30 !important; }
+  background: #00703c !important;
+  color: white !important;
+  box-shadow: 0 2px 0 #002d18;
+  border-radius: 0;
+  position: relative; }
+  .btn-download:hover, .btn-download:active {
+    background: #005a30 !important; }
   .btn-download:visited {
     color: white !important; }
+  .btn-download:active {
+    top: 2px; }
+  .btn-download:focus {
+    background: #fd0 !important;
+    color: #333 !important; }
 
 h5.download {
   font-weight: bold; }
@@ -265,6 +300,9 @@ h5 + .btn-download {
   .zip-download-container #zip-download-info {
     margin-top: 5px;
     margin-left: 10px; }
+
+#selectionsChart .btn-download, #selectionsTable .btn-download {
+  float: left; }
 
 body.contrast-high .btn {
   background: white !important;
@@ -1140,9 +1178,9 @@ footer {
 
 #main-content #indicatorData.no-fields #series-help, #main-content #indicatorData.no-fields #fields, #main-content #indicatorData.no-fields #legend-help, #main-content #indicatorData.no-fields #clear {
   display: none; }
-#main-content #indicatorData.no-fields.no-units > .col-md-3 {
+#main-content #indicatorData.no-fields.no-units.no-serieses > .col-md-3 {
   display: none; }
-#main-content #indicatorData.no-fields.no-units > .col-md-9 {
+#main-content #indicatorData.no-fields.no-units.no-serieses > .col-md-9 {
   width: 100%; }
 #main-content .indicator-sidebar-hidden {
   padding: 0;
@@ -1317,10 +1355,10 @@ footer {
       display: block; }
     #main-content #fields .variable-selector.disallowed .variable-hint {
       display: block; }
-#main-content #units {
+#main-content #units, #main-content #serieses {
   clear: left;
   margin-bottom: 20px; }
-  #main-content #units label {
+  #main-content #units label, #main-content #serieses label {
     font-weight: normal;
     border: 1px solid #ccc;
     padding: 10px;
@@ -1431,7 +1469,7 @@ footer {
       border: none; }
 #main-content.goal-indicators .indicator-cards .tags {
   padding: 0;
-  margin: 6px 10px 0 0;
+  margin: 15px 10px 0 0;
   list-style-type: none; }
   #main-content.goal-indicators .indicator-cards .tags li {
     margin-right: 6px;
@@ -1442,9 +1480,10 @@ footer {
   display: inline;
   font-weight: normal;
   border-bottom: none; }
-#main-content.goal-indicators.goal-by-target .indicator-cards a {
-  padding: 0;
+#main-content.goal-indicators.goal-by-target .goal-indicator {
   margin-bottom: 2.5rem; }
+#main-content.goal-indicators.goal-by-target .indicator-cards a {
+  padding: 0; }
   #main-content.goal-indicators.goal-by-target .indicator-cards a .tags li {
     color: black; }
 #main-content.goal-indicators.goal-by-target .indicator-cards.target {
@@ -1557,7 +1596,7 @@ body.contrast-high #main-content #fields .variable-selector .variable-hint {
   color: white; }
 body.contrast-high caption {
   color: white; }
-body.contrast-high div#units {
+body.contrast-high div#units, body.contrast-high div#serieses {
   color: white; }
 body.contrast-high #legend li {
   color: white !important;
@@ -1591,7 +1630,7 @@ body.contrast-high #main-content.goal-indicators.goal-by-target .indicator-cards
 
 .post-categories {
   padding: 0;
-  margin: 6px 10px 0 0;
+  margin: 15px 10px 0 0;
   list-style-type: none; }
   .post-categories li {
     margin-right: 6px;
@@ -1782,7 +1821,7 @@ body.contrast-high #search-results .search-result .content {
 
 .layout-goal-by-target-vertical .tags {
   padding: 0;
-  margin: 6px 10px 0 0;
+  margin: 15px 10px 0 0;
   list-style-type: none; }
   .layout-goal-by-target-vertical .tags li {
     margin-right: 6px;
