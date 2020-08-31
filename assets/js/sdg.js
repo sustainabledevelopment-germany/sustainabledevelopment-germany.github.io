@@ -761,12 +761,10 @@ var indicatorModel = function (options) {
  * Constants to be used in indicatorModel.js and helper functions.
  */
 var UNIT_COLUMN = 'Units';
-var SERIES_COLUMN = 'Series';
 var GEOCODE_COLUMN = 'GeoCode';
 var YEAR_COLUMN = 'Year';
 var VALUE_COLUMN = 'Value';
 var HEADLINE_COLOR = '#777777';
-var SERIES_TOGGLE = false;
 
   /**
  * Model helper functions with general utility.
@@ -926,88 +924,6 @@ function getUnitFromStartValues(startValues) {
 }
 
   /**
- * Model helper functions related to serieses.
- */
-
-/**
- * @param {Array} rows
- * @return {boolean}
- */
-function dataHasSerieses(rows) {
-  return dataHasColumn(SERIES_COLUMN, rows);
-}
-
-/**
- * @param {Array} fieldsUsedBySeries Field names
- * @return {boolean}
- */
-function dataHasSeriesSpecificFields(fieldsUsedBySeries) {
-  return !_.every(_.pluck(fieldsUsedBySeries, 'fields'), function(fields) {
-    return _.isEqual(_.sortBy(_.pluck(fieldsUsedBySeries, 'fields')[0]), _.sortBy(fields));
-  });
-}
-
-/**
- * @param {Array} serieses
- * @param {Array} rows
- * @return {Array} Field names
- */
-function fieldsUsedBySeries(serieses, rows) {
-  var fields = getFieldColumnsFromData(rows);
-  return serieses.map(function(series) {
-    return {
-      series: series,
-      fields: fields.filter(function(field) {
-        return fieldIsUsedInDataWithSeries(field, series, rows);
-      }, this),
-    }
-  }, this);
-}
-
-/**
- * @param {string} field
- * @param {string} series
- * @param {Array} rows
- */
-function fieldIsUsedInDataWithSeries(field, series, rows) {
-  return rows.some(function(row) {
-    return row[field] && row[SERIES_COLUMN] === series;
-  }, this);
-}
-
-/**
- * @param {Array} rows
- * @param {string} series
- * @return {Array} Rows
- */
-function getDataBySeries(rows, series) {
-  return rows.filter(function(row) {
-    return row[SERIES_COLUMN] === series;
-  }, this);
-}
-
-/**
- * @param {Array} rows
- * @return {string}
- */
-function getFirstSeriesInData(rows) {
-  return rows.find(function(row) {
-    return row[SERIES_COLUMN];
-  }, this)[SERIES_COLUMN];
-}
-
-/**
- * @param {Array} startValues Objects containing 'field' and 'value'
- * @return {string|boolean} Series, or false if none were found
- */
-function getSeriesFromStartValues(startValues) {
-  var match = startValues.find(function(startValue) {
-    return startValue.field === SERIES_COLUMN;
-  }, this);
-  return (match) ? match.value : false;
-}
-
-  /**
  * Model helper functions related to fields and data.
  */
 
@@ -1137,19 +1053,11 @@ function getChildFieldNames(edges) {
  * @param {Array} selectedFields Field items
  * @return {Array} Field item states
  */
-function fieldItemStatesForView(fieldItemStates, fieldsByUnit, selectedUnit, dataHasUnitSpecificFields, fieldsBySeries, selectedSeries, dataHasSeriesSpecificFields, selectedFields) {
+function fieldItemStatesForView(fieldItemStates, fieldsByUnit, selectedUnit, dataHasUnitSpecificFields, selectedFields) {
   var states = fieldItemStates.map(function(item) { return item; });
-  if (dataHasUnitSpecificFields && dataHasSeriesSpecificFields) {
-    states = fieldItemStatesForSeries(fieldItemStates, fieldsBySeries, selectedSeries);
-    states = fieldItemStatesForUnit(states, fieldsByUnit, selectedUnit);
-  }
-  else if (dataHasSeriesSpecificFields) {
-    states = fieldItemStatesForSeries(fieldItemStates, fieldsBySeries, selectedSeries);
-  }
-  else if (dataHasUnitSpecificFields) {
+  if (dataHasUnitSpecificFields) {
     states = fieldItemStatesForUnit(fieldItemStates, fieldsByUnit, selectedUnit);
   }
-
   if (selectedFields.length > 0) {
     states.forEach(function(fieldItem) {
       var selectedField = selectedFields.find(function(selectedItem) {
@@ -1180,21 +1088,6 @@ function fieldItemStatesForUnit(fieldItemStates, fieldsByUnit, selectedUnit) {
       return fieldByUnit.unit === selectedUnit;
     })[0];
     return fieldsBySelectedUnit.fields.includes(fis.field);
-  });
-}
-
-/**
- * @param {Array} fieldItemStates
- * @param {Array} fieldsBySeries Objects containing 'series' and 'fields'
- * @param {string} selectedSeries
- * @return {Array} Field item states
- */
-function fieldItemStatesForSeries(fieldItemStates, fieldsBySeries, selectedSeries) {
-  return fieldItemStates.filter(function(fis) {
-    var fieldsBySelectedSeries = fieldsBySeries.filter(function(fieldBySeries) {
-      return fieldBySeries.series === selectedSeries;
-    })[0];
-    return fieldsBySelectedSeries.fields.includes(fis.field);
   });
 }
 
@@ -1410,29 +1303,13 @@ function getDataBySelectedFields(rows, selectedFields) {
  * @param {string} currentTitle
  * @param {Array} allTitles Objects containing 'unit' and 'title'
  * @param {String} selectedUnit
- * @param {String} selectedSeries
  * @return {String} Updated title
  */
-function getChartTitle(currentTitle, allTitles, selectedUnit, selectedSeries) {
+function getChartTitle(currentTitle, allTitles, selectedUnit) {
   var newTitle = currentTitle;
   if (allTitles && allTitles.length > 0) {
-    var matchedTitle;
-    if (selectedUnit && selectedSeries) {
-      matchedTitle = allTitles.find(function(title) {
-        return title.unit === selectedUnit && title.series === selectedSeries;
-      });
-    }
-    if (!matchedTitle && selectedSeries) {
-      matchedTitle = allTitles.find(function(title) {
-        return title.series === selectedSeries;
-      });
-    }
-    if (!matchedTitle && selectedUnit) {
-      matchedTitle = allTitles.find(function(title) {
-        return title.unit === selectedUnit;
-      });
-    }
-    newTitle = (matchedTitle) ? matchedTitle.title : allTitles[0].title;
+    var unitTitle = allTitles.find(function(title) { return title.unit === selectedUnit });
+    newTitle = (unitTitle) ? unitTitle.title : allTitles[0].title;
   }
   return newTitle;
 }
@@ -1575,7 +1452,7 @@ function getBaseDataset() {
  * @return {string} Human-readable description of combo
  */
 function getCombinationDescription(combination, fallback) {
-  var keys = Object.keys(combination).sort();
+  var keys = Object.keys(combination);
   if (keys.length === 0) {
     return fallback;
   }
@@ -1757,27 +1634,21 @@ function sortData(rows, selectedUnit) {
 
   return {
     UNIT_COLUMN: UNIT_COLUMN,
-    SERIES_COLUMN: SERIES_COLUMN,
     GEOCODE_COLUMN: GEOCODE_COLUMN,
     YEAR_COLUMN: YEAR_COLUMN,
     VALUE_COLUMN: VALUE_COLUMN,
-    SERIES_TOGGLE: SERIES_TOGGLE,
     convertJsonFormatToRows: convertJsonFormatToRows,
     getUniqueValuesByProperty: getUniqueValuesByProperty,
     dataHasUnits: dataHasUnits,
     dataHasGeoCodes: dataHasGeoCodes,
-    dataHasSerieses: dataHasSerieses,
     getFirstUnitInData: getFirstUnitInData,
     getDataByUnit: getDataByUnit,
-    getDataBySeries: getDataBySeries,
     getDataBySelectedFields: getDataBySelectedFields,
     getUnitFromStartValues: getUnitFromStartValues,
     selectFieldsFromStartValues: selectFieldsFromStartValues,
     selectMinimumStartingFields: selectMinimumStartingFields,
     fieldsUsedByUnit: fieldsUsedByUnit,
-    fieldsUsedBySeries: fieldsUsedBySeries,
     dataHasUnitSpecificFields: dataHasUnitSpecificFields,
-    dataHasSeriesSpecificFields: dataHasSeriesSpecificFields,
     getInitialFieldItemStates: getInitialFieldItemStates,
     validParentsByChild: validParentsByChild,
     getFieldNames: getFieldNames,
@@ -2967,25 +2838,16 @@ $(function() {
 });
 $(function() {
 
-  // @deprecated start
-  if (typeof translations.search === 'undefined') {
-    translations.search = { search: 'Search' };
-  }
-  if (typeof translations.general === 'undefined') {
-    translations.general = { hide: 'Hide' };
-  }
-  // @deprecated end
-
   var topLevelSearchLink = $('.top-level span:eq(1), .top-level button:eq(1)');
 
   var resetForSmallerViewport = function() {
     topLevelSearchLink.text('Search');
     $('.top-level li').removeClass('active');
     $('.top-level span').removeClass('open');
-  };
-
+  };  
+  
   var topLevelMenuToggle = document.querySelector("#menuToggle");
-
+  
   topLevelMenuToggle.addEventListener("click", function(){
     setTopLevelMenuAccessibilityActions();
   });
@@ -3027,16 +2889,16 @@ $(function() {
 
     if(target === 'search') {
       $(this).toggleClass('open');
-
+      
       if($(this).hasClass('open') || !wasVisible) {
-        $(this).text(translations.general.hide);
+        $(this).text('Hide');
       } else {
-        $(this).text(translations.search.search);
+        $(this).text('Search');
       }
     } else {
       // menu click, always hide search:
       topLevelSearchLink.removeClass('open');
-      topLevelSearchLink.text(translations.search.search);
+      topLevelSearchLink.text('Search');
     }
 
     if(!wasVisible) {
