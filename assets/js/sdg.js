@@ -1511,8 +1511,8 @@ function footerFields(model) {
   fields[translations.indicator.source] = model.dataSource;
   fields[translations.indicator.geographical_area] = model.geographicalArea;
   fields[translations.indicator.unit_of_measurement] = model.measurementUnit;
-  fields[translations.indicator.copyright] = model.copyright;
   fields[translations.indicator.footnote] = model.footnote;
+  fields[translations.indicator.copyright] = model.copyright;
   // Filter out the empty values.
   return _.pick(fields, _.identity);
 }
