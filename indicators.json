@@ -11,7 +11,7 @@
           "description": "",
           "keywords": "",
           "href": "/1-1-1",
-          "status": "notapplicable"
+          "status": "notstarted"
         },
         {
           "id": "1-2-1",
@@ -249,7 +249,7 @@
           "id": "3-1-2",
           "title": "Anteil der von qualifiziertem Gesundheitspersonal betreuten Geburten",
           "description": "",
-          "keywords": "Indikator 3.1.2, Lebendgeborene in Krankenhäusern",
+          "keywords": "Indikator 3.1.2, Entbindungen in Krankenhäusern, Lebendgeborene",
           "href": "/3-1-2",
           "status": "complete"
         },
@@ -835,7 +835,7 @@
           "description": "",
           "keywords": "",
           "href": "/7-b-1",
-          "status": "notstarted"
+          "status": "notapplicable"
         }]
     }
   },
