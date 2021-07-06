@@ -132,7 +132,7 @@ var translations = {
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" crossorigin="">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" crossorigin="">
         <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/3.2.3/css/fixedColumns.dataTables.min.css" crossorigin="">
-        <link rel="stylesheet" href="/assets/css/style.css?v=20210702133304">
+        <link rel="stylesheet" href="/assets/css/style.css?v=20210706085404">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet" crossorigin="">
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
           integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
@@ -746,7 +746,7 @@ layout-indicator
           
           
           
-          <td class="table-value">15.7</td>
+          <td class="table-value">15.4</td>
           
           
         </tr>
@@ -810,7 +810,7 @@ layout-indicator
           
           
           
-          <td class="table-value">17.0</td>
+          <td class="table-value">16.6</td>
           
           
         </tr>
@@ -826,7 +826,7 @@ layout-indicator
           
           
           
-          <td class="table-value">15.8</td>
+          <td class="table-value">15.5</td>
           
           
         </tr>
@@ -842,7 +842,7 @@ layout-indicator
           
           
           
-          <td class="table-value">15.8</td>
+          <td class="table-value">15.5</td>
           
           
         </tr>
@@ -858,7 +858,7 @@ layout-indicator
           
           
           
-          <td class="table-value">15.7</td>
+          <td class="table-value">16.0</td>
           
           
         </tr>
@@ -874,7 +874,7 @@ layout-indicator
           
           
           
-          <td class="table-value"></td>
+          <td class="table-value">15.4</td>
           
           
         </tr>
@@ -886,11 +886,11 @@ layout-indicator
           
           
           
-          <td>Pro realem BIP (2010 = 100)</td>
+          <td>Pro realem BIP (2015 = 100)</td>
           
           
           
-          <td class="table-value">100.0</td>
+          <td class="table-value">108.1</td>
           
           
         </tr>
@@ -902,11 +902,11 @@ layout-indicator
           
           
           
-          <td>Pro realem BIP (2010 = 100)</td>
+          <td>Pro realem BIP (2015 = 100)</td>
           
           
           
-          <td class="table-value">103.9</td>
+          <td class="table-value">112.3</td>
           
           
         </tr>
@@ -918,11 +918,11 @@ layout-indicator
           
           
           
-          <td>Pro realem BIP (2010 = 100)</td>
+          <td>Pro realem BIP (2015 = 100)</td>
           
           
           
-          <td class="table-value">100.0</td>
+          <td class="table-value">108.1</td>
           
           
         </tr>
@@ -934,11 +934,11 @@ layout-indicator
           
           
           
-          <td>Pro realem BIP (2010 = 100)</td>
+          <td>Pro realem BIP (2015 = 100)</td>
           
           
           
-          <td class="table-value">99.0</td>
+          <td class="table-value">107.0</td>
           
           
         </tr>
@@ -950,11 +950,11 @@ layout-indicator
           
           
           
-          <td>Pro realem BIP (2010 = 100)</td>
+          <td>Pro realem BIP (2015 = 100)</td>
           
           
           
-          <td class="table-value">101.4</td>
+          <td class="table-value">107.6</td>
           
           
         </tr>
@@ -966,11 +966,11 @@ layout-indicator
           
           
           
-          <td>Pro realem BIP (2010 = 100)</td>
+          <td>Pro realem BIP (2015 = 100)</td>
           
           
           
-          <td class="table-value">93.9</td>
+          <td class="table-value">100.0</td>
           
           
         </tr>
@@ -982,11 +982,11 @@ layout-indicator
           
           
           
-          <td>Pro realem BIP (2010 = 100)</td>
+          <td>Pro realem BIP (2015 = 100)</td>
           
           
           
-          <td class="table-value">92.7</td>
+          <td class="table-value">98.7</td>
           
           
         </tr>
@@ -998,11 +998,11 @@ layout-indicator
           
           
           
-          <td>Pro realem BIP (2010 = 100)</td>
+          <td>Pro realem BIP (2015 = 100)</td>
           
           
           
-          <td class="table-value">89.9</td>
+          <td class="table-value">99.6</td>
           
           
         </tr>
@@ -1014,11 +1014,11 @@ layout-indicator
           
           
           
-          <td>Pro realem BIP (2010 = 100)</td>
+          <td>Pro realem BIP (2015 = 100)</td>
           
           
           
-          <td class="table-value"></td>
+          <td class="table-value">94.8</td>
           
           
         </tr>
@@ -1097,7 +1097,7 @@ data-event-label="Change to Table tab"
 <script>
 // Add a chart alteration to support the chart_graph_limits metadata field.
 opensdg.chartConfigAlter(function(config, info) {
-  if (info.graphLimits && info.graphLimits.length > 0) {
+  if (info.graphLimits && Object.keys(info.graphLimits).length > 0) {
     var overrides = {
       options: {
         scales: {
@@ -1562,8 +1562,8 @@ data-event-label="Change to Sources tab"
             
 
             
-              <a href="https://github.com/G205SDGs/sdg-data/commit/0af2cf9a8fce7e3443706fcc13e227bce80c5de7" target="_blank">
-                2021-03-29: see changes on GitHub <span class="visuallyhidden">in neuem Fenster öffnen</span>
+              <a href="https://github.com/G205SDGs/sdg-data/commit/1df2974d5105189931d7f6d7405a5ea4b79783ec" target="_blank">
+                2021-07-05: see changes on GitHub <span class="visuallyhidden">in neuem Fenster öffnen</span>
               </a>
             
 
@@ -2504,12 +2504,12 @@ data-event-label="Change to Sources tab"
 <script>translations['search'] = translations['search'] || {};
     translations['search']['search'] = 'Suche';</script>
 
-<script src='/assets/js/sdg.js?v=20210702133304'></script>
+<script src='/assets/js/sdg.js?v=20210706085404'></script>
 
 
     
     
-    <script src="/assets/js/custom.js?v=20210702133304"></script><script>
+    <script src="/assets/js/custom.js?v=20210706085404"></script><script>
 $(function() {
     if($('#indicatorData').length) {
       var domData = $('#indicatorData').data();
