@@ -127,7 +127,7 @@ var translations = {
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" crossorigin="">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" crossorigin="">
         <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/3.2.3/css/fixedColumns.dataTables.min.css" crossorigin="">
-        <link rel="stylesheet" href="/assets/css/style.css?v=20210712140704">
+        <link rel="stylesheet" href="/assets/css/style.css?v=20210716120241">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet" crossorigin="">
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
           integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
@@ -551,7 +551,7 @@ layout-goal-by-target
           </span>
         </span>
         <a href="/en/17-3-1">
-          Foreign direct investment (FDI), official development assistance and South-South cooperation as a proportion of gross national income (GNI)
+          Foreign direct investment, official development assistance and South-South cooperation as a proportion of gross national income
         </a>
         
       </div>
@@ -569,8 +569,8 @@ layout-goal-by-target
       <div class="col-md-12  goal-indicator">
         <span>
           17.3.2
-          <span class="status inprogress">
-            In progress
+          <span class="status notstarted">
+            Not available
           </span>
         </span>
         <a href="/en/17-3-2">
@@ -644,7 +644,7 @@ layout-goal-by-target
           </span>
         </span>
         <a href="/en/17-5-1">
-          Number of countries that adopt and implement investment promotion regimes for developing countries, including LDCs
+          Number of countries that adopt and implement investment promotion regimes for developing countries, including the least developed countries
         </a>
         
       </div>
@@ -1275,12 +1275,12 @@ layout-goal-by-target
 <script>translations['search'] = translations['search'] || {};
     translations['search']['search'] = 'Search';</script>
 
-<script src='/assets/js/sdg.js?v=20210712140704'></script>
+<script src='/assets/js/sdg.js?v=20210716120241'></script>
 
 
     
     
-    <script src="/assets/js/custom.js?v=20210712140704"></script><script>
+    <script src="/assets/js/custom.js?v=20210716120241"></script><script>
 $(function() {
     if($('#indicatorData').length) {
       var domData = $('#indicatorData').data();
@@ -1325,6 +1325,7 @@ $(function() {
               dataSchema: domData.dataschema,
               compositeBreakdownLabel: domData.compositebreakdownlabel,
               precision: domData.precision,
+              graphStepsize: domData.graphstepsize,
             }),
             view  = new indicatorView(model, {
               rootElement: '#indicatorData',
