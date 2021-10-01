@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>German Indicators For The Sustainable Development Goals</title>
+    <title>general.tabTitle</title>
     <description>Data Platform Prototype</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 03 Sep 2021 08:17:13 +0000</pubDate>
-    <lastBuildDate>Fri, 03 Sep 2021 08:17:13 +0000</lastBuildDate>
+    <pubDate>Fri, 01 Oct 2021 12:58:03 +0000</pubDate>
+    <lastBuildDate>Fri, 01 Oct 2021 12:58:03 +0000</lastBuildDate>
     <generator>Jekyll v3.8.4</generator>
     
   </channel>
