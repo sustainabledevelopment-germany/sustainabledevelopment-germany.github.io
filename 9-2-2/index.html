@@ -3,6 +3,9 @@
     <head>
         <meta charset="utf-8">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+        
+
+
         <script crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js?features=Promise%2CArray.prototype.forEach%2CString.prototype.includes%2CURLSearchParams%2CCustomEvent%2CArray.prototype.includes%2CArray.prototype.filter%2CArray.prototype.some%2CArray.prototype.find%2CArray.prototype.reduce%2CObject.assign%2CArray.isArray%2CObject.values%2CArray.from%2CSet%2CArray.prototype.findIndex"></script>
 <script crossorigin="anonymous" src="https://cdnjs.cloudflare.com/ajax/libs/javascript-canvas-to-blob/3.15.0/js/canvas-to-blob.min.js"></script>
 
@@ -102,6 +105,7 @@ var translations = {
         <!-- Title and meta description
         ================================================== -->
 
+
         
     <title>
         
@@ -134,7 +138,7 @@ var translations = {
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" crossorigin="">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" crossorigin="">
         <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/3.2.3/css/fixedColumns.dataTables.min.css" crossorigin="">
-        <link rel="stylesheet" href="/assets/css/style.css?v=20211006151439">
+        <link rel="stylesheet" href="/assets/css/style.css?v=20211027075820">
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
           integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
           crossorigin=""/>
@@ -153,6 +157,7 @@ layout-indicator
 ">
 <!-- <div class="container"> -->
 
+
 <script>translations['header'] = {"alpha":"Beta-Version","disclaimer":"Diese Seite befindet sich im Entwicklungsstadium. Wir freuen uns über Ihre <a href=\"mailto:%email_address\">Kommentare</a>.","skip_link":" Zum Hauptinhalt springen","tag_line":""};</script>
 
 <a class="sr-only sr-only-focusable" id="skiplink" href="#main-content" tabindex="0"> Zum Hauptinhalt springen</a>
@@ -167,17 +172,33 @@ layout-indicator
 
 </div>
 
-<header role="banner">
+<header role="banner" class="header-default">
   <div class="container">
 
     <div class="logo-and-mobile-widgets">
       <a class="navbar-brand" href="/" id="home">
-        <img src="/assets/img/de/SDG_logo.png" alt="Ziele für Nachhaltige Entwicklung - " />
-      </a>
-
+    <img src="/assets/img/de/SDG_logo.png" alt="Zum Hauptinhalt springen" />
+</a>
       <div class="mobile-widgets">
-        <ul id='accessibility-nav' class='contrast-switcher'></ul><div class="language-toggle-mobile">
-          <div class="language-toggle-container">
+    <ul id='accessibility-nav' class='contrast-switcher'>
+        
+
+    <li class="nav-link contrast contrast-high contrast-type-single">
+        <a title=""
+           aria-label=""
+           data-contrast-switch-to="high"
+           href="javascript:void(0)"
+           data-on="click"
+data-event-category="Accessibility"
+data-event-action="Change contrast setting"
+data-event-label="high"
+
+        >A</a>
+    </li>
+
+
+    </ul><div class="language-toggle-mobile">
+        <div class="language-toggle-container">
   
   <div class="btn-group language-toggle-dropdown ">
     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -191,33 +212,16 @@ layout-indicator
   </div>
 </div>
 
-        </div><!-- Add Btn to link to DNS Page--
-
-        
-          <a href="https://sustainabledevelopment-deutschland.github.io">
-            <img class="link_btn" src="https://g205sdgs.github.io/sdg-indicators/public/DNS Wheel.png" title="Zur Seite der nationalen Indikatoren" alt="Link DNS" style="width:24px;height:24px;"/>
-            <span class="hidden-sm hidden-md hidden-lg">DNS-Berichtsplattform</span>
-          </a>
-        
-
-        <!--     -->
-
-
-
-
-
-
-      </div>
+    </div></div>
     </div>
 
     <nav class="navbar navbar-default" id="main-nav">
-
       <ul class="top-level">
-        <li id="menuToggle"
-            aria-label=""
-            aria-haspopup="true">
-          <button data-target="menu-mobile" aria-expanded="false">Menü</button>
-          <ul class="nav navbar-nav menu-target contrast-switcher" id="menu-mobile"><li class="nav-link ">
+    <li id="menuToggle"
+        aria-label=""
+        aria-haspopup="true">
+        <button data-target="menu-mobile" aria-expanded="false">Menü</button>
+        <ul class="nav navbar-nav menu-target contrast-switcher" id="menu-mobile"><li class="nav-link ">
     <a href="/">17 Ziele</a>
 </li>
 <li class="nav-link ">
@@ -245,36 +249,49 @@ layout-indicator
     <a href="https://sustainabledevelopment-deutschland.github.io"><img class="link_btn" src="https://g205sdgs.github.io/sdg-indicators/public/DNS Wheel.png" title="Zur Seite der nationalen Indikatoren" alt="Link DNS" style="width:24px;height:24px;"/><span class="hidden-sm hidden-md hidden-lg">DNS-Plattform</span></a>
 </li>
 <li class="language-toggle-menu-header">
-    
+        
 
 
 
 
 
   <div class="language-toggle-container">
-  
-  <div class="btn-group language-toggle-dropdown ">
-    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      <span class="language-globe-in-dropdown"><i class="fa fa-globe language-toggle-globe-dropdown"></i></span><span class="language-name">Deutsch</span>
-      <span class="language-abbreviation">de</span><i class="language-toggle-caret fa fa-chevron-down"></i></button>
-    <ul class="dropdown-menu"><li class="language-option-en">
-            <a href="/en/9-2-2/">
-              English
-            </a>
-          </li></ul>
-  </div>
+  <i class="fa fa-globe language-toggle-globe-links"></i>
+  <ul class="language-toggle-links"><li class="language-option-en">
+      <a class="language-toggle-link" href="/en/9-2-2/"><span class="language-name">English</span>
+        <span class="language-abbreviation">en</span></a>
+    </li></ul>
 </div>
 
 
 
-</li></ul>
+    </li>
 
-        </li>
-        <li id="searchToggle"
-            aria-label=""
-            aria-haspopup="true">
-          <button data-target="search-mobile" aria-expanded="false">Suche</button>
-          <div id="search-mobile" class="menu-target">
+  
+
+    <li class="nav-link contrast contrast-high contrast-type-single">
+        <a title=""
+           aria-label=""
+           data-contrast-switch-to="high"
+           href="javascript:void(0)"
+           data-on="click"
+data-event-category="Accessibility"
+data-event-action="Change contrast setting"
+data-event-label="high"
+
+        >A</a>
+    </li>
+
+
+
+</ul>
+
+    </li>
+    <li id="searchToggle"
+        aria-label=""
+        aria-haspopup="true">
+        <button data-target="search-mobile" aria-expanded="false">Suche</button>
+        <div id="search-mobile" class="menu-target">
   <form action="/search/">
     <label class="sr-only" for="indicator_search-mobile">Suche</label>
     <input type="text" name="q" id="indicator_search-mobile" title="Suche" /><!--
@@ -282,9 +299,8 @@ layout-indicator
   </form>
 </div>
 
-        </li>
-      </ul>
-
+    </li>
+</ul>
       <div id="search" class="menu-target">
   <form action="/search/">
     <label class="sr-only" for="indicator_search">Suche</label>
@@ -293,7 +309,6 @@ layout-indicator
   </form>
 </div>
 
-
       <ul class="nav navbar-nav menu-target contrast-switcher" id="menu"><li class="nav-link ">
     <a href="/">17 Ziele</a>
 </li>
@@ -301,12 +316,12 @@ layout-indicator
     <a href="/reporting-status/">Datenverfügbarkeit</a>
 </li>
 <li class="nav-link">
-              <div class="btn-group menu-dropdown">
-                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Über uns
-                      <i class="fa fa-chevron-down"></i>
-                  </button>
-                  <ul class="dropdown-menu"><li class="nav-link ">
+                <div class="btn-group menu-dropdown">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Über uns
+                        <i class="fa fa-chevron-down"></i>
+                    </button>
+                    <ul class="dropdown-menu"><li class="nav-link ">
     <a href="/about_platform/">Die&nbspSDG&#8209;Online&nbspPlattform</a>
 </li>
 <li class="nav-link ">
@@ -316,58 +331,72 @@ layout-indicator
     <a href="/about_guidance/">Technische&nbspHinweise</a>
 </li>
 </ul>
-              </div>
-          </li><li class="nav-link">
-              <div class="btn-group menu-dropdown">
-                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Wissenswertes
-                      <i class="fa fa-chevron-down"></i>
-                  </button>
-                  <ul class="dropdown-menu"><li class="nav-link ">
+                </div>
+            </li><li class="nav-link">
+                <div class="btn-group menu-dropdown">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Wissenswertes
+                        <i class="fa fa-chevron-down"></i>
+                    </button>
+                    <ul class="dropdown-menu"><li class="nav-link ">
     <a href="/facts_agenda/">Agenda&nbsp2030</a>
 </li>
 <li class="nav-link ">
     <a href="/facts_dns/">DNS</a>
 </li>
 </ul>
-              </div>
-          </li><li class="nav-link ">
+                </div>
+            </li><li class="nav-link ">
     <a href="/publications/">Publikationen</a>
 </li>
 <li class="nav-link ">
     <a href="https://sustainabledevelopment-deutschland.github.io"><img class="link_btn" src="https://g205sdgs.github.io/sdg-indicators/public/DNS Wheel.png" title="Zur Seite der nationalen Indikatoren" alt="Link DNS" style="width:24px;height:24px;"/><span class="hidden-sm hidden-md hidden-lg">DNS-Plattform</span></a>
 </li>
 <li class="language-toggle-menu-header">
-    
+        
 
 
 
 
 
   <div class="language-toggle-container">
-  
-  <div class="btn-group language-toggle-dropdown ">
-    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      <span class="language-globe-in-dropdown"><i class="fa fa-globe language-toggle-globe-dropdown"></i></span><span class="language-name">Deutsch</span>
-      <span class="language-abbreviation">de</span><i class="language-toggle-caret fa fa-chevron-down"></i></button>
-    <ul class="dropdown-menu"><li class="language-option-en">
-            <a href="/en/9-2-2/">
-              English
-            </a>
-          </li></ul>
-  </div>
+  <i class="fa fa-globe language-toggle-globe-links"></i>
+  <ul class="language-toggle-links"><li class="language-option-en">
+      <a class="language-toggle-link" href="/en/9-2-2/"><span class="language-name">English</span>
+        <span class="language-abbreviation">en</span></a>
+    </li></ul>
 </div>
 
 
 
-</li></ul>
+    </li>
 
+  
+
+    <li class="nav-link contrast contrast-high contrast-type-single">
+        <a title=""
+           aria-label=""
+           data-contrast-switch-to="high"
+           href="javascript:void(0)"
+           data-on="click"
+data-event-category="Accessibility"
+data-event-action="Change contrast setting"
+data-event-label="high"
+
+        >A</a>
+    </li>
+
+
+
+</ul>
 
     </nav>
   </div>
 
 </header>
 <div id="top" tabindex=-1></div>
+
+
 
 
 <script type="text/template" id="item_template">
@@ -453,15 +482,19 @@ layout-indicator
 <div class="heading goal-banner indicator goal-9">
   <div class="container">
     <div class="row">
+      
       <div class="col-xs-4 col-md-3 col-lg-2 goal-icon goal-tiles">
         <a href="/9" title="Zeigt die Indikatorenliste zum SDG-Ziel an.">
-          <img src="https://g205sdgs.github.io/sdg-indicators/assets/img/goals/de/9.png" alt="Industrie, Innovationen und Infrastruktur - Ziel 9" id="goal-9"/>
+          <img src="https://g205sdgs.github.io/sdg-indicators/assets/img/goals/de/9.png" alt="Industrie, Innovationen und Infrastruktur - Ziel 9" id="goal-9" class="goal-icon-image goal-icon-image-"/>
         </a>
       </div>
       <div class="col-xs-8 col-md-9 col-lg-10 indicator-details">
+      
         <div>
           <h1>
+            
             Indikator 9.2.2
+            
             <span class="lead-copy">Erwerbstätigkeit im Verarbeitenden Gewerbe im Verhältnis zur Erwerbstätigkeit insgesamt</span>
           </h1>
         </div>
@@ -524,7 +557,7 @@ layout-indicator
 </div>
 
 
-  <!-- Last check: 17.09.2021 -->
+  <!-- Last check: 21.10.2021 -->
 
 
 
@@ -2231,12 +2264,12 @@ data-event-label="Change to Sources tab"
 <script>translations['search'] = translations['search'] || {};
     translations['search']['search'] = 'Suche';</script>
 
-<script src='/assets/js/sdg.js?v=20211006151439'></script>
+<script src='/assets/js/sdg.js?v=20211027075820'></script>
 
 
     
     
-    <script src="/assets/js/custom.js?v=20211006151439"></script><script>
+    <script src="/assets/js/custom.js?v=20211027075820"></script><script>
 $(function() {
     if($('#indicatorData').length) {
       var domData = $('#indicatorData').data();
