@@ -387,7 +387,7 @@
           "description": "",
           "keywords": "",
           "href": "/en/3-9-1",
-          "status": "notstarted"
+          "status": "inprogress"
         },
         {
           "id": "3-9-2",
@@ -1255,10 +1255,18 @@
         },
         {
           "id": "11-5-2",
-          "title": "Direct economic loss in relation to global GDP, damage to critical infrastructure and number of disruptions to basic services, attributed to disasters",
+          "title": "Direct economic loss attributed to disasters in relation to global gross domestic product (GDP)",
           "description": "",
           "keywords": "",
           "href": "/en/11-5-2",
+          "status": "notstarted"
+        },
+        {
+          "id": "11-5-3",
+          "title": "(a) Damage to critical infrastructure and (b) number of disruptions to basic services, attributed to disasters",
+          "description": "",
+          "keywords": "",
+          "href": "/en/11-5-3",
           "status": "notstarted"
         },
         {
@@ -1951,7 +1959,7 @@
         },
         {
           "id": "17-3-1",
-          "title": "Foreign direct investment, official development assistance and South-South cooperation as a proportion of gross national income",
+          "title": "Additional financial resources mobilized for developing countries from multiple sources",
           "description": "",
           "keywords": "",
           "href": "/en/17-3-1",
