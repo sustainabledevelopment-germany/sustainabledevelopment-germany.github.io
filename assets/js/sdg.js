@@ -4457,8 +4457,13 @@ function alterDataDisplay(value, info, context) {
     // Before passing to user-defined dataDisplayAlterations, let's
     // do our best to ensure that it starts out as a number.
     var altered = value;
+    // In case the decimal separator has already been applied,
+    // change it back now.
+    if (typeof altered === 'string' && OPTIONS.decimalSeparator) {
+        altered = altered.replace(OPTIONS.decimalSeparator, '.');
+    }
     if (typeof altered !== 'number') {
-        altered = Number(value);
+        altered = Number(altered);
     }
     // If that gave us a non-number, return original.
     if (isNaN(altered)) {
@@ -5495,12 +5500,7 @@ $(function() {
     timeSliderDragUpdate: true,
     speedSlider: false,
     position: 'bottomleft',
-    // Player options.
-    playerOptions: {
-      transitionTime: 1000,
-      loop: false,
-      startOver: true
-    },
+    playButton: false,
   };
 
   L.Control.YearSlider = L.Control.TimeDimension.extend({
@@ -5599,14 +5599,6 @@ $(function() {
       // delimited string of YYYY-MM-DD dates.
       times: years.map(function(y) { return y.time }).join(','),
       currentTime: new Date(years[0].time).getTime(),
-    });
-    // Create the player.
-    options.player = new L.TimeDimension.Player(options.playerOptions, options.timeDimension);
-    options.player.on('play', function() {
-      $('.timecontrol-play').attr('title', 'Pause');
-    });
-    options.player.on('stop', function() {
-      $('.timecontrol-play').attr('title', 'Play');
     });
     // Listen for time changes.
     if (typeof options.yearChangeCallback === 'function') {

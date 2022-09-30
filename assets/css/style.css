@@ -1385,7 +1385,7 @@ body.contrast-high div#serieses {
   color: white; }
 
 .progress-status .progress-status-image {
-  max-width: 100px; }
+  max-width: 136px; }
   .progress-status .progress-status-image img {
     max-width: 100%; }
 
@@ -1414,7 +1414,7 @@ body.contrast-high div#serieses {
     padding: 0 2px;
     border-radius: 5px; }
   .status.complete {
-    color: black;
+    color: #111111;
     border: none;
     background-color: #5cb85c;
     background: #5cb85c; }
@@ -1422,7 +1422,7 @@ body.contrast-high div#serieses {
       background-color: #5cb85c;
       background: #5cb85c; }
   .status.inprogress {
-    color: black;
+    color: #111111;
     border: none;
     background-color: #f0ad4e;
     background: #f0ad4e; }
@@ -1430,7 +1430,7 @@ body.contrast-high div#serieses {
       background-color: #f0ad4e;
       background: #f0ad4e; }
   .status.notstarted {
-    color: black;
+    color: #111111;
     border: none;
     background-color: #E27874;
     background: #E27874; }
@@ -1438,7 +1438,7 @@ body.contrast-high div#serieses {
       background-color: #E27874;
       background: #E27874; }
   .status.notapplicable {
-    color: black;
+    color: #111111;
     border: none;
     background-color: #B7B7B7;
     background: #B7B7B7; }
@@ -1591,8 +1591,6 @@ body.contrast-high #main-content .nav-tabs {
   padding-top: 0px;
   padding-bottom: 15px; }
 
-.layout-goal .goal-page-heading {
-  margin-bottom: 14px; }
 .layout-goal .goal-page-target-number {
   min-width: 60px; }
   .layout-goal .goal-page-target-number h3 {
@@ -1604,7 +1602,7 @@ body.contrast-high #main-content .nav-tabs {
   margin-top: 0; }
 .layout-goal .goal-indicator {
   margin-top: 20px; }
-.layout-goal .goal-page-target-rule {
+.layout-goal .goal-page-target-rule, .layout-goal .goal-page-column-header-rule {
   border: 0;
   border-top: 0.1px solid #ccc;
   margin-bottom: 25px;
@@ -1629,7 +1627,7 @@ body.contrast-high #main-content .nav-tabs {
     min-width: 0; }
   .layout-goal .goal-page-target-number {
     min-width: 0; }
-  .layout-goal .goal-page-target-rule {
+  .layout-goal .goal-page-target-rule, .layout-goal .goal-page-column-header-rule {
     margin-left: 60px; } }
 .layout-goal .tags {
   margin-top: 10px; }
@@ -1639,6 +1637,12 @@ body.contrast-high #main-content .nav-tabs {
   .layout-goal .container .goal-details {
     float: none;
     width: 100%; } }
+@media only screen and (min-width: 992px) {
+  .layout-goal .goal-showing-progress .goal-page-target-name, .layout-goal .goal-showing-progress .goal-page-indicator-name {
+    padding-right: 40px; }
+  .layout-goal .goal-showing-progress .progress-column-header {
+    font-size: 16px;
+    margin-top: 20px; } }
 
 .layout-indicator #page-content {
   border-top: 1px solid #faebcc;
@@ -1677,6 +1681,9 @@ body.contrast-high #main-content .nav-tabs {
   font-style: italic;
   color: #505A5F; }
 
+.layout-page #main-content h2 {
+  margin-top: 30px; }
+
 .layout-reportingstatus .reporting-status-description {
   margin-bottom: 25px; }
 .layout-reportingstatus #main-content .statuses strong {
@@ -1702,7 +1709,7 @@ body.contrast-high #main-content .nav-tabs {
       padding: 0 2px;
       border-radius: 5px; }
     .layout-reportingstatus #main-content .statuses > div .status.complete {
-      color: black;
+      color: #111111;
       border: none;
       background-color: #5cb85c;
       background: #5cb85c; }
@@ -1710,7 +1717,7 @@ body.contrast-high #main-content .nav-tabs {
         background-color: #5cb85c;
         background: #5cb85c; }
     .layout-reportingstatus #main-content .statuses > div .status.inprogress {
-      color: black;
+      color: #111111;
       border: none;
       background-color: #f0ad4e;
       background: #f0ad4e; }
@@ -1718,7 +1725,7 @@ body.contrast-high #main-content .nav-tabs {
         background-color: #f0ad4e;
         background: #f0ad4e; }
     .layout-reportingstatus #main-content .statuses > div .status.notstarted {
-      color: black;
+      color: #111111;
       border: none;
       background-color: #E27874;
       background: #E27874; }
@@ -1726,7 +1733,7 @@ body.contrast-high #main-content .nav-tabs {
         background-color: #E27874;
         background: #E27874; }
     .layout-reportingstatus #main-content .statuses > div .status.notapplicable {
-      color: black;
+      color: #111111;
       border: none;
       background-color: #B7B7B7;
       background: #B7B7B7; }
@@ -2427,6 +2434,8 @@ body.contrast-high .success {
   width: 50%;
   max-width: 150px; }
 
+.layout-post #main-content h2 {
+  margin-top: 30px; }
 .layout-post .post-header {
   margin-bottom: 20px; }
 .layout-post .post-categories {
@@ -2564,16 +2573,6 @@ body.contrast-high.layout-search form input, body.contrast-high.layout-search fo
 .breadcrumb {
   margin-bottom: 0px;
   padding-top: 10px; }
-
-.indicator-card-number {
-  display: block;
-  margin-bottom: 0.5rem;
-  margin-top: 0rem;
-  font-weight: bold;
-  border-bottom-width: 2px;
-  border-bottom-style: solid;
-  position: relative;
-  padding: 5px 0; }
 
 /**
  * custom.scss
@@ -3010,16 +3009,6 @@ body {
   background: white;
   padding-top: 15px; }
 
-#mapHead {
-  display: block;
-  font-size: 1.0em;
-  margin-top: 1.0em;
-  margin-bottom: 1.0em;
-  padding-left: 10px;
-  margin-left: 0;
-  margin-right: 0;
-  font-weight: bold; }
-
 .responsiveImg {
   width: 75%;
   display: block;
@@ -3111,3 +3100,35 @@ body {
   left: 100%;
   margin-top: -1px;
   margin-left: 0px; }
+
+.align-left {
+  float: left;
+  padding-bottom: 2px; }
+
+.align-right {
+  float: right;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-bottom: 0px; }
+
+.indicator-card-number {
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+  font-weight: bold;
+  padding-bottom: 8px;
+  padding-left: 0px; }
+
+.heading-goal-page {
+  padding-right: 0px;
+  padding-left: 0px; }
+
+.range-and-postulate {
+  margin-bottom: 25px;
+  padding-right: 15px; }
+
+.postulate {
+  padding-left: 0px;
+  font-style: italic; }
+
+.indicator-link-goal-page {
+  padding-left: 0px; }
