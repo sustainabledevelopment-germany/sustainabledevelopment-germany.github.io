@@ -26,8 +26,9 @@ var opensdg = {
   },
 
   // A hook which can be replaced to alter whether/how the values that are
-  // displayed on indicator tables/graphs get rounded.
-  dataRounding: function(value) {
+  // displayed on indicator tables/graphs get rounded. A "context" parameter
+  // is also passed which contains additional information.
+  dataRounding: function(value, context) {
     // Alterations go here.
     return value;
   },
@@ -126,7 +127,7 @@ var translations = {
         <link res="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" crossorigin="">
         <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/3.2.3/css/fixedColumns.dataTables.min.css" crossorigin="">
-        <link rel="stylesheet" href="/assets/css/style.css?v=20221012074848">
+        <link rel="stylesheet" href="/assets/css/style.css?v=20221212180007">
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
           integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
           crossorigin=""/>
@@ -176,7 +177,7 @@ layout-goal
     <img src="/assets/img/en/SDG_logo.png" alt="To main menu" />
 </a>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="d-flex flex-wrap w-100 justify-content-between">
@@ -219,7 +220,7 @@ layout-goal
     <a class="nav-link" href="/en/publications/">Publications</a>
 </li>
 <li class="nav-item ">
-    <a class="nav-link" href="https://sustainabledevelopment-deutschland.github.io"><img class="link_btn" src="https://g205sdgs.github.io/sdg-indicators/public/DNS Wheel.png" title="To the page of the national indicators" alt="Link DNS" style="width:24px;height:24px;"/></a>
+    <a class="nav-link" href="https://dns-indikatoren.de"><img class="link_btn" src="https://g205sdgs.github.io/sdg-indicators/public/DNS Wheel.png" title="To the page of the national indicators" alt="Link DNS" style="width:24px;height:24px;"/></a>
 </li>
 </ul>
 
@@ -230,7 +231,7 @@ layout-goal
         <label class="visually-hidden" for="indicator_search">Search</label>
         <input class="form-control" type="search" name="q" id="indicator_search" title="Search">
         <span class="input-group-append">
-            <button class="btn btn-outline-secondary ms-n5" aria-label="Search" id="search-btn" type="submit">
+            <button class="btn btn-outline-secondary ms-n5" aria-label="" id="search-btn" type="submit">
                 <i class="fa fa-search"></i>
             </button>
         </span>
@@ -340,12 +341,12 @@ data-event-label="high"
   </div>
 
 
-  <div class="container g-0">
+  <div class="container">
     <div class="row">
-      <div class="col" style="padding-right: 0px;">
+      <div class="col" style="padding-left: 0px;">
         <h2>Targets</h2>
       </div>
-      <div class="col" style="paddig-left: 0px;">
+      <div class="col" style="padding-left: 0px;">
         <h2>Indicators</h2>
       </div>
     </div>
@@ -359,7 +360,7 @@ data-event-label="high"
             <span class="indicator-card-number"> <!-- style="padding-bottom: 8px;">-->
               <div class="align-left">10.1</div>
             </span>
-            <p>
+            <p style="padding-left: 0px;">
               By 2030, progressively achieve and sustain income growth of the bottom 40 per cent of the population at a rate higher than the national average
             </p>
           </div>
@@ -398,7 +399,7 @@ data-event-label="high"
 
 </div>
                 </span>
-                <a href="/en/10-1-1" >
+                <a href="/en/10-1-1" style="padding-left: 0px;">
                   Growth rates of household expenditure or income per capita among the bottom 40 per cent of the population and the total population
                 </a>
               
@@ -414,7 +415,7 @@ data-event-label="high"
             <span class="indicator-card-number"> <!-- style="padding-bottom: 8px;">-->
               <div class="align-left">10.2</div>
             </span>
-            <p>
+            <p style="padding-left: 0px;">
               By 2030, empower and promote the social, economic and political inclusion of all, irrespective of age, sex, disability, race, ethnicity, origin, religion or economic or other status
             </p>
           </div>
@@ -453,7 +454,7 @@ data-event-label="high"
 
 </div>
                 </span>
-                <a href="/en/10-2-1" >
+                <a href="/en/10-2-1" style="padding-left: 0px;">
                   Proportion of people living below 50 per cent of median income, by sex, age and persons with disabilities
                 </a>
               
@@ -469,7 +470,7 @@ data-event-label="high"
             <span class="indicator-card-number"> <!-- style="padding-bottom: 8px;">-->
               <div class="align-left">10.3</div>
             </span>
-            <p>
+            <p style="padding-left: 0px;">
               Ensure equal opportunity and reduce inequalities of outcome, including by eliminating discriminatory laws, policies and practices and promoting appropriate legislation, policies and action in this regard
             </p>
           </div>
@@ -508,7 +509,7 @@ data-event-label="high"
 
 </div>
                 </span>
-                <a href="/en/10-3-1" >
+                <a href="/en/10-3-1" style="padding-left: 0px;">
                   Proportion of population reporting having personally felt discriminated against or harassed in the previous 12 months on the basis of a ground of discrimination prohibited under international human rights law
                 </a>
               
@@ -524,7 +525,7 @@ data-event-label="high"
             <span class="indicator-card-number"> <!-- style="padding-bottom: 8px;">-->
               <div class="align-left">10.4</div>
             </span>
-            <p>
+            <p style="padding-left: 0px;">
               Adopt policies, especially fiscal, wage and social protection policies, and progressively achieve greater equality
             </p>
           </div>
@@ -563,7 +564,7 @@ data-event-label="high"
 
 </div>
                 </span>
-                <a href="/en/10-4-1" >
+                <a href="/en/10-4-1" style="padding-left: 0px;">
                   Labour share of GDP
                 </a>
               
@@ -590,8 +591,8 @@ data-event-label="high"
 
 
 
-<span class="status inprogress" style="color: black">
-    <span class="status-inner">In progress</span>
+<span class="status complete" style="color: black">
+    <span class="status-inner">Reported</span>
 </span>
 
 
@@ -599,7 +600,7 @@ data-event-label="high"
 
 </div>
                 </span>
-                <a href="/en/10-4-2" >
+                <a href="/en/10-4-2" style="padding-left: 0px;">
                   Redistributive impact of fiscal policy
                 </a>
               
@@ -615,7 +616,7 @@ data-event-label="high"
             <span class="indicator-card-number"> <!-- style="padding-bottom: 8px;">-->
               <div class="align-left">10.5</div>
             </span>
-            <p>
+            <p style="padding-left: 0px;">
               Improve the regulation and monitoring of global financial markets and institutions and strengthen the implementation of such regulations
             </p>
           </div>
@@ -654,7 +655,7 @@ data-event-label="high"
 
 </div>
                 </span>
-                <a href="/en/10-5-1" >
+                <a href="/en/10-5-1" style="padding-left: 0px;">
                   Financial Soundness Indicators
                 </a>
               
@@ -670,7 +671,7 @@ data-event-label="high"
             <span class="indicator-card-number"> <!-- style="padding-bottom: 8px;">-->
               <div class="align-left">10.6</div>
             </span>
-            <p>
+            <p style="padding-left: 0px;">
               Ensure enhanced representation and voice for developing countries in decision-making in global international economic and financial institutions in order to deliver more effective, credible, accountable and legitimate institutions
             </p>
           </div>
@@ -709,7 +710,7 @@ data-event-label="high"
 
 </div>
                 </span>
-                <a href="/en/10-6-1" >
+                <a href="/en/10-6-1" style="padding-left: 0px;">
                   Proportion of members and voting rights of developing countries in international organizations
                 </a>
               
@@ -725,7 +726,7 @@ data-event-label="high"
             <span class="indicator-card-number"> <!-- style="padding-bottom: 8px;">-->
               <div class="align-left">10.7</div>
             </span>
-            <p>
+            <p style="padding-left: 0px;">
               Facilitate orderly, safe, regular and responsible migration and mobility of people, including through the implementation of planned and well-managed migration policies
             </p>
           </div>
@@ -764,7 +765,7 @@ data-event-label="high"
 
 </div>
                 </span>
-                <a href="/en/10-7-1" >
+                <a href="/en/10-7-1" style="padding-left: 0px;">
                   Recruitment cost borne by employee as a proportion of monthly income earned in country of destination
                 </a>
               
@@ -800,7 +801,7 @@ data-event-label="high"
 
 </div>
                 </span>
-                <a href="/en/10-7-2" >
+                <a href="/en/10-7-2" style="padding-left: 0px;">
                   Number of countries with migration policies that facilitate orderly, safe, regular and responsible migration and mobility of people
                 </a>
               
@@ -836,7 +837,7 @@ data-event-label="high"
 
 </div>
                 </span>
-                <a href="/en/10-7-3" >
+                <a href="/en/10-7-3" style="padding-left: 0px;">
                   Number of people who died or disappeared in the process of migration towards an international destination
                 </a>
               
@@ -872,7 +873,7 @@ data-event-label="high"
 
 </div>
                 </span>
-                <a href="/en/10-7-4" >
+                <a href="/en/10-7-4" style="padding-left: 0px;">
                   Proportion of the population who are refugees, by country of origin
                 </a>
               
@@ -888,7 +889,7 @@ data-event-label="high"
             <span class="indicator-card-number"> <!-- style="padding-bottom: 8px;">-->
               <div class="align-left">10.a</div>
             </span>
-            <p>
+            <p style="padding-left: 0px;">
               Implement the principle of special and differential treatment for developing countries, in particular least developed countries, in accordance with World Trade Organization agreements
             </p>
           </div>
@@ -927,7 +928,7 @@ data-event-label="high"
 
 </div>
                 </span>
-                <a href="/en/10-a-1" >
+                <a href="/en/10-a-1" style="padding-left: 0px;">
                   Proportion of tariff lines applied to imports from least developed countries and developing countries with zero-tariff
                 </a>
               
@@ -943,7 +944,7 @@ data-event-label="high"
             <span class="indicator-card-number"> <!-- style="padding-bottom: 8px;">-->
               <div class="align-left">10.b</div>
             </span>
-            <p>
+            <p style="padding-left: 0px;">
               Encourage official development assistance and financial flows, including foreign direct investment, to States where the need is greatest, in particular least developed countries, African countries, small island developing States and landlocked developing countries, in accordance with their national plans and programmes
             </p>
           </div>
@@ -982,7 +983,7 @@ data-event-label="high"
 
 </div>
                 </span>
-                <a href="/en/10-b-1" >
+                <a href="/en/10-b-1" style="padding-left: 0px;">
                   Total resource flows for development, by recipient and donor countries and type of flow (e.g. official development assistance, foreign direct investment and other flows)
                 </a>
               
@@ -998,7 +999,7 @@ data-event-label="high"
             <span class="indicator-card-number"> <!-- style="padding-bottom: 8px;">-->
               <div class="align-left">10.c</div>
             </span>
-            <p>
+            <p style="padding-left: 0px;">
               By 2030, reduce to less than 3 per cent the transaction costs of migrant remittances and eliminate remittance corridors with costs higher than 5 per cent
             </p>
           </div>
@@ -1037,7 +1038,7 @@ data-event-label="high"
 
 </div>
                 </span>
-                <a href="/en/10-c-1" >
+                <a href="/en/10-c-1" style="padding-left: 0px;">
                   Remittance costs as a proportion of the amount remitted
                 </a>
               
@@ -1112,12 +1113,12 @@ data-event-label="high"
 <script>translations['search'] = translations['search'] || {};
     translations['search']['search'] = 'Search';</script>
 
-<script src='/assets/js/sdg.js?v=20221012074848'></script>
+<script src='/assets/js/sdg.js?v=20221212180007'></script>
 
 
     
     
-    <script src="/assets/js/custom.js?v=20221012074848"></script><script>
+    <script src="/assets/js/custom.js?v=20221212180007"></script><script>
     new indicatorInit();
     new accessibilitySwitcher();
 </script>

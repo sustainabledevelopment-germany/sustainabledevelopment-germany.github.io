@@ -26,8 +26,9 @@ var opensdg = {
   },
 
   // A hook which can be replaced to alter whether/how the values that are
-  // displayed on indicator tables/graphs get rounded.
-  dataRounding: function(value) {
+  // displayed on indicator tables/graphs get rounded. A "context" parameter
+  // is also passed which contains additional information.
+  dataRounding: function(value, context) {
     // Alterations go here.
     return value;
   },
@@ -126,7 +127,7 @@ var translations = {
         <link res="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" crossorigin="">
         <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/3.2.3/css/fixedColumns.dataTables.min.css" crossorigin="">
-        <link rel="stylesheet" href="/assets/css/style.css?v=20221012074848">
+        <link rel="stylesheet" href="/assets/css/style.css?v=20221212180007">
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
           integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
           crossorigin=""/>
@@ -176,7 +177,7 @@ layout-goal
     <img src="/assets/img/de/SDG_logo.png" alt="Zum Hauptinhalt springen" />
 </a>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="d-flex flex-wrap w-100 justify-content-between">
@@ -219,7 +220,7 @@ layout-goal
     <a class="nav-link" href="/publications/">Publikationen</a>
 </li>
 <li class="nav-item ">
-    <a class="nav-link" href="https://sustainabledevelopment-deutschland.github.io"><img class="link_btn" src="https://g205sdgs.github.io/sdg-indicators/public/DNS Wheel.png" title="Zur Seite der nationalen Indikatoren" alt="Link DNS" style="width:24px;height:24px;"/></a>
+    <a class="nav-link" href="https://dns-indikatoren.de"><img class="link_btn" src="https://g205sdgs.github.io/sdg-indicators/public/DNS Wheel.png" title="Zur Seite der nationalen Indikatoren" alt="Link DNS" style="width:24px;height:24px;"/></a>
 </li>
 </ul>
 
@@ -230,7 +231,7 @@ layout-goal
         <label class="visually-hidden" for="indicator_search">Suche</label>
         <input class="form-control" type="search" name="q" id="indicator_search" title="Suche">
         <span class="input-group-append">
-            <button class="btn btn-outline-secondary ms-n5" aria-label="Suche" id="search-btn" type="submit">
+            <button class="btn btn-outline-secondary ms-n5" aria-label="" id="search-btn" type="submit">
                 <i class="fa fa-search"></i>
             </button>
         </span>
@@ -340,12 +341,12 @@ data-event-label="high"
   </div>
 
 
-  <div class="container g-0">
+  <div class="container">
     <div class="row">
-      <div class="col" style="padding-right: 0px;">
+      <div class="col" style="padding-left: 0px;">
         <h2>Unterziele</h2>
       </div>
-      <div class="col" style="paddig-left: 0px;">
+      <div class="col" style="padding-left: 0px;">
         <h2>Indikatoren</h2>
       </div>
     </div>
@@ -359,7 +360,7 @@ data-event-label="high"
             <span class="indicator-card-number"> <!-- style="padding-bottom: 8px;">-->
               <div class="align-left">12.1</div>
             </span>
-            <p>
+            <p style="padding-left: 0px;">
               Den Z<small>EHNJAHRES-</small>P<small>ROGRAMMRAHMEN FÜR NACHHALTIGE</small> K<small>ONSUM- UND</small> P<small>RODUKTIONSMUSTER</small> umsetzen, wobei alle Länder, an der Spitze die entwickelten Länder, Maßnahmen ergreifen, unter Berücksichtigung des Entwicklungsstands und der Kapazitäten der Entwicklungsländer
             </p>
           </div>
@@ -398,7 +399,7 @@ data-event-label="high"
 
 </div>
                 </span>
-                <a href="/12-1-1" >
+                <a href="/12-1-1" style="padding-left: 0px;">
                   Anzahl der Staaten, die politische Instrumente zur Unterstützung des Übergangs zu nachhaltigem Konsum und nachhaltiger Produktion entwickeln, beschließen und umsetzen
                 </a>
               
@@ -414,7 +415,7 @@ data-event-label="high"
             <span class="indicator-card-number"> <!-- style="padding-bottom: 8px;">-->
               <div class="align-left">12.2</div>
             </span>
-            <p>
+            <p style="padding-left: 0px;">
               Bis 2030 die nachhaltige Bewirtschaftung und effiziente Nutzung der natürlichen Ressourcen erreichen
             </p>
           </div>
@@ -453,7 +454,7 @@ data-event-label="high"
 
 </div>
                 </span>
-                <a href="/12-2-1" >
+                <a href="/12-2-1" style="padding-left: 0px;">
                   Rohstoff-Fußabdruck, Rohstoff-Fußabdruck pro Kopf und Rohstoff-Fußabdruck im Verhältnis zum BIP
                 </a>
               
@@ -489,7 +490,7 @@ data-event-label="high"
 
 </div>
                 </span>
-                <a href="/12-2-2" >
+                <a href="/12-2-2" style="padding-left: 0px;">
                   Inländische Materialnutzung, inländische Materialnutzung pro Kopf und inländische Materialnutzung im Verhältnis zum BIP
                 </a>
               
@@ -505,7 +506,7 @@ data-event-label="high"
             <span class="indicator-card-number"> <!-- style="padding-bottom: 8px;">-->
               <div class="align-left">12.3</div>
             </span>
-            <p>
+            <p style="padding-left: 0px;">
               Bis 2030 die weltweite Nahrungsmittelverschwendung pro Kopf auf Einzelhandels- und Verbraucherebene halbieren und die entlang der Produktions- und Lieferkette entstehenden Nahrungsmittelverluste einschließlich Nachernteverlusten verringern
             </p>
           </div>
@@ -544,7 +545,7 @@ data-event-label="high"
 
 </div>
                 </span>
-                <a href="/12-3-1" >
+                <a href="/12-3-1" style="padding-left: 0px;">
                   a) Index der Lebensmittelverluste und b) Index der Lebensmittelverschwendung
                 </a>
               
@@ -560,7 +561,7 @@ data-event-label="high"
             <span class="indicator-card-number"> <!-- style="padding-bottom: 8px;">-->
               <div class="align-left">12.4</div>
             </span>
-            <p>
+            <p style="padding-left: 0px;">
               Bis 2020 einen umweltverträglichen Umgang mit Chemikalien und allen Abfällen während ihres gesamten Lebenszyklus in Übereinstimmung mit den vereinbarten internationalen Rahmenregelungen erreichen und ihre Freisetzung in Luft, Wasser und Boden erheblich verringern, um ihre nachteiligen Auswirkungen auf die menschliche Gesundheit und die Umwelt auf ein Mindestmaß zu beschränken
             </p>
           </div>
@@ -599,7 +600,7 @@ data-event-label="high"
 
 </div>
                 </span>
-                <a href="/12-4-1" >
+                <a href="/12-4-1" style="padding-left: 0px;">
                   Anzahl der Vertragsparteien internationaler multilateraler Umweltübereinkommen über gefährliche Abfälle und andere Chemikalien, die ihre Zusagen und Verpflichtungen zur Übermittlung von Informationen nach den einschlägigen Übereinkommen einhalten
                 </a>
               
@@ -635,7 +636,7 @@ data-event-label="high"
 
 </div>
                 </span>
-                <a href="/12-4-2" >
+                <a href="/12-4-2" style="padding-left: 0px;">
                   a) Aufkommen gefährlicher Abfälle pro Kopf und b) Anteil der gefährlichen Abfälle, der behandelt wird, nach Art der Behandlung
                 </a>
               
@@ -651,7 +652,7 @@ data-event-label="high"
             <span class="indicator-card-number"> <!-- style="padding-bottom: 8px;">-->
               <div class="align-left">12.5</div>
             </span>
-            <p>
+            <p style="padding-left: 0px;">
               Bis 2030 das Abfallaufkommen durch Vermeidung, Verminderung, Wiederverwertung und Wiederverwendung deutlich verringern
             </p>
           </div>
@@ -690,7 +691,7 @@ data-event-label="high"
 
 </div>
                 </span>
-                <a href="/12-5-1" >
+                <a href="/12-5-1" style="padding-left: 0px;">
                   Nationale Recyclingquote, Tonnen an recyceltem Material
                 </a>
               
@@ -706,7 +707,7 @@ data-event-label="high"
             <span class="indicator-card-number"> <!-- style="padding-bottom: 8px;">-->
               <div class="align-left">12.6</div>
             </span>
-            <p>
+            <p style="padding-left: 0px;">
               Die Unternehmen, insbesondere große und transnationale Unternehmen, dazu ermutigen, nachhaltige Verfahren einzuführen und in ihre Berichterstattung Nachhaltigkeitsinformationen aufzunehmen
             </p>
           </div>
@@ -745,7 +746,7 @@ data-event-label="high"
 
 </div>
                 </span>
-                <a href="/12-6-1" >
+                <a href="/12-6-1" style="padding-left: 0px;">
                   Anzahl der Unternehmen, die Nachhaltigkeitsberichte veröffentlichen
                 </a>
               
@@ -761,7 +762,7 @@ data-event-label="high"
             <span class="indicator-card-number"> <!-- style="padding-bottom: 8px;">-->
               <div class="align-left">12.7</div>
             </span>
-            <p>
+            <p style="padding-left: 0px;">
               In der öffentlichen Beschaffung nachhaltige Verfahren fördern, im Einklang mit den nationalen Politiken und Prioritäten
             </p>
           </div>
@@ -800,7 +801,7 @@ data-event-label="high"
 
 </div>
                 </span>
-                <a href="/12-7-1" >
+                <a href="/12-7-1" style="padding-left: 0px;">
                   Umsetzungsgrad der Politikkonzepte und Aktionspläne für eine nachhaltige öffentliche Beschaffung
                 </a>
               
@@ -816,7 +817,7 @@ data-event-label="high"
             <span class="indicator-card-number"> <!-- style="padding-bottom: 8px;">-->
               <div class="align-left">12.8</div>
             </span>
-            <p>
+            <p style="padding-left: 0px;">
               Bis 2030 sicherstellen, dass die Menschen überall über einschlägige Informationen und das Bewusstsein für nachhaltige Entwicklung und eine Lebensweise in Harmonie mit der Natur verfügen
             </p>
           </div>
@@ -855,7 +856,7 @@ data-event-label="high"
 
 </div>
                 </span>
-                <a href="/12-8-1" >
+                <a href="/12-8-1" style="padding-left: 0px;">
                   Umfang, in dem i) Bildung zur Weltbürgerschaft (Global Citizenship Education) und ii) Bildung für nachhaltige Entwicklung in a) nationale Bildungspolitik, b) Lehrpläne, c) Ausbildung von Lehrkräften und d) Leistungsbewertung der Lernenden integriert sind
                 </a>
               
@@ -871,7 +872,7 @@ data-event-label="high"
             <span class="indicator-card-number"> <!-- style="padding-bottom: 8px;">-->
               <div class="align-left">12.a</div>
             </span>
-            <p>
+            <p style="padding-left: 0px;">
               Die Entwicklungsländer bei der Stärkung ihrer wissenschaftlichen und technologischen Kapazitäten im Hinblick auf den Übergang zu nachhaltigeren Konsum- und Produktionsmustern unterstützen
             </p>
           </div>
@@ -910,7 +911,7 @@ data-event-label="high"
 
 </div>
                 </span>
-                <a href="/12-a-1" >
+                <a href="/12-a-1" style="padding-left: 0px;">
                   Installierte Kapazitäten zur Erzeugung erneuerbarer Energie in Entwicklungsländern (in Watt pro Kopf)
                 </a>
               
@@ -926,7 +927,7 @@ data-event-label="high"
             <span class="indicator-card-number"> <!-- style="padding-bottom: 8px;">-->
               <div class="align-left">12.b</div>
             </span>
-            <p>
+            <p style="padding-left: 0px;">
               Instrumente zur Beobachtung der Auswirkungen eines nachhaltigen Tourismus, der Arbeitsplätze schafft und die lokale Kultur und lokale Produkte fördert, auf die nachhaltige Entwicklung entwickeln und anwenden
             </p>
           </div>
@@ -965,7 +966,7 @@ data-event-label="high"
 
 </div>
                 </span>
-                <a href="/12-b-1" >
+                <a href="/12-b-1" style="padding-left: 0px;">
                   Anwendung von standardisierten Gesamtrechnungssystemen zur Beobachtung der wirtschaftlichen und ökologischen Aspekte der Nachhaltigkeit des Tourismus
                 </a>
               
@@ -981,7 +982,7 @@ data-event-label="high"
             <span class="indicator-card-number"> <!-- style="padding-bottom: 8px;">-->
               <div class="align-left">12.c</div>
             </span>
-            <p>
+            <p style="padding-left: 0px;">
               Die ineffiziente Subventionierung fossiler Brennstoffe, die zu verschwenderischem Verbrauch verleitet, durch Beseitigung von Marktverzerrungen entsprechend den nationalen Gegebenheiten rationalisieren, unter anderem durch eine Umstrukturierung der Besteuerung und die allmähliche Abschaffung dieser schädlichen Subventionen, um ihren Umweltauswirkungen Rechnung zu tragen, wobei die besonderen Bedürfnisse und Gegebenheiten der Entwicklungsländer in vollem Umfang berücksichtigt und die möglichen nachteiligen Auswirkungen auf ihre Entwicklung in einer die Armen und die betroffenen Gemeinwesen schützenden Weise so gering wie möglich gehalten werden
             </p>
           </div>
@@ -1020,7 +1021,7 @@ data-event-label="high"
 
 </div>
                 </span>
-                <a href="/12-c-1" >
+                <a href="/12-c-1" style="padding-left: 0px;">
                   Höhe der Subventionen für fossile Brennstoffe je BIP-Einheit (Produktion und Konsum)
                 </a>
               
@@ -1095,12 +1096,12 @@ data-event-label="high"
 <script>translations['search'] = translations['search'] || {};
     translations['search']['search'] = 'Suche';</script>
 
-<script src='/assets/js/sdg.js?v=20221012074848'></script>
+<script src='/assets/js/sdg.js?v=20221212180007'></script>
 
 
     
     
-    <script src="/assets/js/custom.js?v=20221012074848"></script><script>
+    <script src="/assets/js/custom.js?v=20221212180007"></script><script>
     new indicatorInit();
     new accessibilitySwitcher();
 </script>
